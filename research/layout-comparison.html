@@ -1,0 +1,220 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Layout Comparison</title>
+<style>
+:root {
+  --bg: #f4f6f9; --card: #ffffff; --ink: #14202e; --muted: #5b6b7e; --line: #d5dde6;
+  --nav: #e6eaef; --hero: #cfe3f7; --cta: #c9ecd3; --proof: #fbdcb0; --process: #e0d4f5;
+  --copy: #eef1f5; --form: #c4ebe8; --foot: #e6eaef;
+  --hero-b: #2f7fd1; --cta-b: #2e9a56; --proof-b: #d98a1f; --process-b: #7a55c9; --copy-b: #9aa8b8; --form-b: #1f9a92; --nav-b: #9aa8b8;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #0f1722; --card: #17212e; --ink: #e8eef5; --muted: #9bacbf; --line: #2a3849;
+    --nav: #223042; --hero: #1d3d5e; --cta: #1d4a30; --proof: #5a3d12; --process: #3b2f63;
+    --copy: #1f2c3b; --form: #17473f; --foot: #223042;
+  }
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--ink); font: 15px/1.5 system-ui, -apple-system, "Segoe UI", sans-serif; }
+main { max-width: 1400px; margin: 0 auto; padding: 24px 16px 64px; }
+h1 { font-size: 28px; margin: 0 0 4px; }
+h2 { font-size: 20px; margin: 40px 0 12px; }
+p.lead { color: var(--muted); margin: 0 0 16px; max-width: 70ch; }
+.legend { display: flex; flex-wrap: wrap; gap: 8px 16px; margin: 16px 0 8px; font-size: 13px; }
+.legend span { display: inline-flex; align-items: center; gap: 6px; }
+.legend i { width: 14px; height: 14px; border-radius: 3px; border-left: 4px solid; display: inline-block; }
+.scroller { overflow-x: auto; padding-bottom: 12px; }
+.cols { display: flex; gap: 16px; align-items: flex-start; min-width: min-content; }
+.site { flex: 0 0 178px; background: var(--card); border: 1px solid var(--line); border-radius: 10px; padding: 12px; }
+.site.ours { border: 2px solid var(--hero-b); }
+.site h3 { margin: 0; font-size: 15px; }
+.site .url { color: var(--muted); font-size: 12px; margin-bottom: 8px; }
+.site .meta { font-size: 12px; color: var(--muted); margin: 8px 0 0; }
+.b { border-left: 4px solid; border-radius: 4px; padding: 5px 8px; margin-bottom: 5px; font-size: 11.5px; line-height: 1.3; }
+.b strong { display: block; font-size: 11px; text-transform: uppercase; letter-spacing: .03em; }
+.b em { color: var(--muted); font-style: normal; display: block; margin-top: 2px; }
+.t-nav { background: var(--nav); border-color: var(--nav-b); }
+.t-hero { background: var(--hero); border-color: var(--hero-b); }
+.t-cta { background: var(--cta); border-color: var(--cta-b); }
+.t-proof { background: var(--proof); border-color: var(--proof-b); }
+.t-process { background: var(--process); border-color: var(--process-b); }
+.t-copy { background: var(--copy); border-color: var(--copy-b); }
+.t-form { background: var(--form); border-color: var(--form-b); }
+.t-foot { background: var(--foot); border-color: var(--nav-b); }
+table { width: 100%; border-collapse: collapse; background: var(--card); border: 1px solid var(--line); border-radius: 10px; overflow: hidden; font-size: 14px; }
+th, td { padding: 8px 10px; border-bottom: 1px solid var(--line); text-align: center; }
+th:first-child, td:first-child { text-align: left; }
+thead th { background: var(--nav); font-size: 12px; }
+tr.ours td { font-weight: 600; background: var(--hero); }
+td.tot { font-weight: 700; }
+.table-wrap { overflow-x: auto; }
+.note { color: var(--muted); font-size: 13px; max-width: 80ch; }
+ul.v { padding-left: 20px; max-width: 80ch; }
+ul.v li { margin-bottom: 6px; }
+</style>
+</head>
+<body>
+<main>
+  <h1>Layout comparison</h1>
+  <p class="lead">Wireframes rebuilt from the cached text research in <code>competitor-fetch-raw.md</code>. They show section order and weight only. Colors, imagery, and exact spacing of the real sites are not known, because the fetch tool returned text summaries. Block height is roughly how much space the section takes.</p>
+
+  <div class="legend" id="legend"></div>
+  <div class="scroller"><div class="cols" id="cols"></div></div>
+
+  <h2>Scorecard</h2>
+  <p class="note">Scores 1-5 (5 is best) are my judgment from the text research, scored for Gratovo's goal: a new brand with no clients or results yet, trying to get a visitor to act fast. They are not conversion data. None of these sites publishes any. Gratovo's own row is self-rated, so treat it as biased.</p>
+  <div class="table-wrap">
+  <table>
+    <thead><tr>
+      <th>Site</th><th>Hero says what the client gets</th><th>One clear action, early</th><th>Process visible</th><th>Works without proof we lack</th><th>Short and scannable</th><th>Total /25</th>
+    </tr></thead>
+    <tbody>
+      <tr><td>creatorauthority.com</td><td>2</td><td>3</td><td>1</td><td>3</td><td>5</td><td class="tot">14</td></tr>
+      <tr><td>mindsharemedia.live</td><td>3</td><td>4</td><td>1</td><td>2</td><td>4</td><td class="tot">14</td></tr>
+      <tr><td>nsentive.com</td><td>2</td><td>3</td><td>4</td><td>2</td><td>2</td><td class="tot">13</td></tr>
+      <tr><td>apollomgmt.co</td><td>2</td><td>2</td><td>5</td><td>1</td><td>2</td><td class="tot">12</td></tr>
+      <tr><td>attraktmedia.com</td><td>2</td><td>3</td><td>4</td><td>1</td><td>1</td><td class="tot">11</td></tr>
+      <tr><td>rightclick.gg</td><td>1</td><td>2</td><td>1</td><td>1</td><td>3</td><td class="tot">8</td></tr>
+      <tr class="ours"><td>Gratovo (index.html, self-rated)</td><td>5</td><td>5</td><td>4</td><td>4</td><td>4</td><td class="tot">22</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <h2>Which is better?</h2>
+  <ul class="v">
+    <li><strong>No single winner to copy.</strong> Creator Authority and MindShare tie at 14. Both are short, but both are thin on telling the client what they get. Neither is a good template on its own.</li>
+    <li><strong>Best headline and action: MindShare.</strong> "Stop guessing. Start converting." names a pain and an outcome, and the path ends in one action ("Book a Discovery Call"). Its weak spots are the vague hero tagline and the split between brands and creators.</li>
+    <li><strong>Best process section: Apollo.</strong> Five numbered steps from proposal to analytics. Attrakt and Nsentive use four. Gratovo uses three, which suits a simpler offer.</li>
+    <li><strong>Best number strip: Attrakt and Apollo.</strong> Big stats right after the hero. They rely on real results, so Gratovo shows its vetting standards instead.</li>
+    <li><strong>Best brevity: Creator Authority.</strong> Seven sections, one clear audience for the brand. The copy stays generic ("Contact Us").</li>
+    <li><strong>Worst fit: Right Click, then Attrakt.</strong> Right Click's hero says nothing about value and it targets entertainment. Attrakt is 12 sections of proof that a new agency cannot match.</li>
+    <li><strong>Shared pattern:</strong> eight of the nine sites speak to both brands and creators. Gratovo does too, so copy that structure.</li>
+  </ul>
+</main>
+
+<script>
+var TYPES = {
+  nav: 'Nav / footer', hero: 'Hero', cta: 'Call to action', proof: 'Proof (needs real results)',
+  process: 'Process steps', copy: 'Copy / services', form: 'Form'
+};
+var SITES = [
+  { name: 'Attrakt Media', url: 'attraktmedia.com', meta: '12 sections, about 3,000 words. Very proof-heavy.', blocks: [
+    ['nav', 'Nav', '', 22],
+    ['hero', 'Hero', '"Elevating influencer impact"', 90],
+    ['cta', 'Dual CTA', 'Get sponsored / Work with us as a brand', 28],
+    ['copy', 'Intro', '"Hello There!"', 40],
+    ['proof', 'Client logos', '15+ brands', 40],
+    ['proof', 'Stat boxes', '250+ creators, 15M+ reach, $1M deals, 20M+ engagements', 50],
+    ['copy', 'Services', 'Brands vs creators', 60],
+    ['proof', 'Creator roster', '12 profiles with stats', 80],
+    ['proof', 'Team', '3 founders', 40],
+    ['proof', 'Testimonials', '15 in a carousel', 70],
+    ['proof', 'Video gallery', 'Campaign examples', 50],
+    ['form', 'Contact + newsletter', '', 50],
+    ['nav', 'Footer', '', 22]
+  ]},
+  { name: 'Creator Authority', url: 'creatorauthority.com', meta: '7 sections. Short, generic copy.', blocks: [
+    ['nav', 'Nav', 'Home, About, Services, Contact Us', 22],
+    ['hero', 'Hero', '"B2B Influencer Marketing Services"', 80],
+    ['cta', 'CTA', 'Contact Us', 28],
+    ['proof', 'Logos', '"Trusted By Amazing Brands"', 40],
+    ['copy', 'Why us', '3 icon benefits: Partner Program, Full Funnel, Creator Backed', 70],
+    ['copy', 'Services', 'Image carousel, no descriptions', 50],
+    ['cta', 'Dual CTA', 'Let\'s Work Together / Join The Database', 50],
+    ['nav', 'Footer', '', 22]
+  ]},
+  { name: 'Nsentive', url: 'nsentive.com', meta: '8 sections. Abstract structure, animated word loop.', blocks: [
+    ['hero', 'Nav + hero', '"Maximise your bottom line by curating brand sponsorships effectively."', 90],
+    ['cta', 'CTA', 'Let\'s Talk (jumps to form)', 28],
+    ['copy', 'WHO / WHAT / WHY / WHERE / HOW / WHEN', '6 stacked blocks with icons', 150],
+    ['copy', '3 columns', 'Creators, Brands, Business', 60],
+    ['proof', 'Testimonial', 'The Design Conference', 40],
+    ['proof', 'Logo carousel', 'Surfshark, Audible, Canva, Grammarly...', 40],
+    ['process', '4-step "Finding Flow"', 'Identity, Positioning, Teamwork, Commitment', 70],
+    ['copy', 'Word loop', 'Animated list of "N" words', 30],
+    ['form', 'Contact form', 'Privacy reassurance', 50],
+    ['nav', 'Footer', '', 22]
+  ]},
+  { name: 'Apollo Management', url: 'apollomgmt.co', meta: '12 sections. Casual tone, emoji, two audiences.', blocks: [
+    ['nav', 'Nav', 'Homebase, Creators, Brands, Careers, Contact', 22],
+    ['hero', 'Hero: creators', '"a modern management team. for creators."', 80],
+    ['hero', 'Hero: brands', '"for brands."', 60],
+    ['cta', 'CTAs', '"Learn more" x2', 24],
+    ['copy', 'Who we are', 'LA-based management team', 40],
+    ['copy', 'What we do', '4 sub-blocks', 90],
+    ['proof', 'Stats', '1k+ campaigns, 140M+ subscribers, 7 figures spend', 50],
+    ['process', '5-step blueprint', 'Proposal, Concepts, Drafts, Launch, Analytics', 100],
+    ['proof', 'Brand logos', '40+ in two rows', 50],
+    ['proof', 'Testimonials', '5 cards, 70-80 words each', 80],
+    ['proof', 'Team', 'Founder bio', 40],
+    ['cta', 'Dual CTA', '"Ready for take-off?"', 50],
+    ['nav', 'Footer', '', 22]
+  ]},
+  { name: 'Right Click Culture', url: 'rightclick.gg', meta: '9 sections. Entertainment/pop-culture positioning.', blocks: [
+    ['nav', 'Nav', 'Creators, Musicians, Brands + CTA', 22],
+    ['hero', 'Hero', '"LETS MAKE SOME COOL SH*T"', 110],
+    ['copy', 'About', 'Founder quote', 50],
+    ['copy', '3 divisions', 'Management, creative agency, brands', 70],
+    ['proof', 'Talent showcase', '10 creators', 80],
+    ['cta', 'Roster button', '"full ROSTER"', 24],
+    ['copy', 'Talent crew', '3 category links', 40],
+    ['copy', 'Creative team', 'Founder quote', 40],
+    ['proof', 'Brand logos', 'Riot, Amazon, Ubisoft, EA...', 50],
+    ['cta', 'Footer CTA', '"Ready to get started? Let\'s work!"', 40],
+    ['nav', 'Footer', '', 22]
+  ]},
+  { name: 'MindShare Media', url: 'mindsharemedia.live', meta: '9 sections. Direct, no process section.', blocks: [
+    ['nav', 'Nav', 'For Brands, For Creators, Contact', 22],
+    ['hero', 'Hero', '"Where Influence Meets Intent"', 80],
+    ['cta', 'Dual CTA', '"I\'m a Brand" / "I\'m a Creator"', 28],
+    ['proof', 'Logo carousel', 'Lovable, Manus, Stream, italki', 36],
+    ['copy', 'Services', '4 offerings', 70],
+    ['proof', 'Brands that trust us', '4 logos', 36],
+    ['copy', 'Philosophy', '"WE DON\'T CHASE CLICKS"', 50],
+    ['copy', 'For brands', '"STOP GUESSING. START CONVERTING" + 3 value props', 80],
+    ['cta', 'Brand CTA', 'Book a Discovery Call', 28],
+    ['copy', 'For creators', '"YOUR VOICE. YOUR VALUE"', 50],
+    ['cta', 'Final CTA', '"LET\'S BUILD SOMETHING REAL"', 40],
+    ['nav', 'Footer', '', 22]
+  ]},
+  { name: 'Gratovo (current)', url: 'index.html', ours: true, meta: '6 sections. One audience: the brand. No proof claims.', blocks: [
+    ['nav', 'Nav', 'Logo + "Work With Us" button', 22],
+    ['hero', 'Hero', '"Get the Right AI Creators Promoting Your Product."', 100],
+    ['cta', 'CTA', 'Find My Creators', 28],
+    ['copy', '3 benefit cards', 'Zero outreach, Vetted not guessed, Fair price', 80],
+    ['proof', 'Vetting number strip', '30K+ views, 3-8% engagement, 35%+ audience, 1-3 creators', 50],
+    ['process', '3 steps', 'Tell us, We recommend the best fit, We handle the rest', 70],
+    ['cta', 'CTA', 'Find My Creators', 28],
+    ['form', 'Form + copyable email', 'Name, email, message', 70],
+    ['nav', 'Footer', '', 22]
+  ]}
+];
+
+var legend = document.getElementById('legend');
+Object.keys(TYPES).forEach(function (k) {
+  var s = document.createElement('span');
+  s.innerHTML = '<i class="t-' + k + '"></i>' + TYPES[k];
+  legend.appendChild(s);
+});
+var cols = document.getElementById('cols');
+SITES.forEach(function (site) {
+  var d = document.createElement('div');
+  d.className = 'site' + (site.ours ? ' ours' : '');
+  var h = '<h3>' + site.name + '</h3><div class="url">' + site.url + '</div>';
+  site.blocks.forEach(function (b) {
+    var tcls = b[0] === 'nav' && b[1] === 'Footer' ? 'foot' : b[0];
+    h += '<div class="b t-' + tcls + '" style="min-height:' + b[3] + 'px"><strong>' + b[1] + '</strong>' +
+         (b[2] ? '<em>' + b[2].replace(/</g, '&lt;') + '</em>' : '') + '</div>';
+  });
+  h += '<p class="meta">' + site.meta + '</p>';
+  d.innerHTML = h;
+  cols.appendChild(d);
+});
+</script>
+</body>
+</html>

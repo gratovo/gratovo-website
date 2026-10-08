@@ -1,0 +1,50 @@
+{
+  "globals": {
+    "Webflow": true,
+    "jQuery": true
+  },
+  "liveAnimations": {
+    "animStar": 3,
+    "animShootingStar": 1,
+    "apollo-float-a": 1,
+    "apollo-float-b": 1,
+    "apollo-float-c": 1,
+    "apollo-orbit-spin": 2,
+    "apollo-beam-shimmer": 6,
+    "apollo-orbit-counter": 6,
+    "apollo-orbit-pulse": 6,
+    "apollo-signings-dot": 1,
+    "videoBorder": 2,
+    "gLqvyd": 1,
+    "apollo-pulse-pp": 1,
+    "scaleFadeRepeat": 25,
+    "apl-scroll-up": 1,
+    "apl-scroll-down": 1
+  },
+  "videos": [
+    {
+      "autoplay": true,
+      "loop": true,
+      "muted": true,
+      "src": "https://cdn.prod.website-files.com/65a0f09d436f79a4be66c99a/65f52e37ccd81bc76a659e8b_APOLLO_MANAGEMENT_SHOWREEL_V12_WEB_"
+    }
+  ],
+  "canvases": 0,
+  "svgs": 18,
+  "htmlClass": "w-mod-js w-mod-ix wf-inter-n4-active wf-inter-n6-active wf-inter-n3-active wf-inter-n5-active wf-inter-n7-active wf-active",
+  "customCursor": false,
+  "stickyElements": 4,
+  "pageHeight": 12577,
+  "url": "https://apollomgmt.co/",
+  "screenshots": 10,
+  "libraryHintsFromScriptUrls": [
+    "Webflow"
+  ],
+  "scriptHosts": [
+    "ajax.googleapis.com",
+    "cdn.jsdelivr.net",
+    "cdn.prod.website-files.com",
+    "cdnjs.cloudflare.com",
+    "d3e54v103j8qbb.cloudfront.net"
+  ]
+}

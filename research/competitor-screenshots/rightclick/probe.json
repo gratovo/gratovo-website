@@ -1,0 +1,26 @@
+{
+  "globals": {
+    "Webflow": true,
+    "jQuery": true
+  },
+  "liveAnimations": {},
+  "videos": [],
+  "canvases": 0,
+  "svgs": 0,
+  "htmlClass": "w-mod-js w-mod-ix wf-poppins-n3-active wf-poppins-n5-active wf-poppins-n4-active wf-poppins-n6-active wf-poppins-n7-active wf-montserrat-n5-active wf-montserrat-n3-active wf-montserrat-n7-active wf-mo",
+  "customCursor": true,
+  "stickyElements": 2,
+  "pageHeight": 4992,
+  "url": "https://rightclick.gg/",
+  "screenshots": 8,
+  "libraryHintsFromScriptUrls": [
+    "Webflow"
+  ],
+  "scriptHosts": [
+    "ajax.googleapis.com",
+    "cdn.prod.website-files.com",
+    "d3e54v103j8qbb.cloudfront.net",
+    "rightclick.gg",
+    "www.googletagmanager.com"
+  ]
+}

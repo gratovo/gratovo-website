@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+<head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<meta name="robots" content="noindex, nofollow">
+<title>Layout test: Apollo-style | Gratovo</title>
+<link rel="icon" type="image/svg+xml" href="../../images/logo.svg">
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link rel="stylesheet" href="../../fonts/fonts.css">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../css/process-cards.css">
+
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "primary": "#0a5c9e",
+                        "on-primary": "#ffffff",
+                        "primary-container": "#0072b8",
+                        "on-primary-container": "#eaf6ff",
+                        "primary-fixed": "#eaf6ff",
+                        "primary-fixed-dim": "#9ad6f7",
+                        "on-primary-fixed": "#052c4d",
+                        "on-primary-fixed-variant": "#0a5c9e",
+                        "inverse-primary": "#bfe6ff",
+                        "surface-tint": "#0072b8",
+                        "accent": "#b8286e",
+                        "on-accent": "#ffffff",
+                        "accent-container": "#ffd9e3",
+                        "on-accent-container": "#5c0f33",
+                        "secondary": "#4a5a6e",
+                        "on-secondary": "#ffffff",
+                        "secondary-container": "#d5e6f4",
+                        "on-secondary-container": "#3e4c5e",
+                        "secondary-fixed": "#d5e6f4",
+                        "secondary-fixed-dim": "#b9cbdb",
+                        "on-secondary-fixed": "#0b1c2e",
+                        "on-secondary-fixed-variant": "#3e4c5e",
+                        "tertiary": "#484b4d",
+                        "on-tertiary": "#ffffff",
+                        "tertiary-container": "#606365",
+                        "on-tertiary-container": "#dde0e1",
+                        "tertiary-fixed": "#e0e3e5",
+                        "tertiary-fixed-dim": "#c4c7c9",
+                        "on-tertiary-fixed": "#191c1e",
+                        "on-tertiary-fixed-variant": "#444749",
+                        "error": "#ba1a1a",
+                        "on-error": "#ffffff",
+                        "error-container": "#ffdad6",
+                        "on-error-container": "#93000a",
+                        "background": "#f4f9fe",
+                        "on-background": "#0b1c2e",
+                        "surface": "#f4f9fe",
+                        "on-surface": "#0b1c2e",
+                        "on-surface-variant": "#3e4c5e",
+                        "surface-bright": "#f8fbff",
+                        "surface-dim": "#c4d8e8",
+                        "surface-variant": "#d5e6f4",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-container-low": "#eaf4fc",
+                        "surface-container": "#e1eef9",
+                        "surface-container-high": "#d8e8f5",
+                        "surface-container-highest": "#cfe1f0",
+                        "outline": "#66788c",
+                        "outline-variant": "#c5d5e4",
+                        "inverse-surface": "#16293d",
+                        "inverse-on-surface": "#eaf4fc"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "section-gap": "120px",
+                        "base": "8px",
+                        "grid-gutter": "24px",
+                        "container-max": "1280px"
+                    },
+                    "fontFamily": {
+                        "headline-lg-mobile": ["Plus Jakarta Sans", "sans-serif"],
+                        "body-md": ["Source Sans 3", "sans-serif"],
+                        "display-lg": ["Plus Jakarta Sans", "sans-serif"],
+                        "body-lg": ["Source Sans 3", "sans-serif"],
+                        "headline-md": ["Plus Jakarta Sans", "sans-serif"],
+                        "headline-lg": ["Plus Jakarta Sans", "sans-serif"],
+                        "label-sm": ["JetBrains Mono", "monospace"]
+                    },
+                    "fontSize": {
+                        "headline-lg-mobile": ["32px", { "lineHeight": "40px", "fontWeight": "700" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "display-lg": ["64px", { "lineHeight": "72px", "letterSpacing": "-0.02em", "fontWeight": "800" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "headline-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+                        "label-sm": ["14px", { "lineHeight": "20px", "letterSpacing": "0.02em", "fontWeight": "500" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+html { scroll-behavior: smooth; }
+body { -webkit-font-smoothing: antialiased; }
+.material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+.icon-fill { font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+.reveal { opacity: 0; transform: translateY(26px); transition: opacity .7s ease, transform .7s ease; }
+.reveal.in { opacity: 1; transform: none; }
+.marquee { overflow: hidden; white-space: nowrap; }
+.marquee-track { display: inline-flex; gap: 4rem; animation: marquee 26s linear infinite; padding-right: 4rem; }
+@keyframes marquee { to { transform: translateX(-50%); } }
+@keyframes floaty { 0%,100% { transform: translateY(0) rotate(var(--r,0deg)); } 50% { transform: translateY(-14px) rotate(var(--r,0deg)); } }
+@keyframes drawline { to { stroke-dashoffset: 0; } }
+@keyframes fadein { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+@keyframes scrollup { to { transform: translateY(-50%); } }
+.layout-tag { position: fixed; left: 12px; bottom: 12px; z-index: 9999; font: 12px/1.3 system-ui, sans-serif; background: rgba(15,23,34,.88); color: #fff; padding: 6px 10px; border-radius: 999px; }
+.layout-tag a { color: #9ad6f7; text-decoration: underline; margin-left: 6px; }
+.step-panel[hidden] { display: none; }
+@media (prefers-reduced-motion: reduce) {
+  .reveal { opacity: 1; transform: none; transition: none; }
+  *, *::before, *::after { animation: none !important; }
+}
+
+@keyframes twinkle { 0%,100% { opacity:.15; } 50% { opacity:.9; } }
+@keyframes shoot { 0% { transform: translate(0,0) rotate(-35deg); opacity:0; } 8% { opacity:1; } 30% { transform: translate(-420px,300px) rotate(-35deg); opacity:0; } 100% { opacity:0; } }
+@keyframes spin { to { transform: rotate(360deg); } }
+@keyframes counter { to { transform: rotate(-360deg); } }
+.shoot { position:absolute; top:8%; right:12%; width:120px; height:2px; background:linear-gradient(90deg, rgba(255,255,255,0), #fff); animation: shoot 7s 2s infinite; }
+.glass { background: linear-gradient(160deg, rgba(255,255,255,.08), rgba(255,255,255,.02)); border:1px solid rgba(255,255,255,.12); border-radius:28px; backdrop-filter: blur(10px); }
+.grad-text { background: linear-gradient(90deg, #ffd9a8, #ff8fb3, #b88cff); -webkit-background-clip:text; background-clip:text; color:transparent; }
+.chip { position:absolute; background: rgba(20,30,70,.9); border:1px solid rgba(255,255,255,.18); border-radius:16px; padding:10px 14px; font-size:13px; color:#fff; animation: floaty 6s ease-in-out infinite; box-shadow:0 10px 30px rgba(0,0,0,.4); }
+.orbit { position:relative; width:260px; height:260px; margin:auto; }
+.orbit .ring { position:absolute; inset:0; border:1px dashed rgba(255,255,255,.25); border-radius:50%; animation: spin 24s linear infinite; }
+.orbit .ring i { position:absolute; width:52px; height:52px; margin:-26px; border-radius:16px; background:#fff; color:#16293d; display:flex; align-items:center; justify-content:center; animation: counter 24s linear infinite; }
+.orbit .core { position:absolute; inset:88px; border-radius:24px; background: linear-gradient(135deg,#0a5c9e,#6a54e8); display:flex; align-items:center; justify-content:center; box-shadow:0 0 50px rgba(106,84,232,.6); }
+.ghost { position:absolute; inset:0; display:flex; align-items:center; justify-content:center; font-size: clamp(120px, 24vw, 340px); font-weight:800; color: rgba(255,255,255,.05); pointer-events:none; letter-spacing:-.04em; }
+.beam { height:1px; background: linear-gradient(90deg, transparent, rgba(150,130,255,.8), transparent); background-size:200% 100%; animation: shimmer 4s linear infinite; }
+@keyframes shimmer { to { background-position: -200% 0; } }
+</style>
+<noscript><style>.reveal{opacity:1;transform:none}</style></noscript>
+</head>
+<body class="bg-[#050a1f]">
+
+<div class="bg-[#050a1f] text-white relative overflow-hidden">
+<div id="stars" class="absolute inset-0 pointer-events-none"></div><div class="shoot"></div>
+<header class="relative z-20 max-w-[1280px] mx-auto px-6 h-20 flex items-center justify-between"><a href="#"><span class="wordmark text-3xl" role="img" aria-label="Gratovo"><img src="../../images/logo-mark.svg" alt=""><span aria-hidden="true">ratovo</span></span></a>
+<nav class="hidden md:flex gap-1 border border-white/15 rounded-full px-2 py-2 text-sm bg-white/5"><a class="px-4 py-1.5 rounded-full bg-white/10" href="#">Home</a><a class="px-4 py-1.5" href="#brands">For brands</a><a class="px-4 py-1.5" href="#for-creators">For creators</a><a class="px-4 py-1.5" href="#process">How it works</a></nav>
+<a href="#workwithus" class="border border-white/25 bg-white/5 rounded-lg px-5 py-2 text-sm">Contact</a></header>
+<main class="relative z-10">
+<section class="text-center px-6 pt-14 pb-12"><h1 class="font-display-lg font-bold text-4xl md:text-7xl max-w-5xl mx-auto leading-[1.05]">Connecting AI Brands With the <span class="grad-text">Creators Their Customers Trust</span>.</h1>
+<p class="mt-5 text-white/70 text-lg max-w-2xl mx-auto">Brands get vetted AI creators. Creators get brand deals that fit.</p></section>
+<section class="max-w-[1280px] mx-auto px-6 grid md:grid-cols-2 gap-6 pb-24">
+<div id="brands" class="glass p-8 md:p-10 text-center relative overflow-hidden min-h-[470px] reveal"><h2 class="font-display-lg font-bold text-4xl mb-3">for brands.</h2><p class="text-white/70 mb-6">1 to 3 vetted AI creators picked for your product.</p>
+<a href="#workwithus" class="inline-block border border-white/25 bg-white/10 rounded-full px-7 py-3 text-sm font-semibold">Find My Creators</a>
+<div class="relative h-56 mt-6"><div class="chip" style="left:6%;top:6%;--r:-6deg">Creator A · 42K avg views</div><div class="chip" style="left:34%;top:38%;--r:4deg;animation-delay:1s">Creator B · 5.1% engagement</div><div class="chip" style="left:12%;top:70%;--r:-3deg;animation-delay:2s">Creator C · 46% US audience</div></div>
+<p class="absolute bottom-3 inset-x-0 text-[11px] text-white/45 uppercase tracking-wider">Example format</p></div>
+<div class="glass p-8 md:p-10 text-center min-h-[470px] reveal" data-delay="120"><h2 class="font-display-lg font-bold text-4xl mb-3">for creators.</h2><p class="text-white/70 mb-6">Brand deals that fit your channel. YouTube, LinkedIn, X, and newsletters.</p>
+<a href="#creators" class="inline-block border border-white/25 bg-white/10 rounded-full px-7 py-3 text-sm font-semibold">Get Brand Deals</a>
+<div class="orbit mt-8"><div class="core"><span class="material-symbols-outlined icon-fill text-4xl text-white">rocket_launch</span></div><div class="ring"><i style="left:100.0%;top:50.0%"><span class="material-symbols-outlined icon-fill text-2xl">smart_display</span></i><i style="left:49.99981633974483%;top:99.99999999966269%"><span class="material-symbols-outlined icon-fill text-2xl">work</span></i><i style="left:1.3492424955074966e-09%;top:49.999632679489665%"><span class="material-symbols-outlined icon-fill text-2xl">tag</span></i><i style="left:50.00055098076548%;top:3.0358009439623856e-09%"><span class="material-symbols-outlined icon-fill text-2xl">mail</span></i></div></div></div></section>
+<section class="max-w-[1280px] mx-auto px-6 pb-24"><div class="text-center mb-10 reveal"><span class="inline-block border border-white/20 rounded-full px-4 py-1 text-sm mb-4">What brands get ✦</span><h2 class="font-display-lg font-bold text-4xl md:text-6xl">A simpler way to work with AI creators.</h2></div><div class="grid md:grid-cols-2 gap-5"><div class="glass p-8 reveal" data-delay="0"><h3 class="font-headline-md text-white mb-2">It's that easy.</h3><p class="text-white/70">Send us a short message. We do the searching, vetting, and chasing.</p></div><div class="glass p-8 reveal" data-delay="100"><h3 class="font-headline-md text-white mb-2">Peace of mind.</h3><p class="text-white/70">Every creator is checked for real views, engagement, and audience location first.</p></div><div class="glass p-8 reveal" data-delay="200"><h3 class="font-headline-md text-white mb-2">Your product, shown properly.</h3><p class="text-white/70">Creators demo your tool in a real workflow, for an audience that wants to try it.</p></div><div class="glass p-8 reveal" data-delay="300"><h3 class="font-headline-md text-white mb-2">Nothing goes live unseen.</h3><p class="text-white/70">You approve the video before it posts.</p></div></div></section>
+<section class="relative max-w-[1100px] mx-auto px-6 py-24"><div class="ghost" aria-hidden="true">1-3</div><div class="relative"><div class="beam mb-12"></div><div class="grid md:grid-cols-3 gap-10"><div class="text-center"><p class="text-5xl font-bold text-white">30K+</p><p class="text-white/65 mt-2 max-w-[200px] mx-auto">average views per video</p></div><div class="text-center"><p class="text-5xl font-bold text-white">3-8%</p><p class="text-white/65 mt-2 max-w-[200px] mx-auto">real engagement from active viewers</p></div><div class="text-center"><p class="text-5xl font-bold text-white">35%+</p><p class="text-white/65 mt-2 max-w-[200px] mx-auto">of the audience in your target country</p></div></div><div class="beam mt-12"></div></div><p class="relative text-center text-white/60 mt-8">Every creator we recommend passes these checks first.</p></section>
+<section id="for-creators" class="max-w-container-max mx-auto px-6 md:px-12 py-20 ">
+<div class="text-center max-w-3xl mx-auto mb-10"><p class="font-label-sm uppercase tracking-widest text-primary-fixed-dim mb-3 reveal">For creators</p>
+<h2 class="font-headline-lg font-bold text-3xl md:text-5xl text-white  reveal">Brand deals that fit your channel.</h2>
+<p class="text-white/70 mt-4 reveal">Already making content about AI and software? We put you in front of the brands that fit your audience.</p></div>
+<div class="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto mb-10"><div class="reveal bg-white/5 border border-white/15 rounded-2xl p-7" data-delay="0"><div class="w-12 h-12 rounded-xl bg-primary-container text-white flex items-center justify-center mb-4"><span class="material-symbols-outlined icon-fill text-2xl">handshake</span></div><h3 class="font-headline-md text-white mb-2">Brand Deals Come to You</h3><p class="text-white/70">No cold outreach to brands. We bring AI and SaaS sponsorship deals to creators who fit.</p></div><div class="reveal bg-white/5 border border-white/15 rounded-2xl p-7" data-delay="100"><div class="w-12 h-12 rounded-xl bg-primary-container text-white flex items-center justify-center mb-4"><span class="material-symbols-outlined icon-fill text-2xl">person</span></div><h3 class="font-headline-md text-white mb-2">One Contact, Less Back-and-Forth</h3><p class="text-white/70">No long media-kit requests or endless email threads. One person to talk to.</p></div></div>
+<div class="grid sm:grid-cols-3 gap-6 max-w-4xl mx-auto mb-10"><div class="reveal" data-delay="0"><p class="font-label-sm text-primary-fixed-dim mb-1">01</p><h4 class="font-semibold text-white">Tell us about your channel</h4><p class="text-white/70 text-sm">Your channel link and what you cover. It takes two minutes.</p></div><div class="reveal" data-delay="100"><p class="font-label-sm text-primary-fixed-dim mb-1">02</p><h4 class="font-semibold text-white">We put you forward</h4><p class="text-white/70 text-sm">We introduce you to AI and SaaS brands that fit your audience.</p></div><div class="reveal" data-delay="200"><p class="font-label-sm text-primary-fixed-dim mb-1">03</p><h4 class="font-semibold text-white">You hear from us</h4><p class="text-white/70 text-sm">When a brand deal fits, we reach out with the details.</p></div></div>
+<div class="text-center"><a href="#creators" class="inline-flex bg-primary-container text-white rounded-full px-8 py-4 font-label-sm uppercase tracking-wider">Get Brand Deals</a></div></section>
+<section id="process" class="max-w-[1280px] mx-auto px-6 pb-24"><div class="text-center mb-10 reveal"><h2 class="font-display-lg font-bold text-4xl md:text-6xl">How a deal works with us.</h2></div><div class="grid md:grid-cols-5 gap-4"><div class="glass p-7 reveal" data-delay="0"><span class="grad-text text-4xl font-bold">01</span><h3 class="font-headline-md text-white mt-3 mb-2">Tell us what you sell</h3><p class="text-white/70 text-sm">A short message about your product and who it's for. We reply within 24 hours.</p></div><div class="glass p-7 reveal" data-delay="90"><span class="grad-text text-4xl font-bold">02</span><h3 class="font-headline-md text-white mt-3 mb-2">We recommend the best fit</h3><p class="text-white/70 text-sm">You get 1 to 3 vetted creators with their views, engagement, and audience details.</p></div><div class="glass p-7 reveal" data-delay="180"><span class="grad-text text-4xl font-bold">03</span><h3 class="font-headline-md text-white mt-3 mb-2">We agree the deal</h3><p class="text-white/70 text-sm">Deliverables and dates are agreed and put in writing.</p></div><div class="glass p-7 reveal" data-delay="270"><span class="grad-text text-4xl font-bold">04</span><h3 class="font-headline-md text-white mt-3 mb-2">You approve the video</h3><p class="text-white/70 text-sm">We review the script and draft, then send it to you for sign-off.</p></div><div class="glass p-7 reveal" data-delay="360"><span class="grad-text text-4xl font-bold">05</span><h3 class="font-headline-md text-white mt-3 mb-2">It goes live</h3><p class="text-white/70 text-sm">We confirm it posts and send you the early performance numbers.</p></div></div></section>
+<section class="max-w-[1100px] mx-auto px-6 pb-24"><div class="glass p-8 md:p-14 text-center reveal"><h2 class="font-display-lg font-bold text-4xl md:text-6xl mb-3">Ready for <span class="grad-text">take-off?</span></h2><p class="text-white/70 mb-10">Brands, tell us what you're promoting. Creators, tell us about your channel. We reply within 24 hours.</p><div class="max-w-xl mx-auto">
+<div id="contact-card" class="scroll-mt-28 bg-white/5 border border-white/15 rounded-3xl p-6 md:p-8 text-left" style="--gv-bg:rgba(255,255,255,.08);--gv-bd:rgba(255,255,255,.2);--gv-fg:rgba(255,255,255,.7);--gv-on-fg:#0b1c2e;--gv-on-bg:#fff;--gv-ph:rgba(255,255,255,.65);">
+<div class="gv-tabs" role="tablist" aria-label="I am a"><button type="button" role="tab" class="gv-tabbtn gv-on" data-aud="brand" aria-selected="true" aria-controls="workwithus">I'm a brand</button><button type="button" role="tab" class="gv-tabbtn" data-aud="creator" aria-selected="false" aria-controls="creators">I'm a creator</button><span class="gv-ind" aria-hidden="true"></span></div>
+<div id="workwithus" role="tabpanel" data-gv-panel="brand" class="scroll-mt-28">
+<p class="text-white/70 mb-5">Tell us what you're promoting.</p>
+<form action="https://formsubmit.co/mustafa@gratovo.com" method="POST" class="gv-form flex flex-col gap-3" data-who="brand request"><input type="hidden" name="_captcha" value="false"><input type="hidden" name="_next" value="https://www.gratovo.com/">
+<input type="hidden" name="_subject" value="New brand request from the website">
+<input type="text" name="name" placeholder="Your name / company" required class="w-full py-3.5 px-5 rounded-full bg-white/10 border border-white/25 text-white focus:ring-2 focus:ring-primary-fixed-dim outline-none placeholder:text-white/60">
+<input type="email" name="email" placeholder="Your email" required class="w-full py-3.5 px-5 rounded-full bg-white/10 border border-white/25 text-white focus:ring-2 focus:ring-primary-fixed-dim outline-none placeholder:text-white/60">
+<select name="inquiry" required aria-label="What is this about?" class="w-full py-3.5 px-5 rounded-full bg-white/10 border border-white/25 text-white focus:ring-2 focus:ring-primary-fixed-dim outline-none placeholder:text-white/60" style="padding-right:3rem"><option value="" disabled selected>What&#39;s this about?</option><option value="find-creators" data-hint="What does your product do? One line is enough." data-need="0">Find creators for my product</option><option value="specific-creator" data-hint="Which creator? A link works." data-need="1">Work with a specific creator</option><option value="scale" data-hint="What's working so far? One line is enough." data-need="0">Scale what's already working</option><option value="question" data-hint="What would you like to know?" data-need="1">I have a question first</option></select>
+<textarea name="message" rows="2" placeholder="Anything we should know? (optional)" class="w-full py-3.5 px-5 rounded-3xl bg-white/10 border border-white/25 text-white focus:ring-2 focus:ring-primary-fixed-dim outline-none placeholder:text-white/60"></textarea>
+<button type="submit" class="self-center bg-primary-container text-white hover:bg-primary py-3.5 px-8 rounded-full font-label-sm uppercase text-sm tracking-wider inline-flex items-center gap-2 shadow-lg transition hover:-translate-y-1 duration-200">Find My Creators <span class="material-symbols-outlined ">send</span></button></form></div><div id="creators" role="tabpanel" data-gv-panel="creator" class="scroll-mt-28" hidden>
+<p class="text-white/70 mb-5">Tell us about your channel.</p>
+<form action="https://formsubmit.co/mustafa@gratovo.com" method="POST" class="gv-form flex flex-col gap-3" data-who="creator application"><input type="hidden" name="_captcha" value="false"><input type="hidden" name="_next" value="https://www.gratovo.com/">
+<input type="hidden" name="_subject" value="New creator application from the website">
+<input type="text" name="name" placeholder="Your name / channel name" required class="w-full py-3.5 px-5 rounded-full bg-white/10 border border-white/25 text-white focus:ring-2 focus:ring-primary-fixed-dim outline-none placeholder:text-white/60">
+<input type="email" name="email" placeholder="Your email" required class="w-full py-3.5 px-5 rounded-full bg-white/10 border border-white/25 text-white focus:ring-2 focus:ring-primary-fixed-dim outline-none placeholder:text-white/60">
+<input type="text" name="channel" placeholder="Your channel link" required class="w-full py-3.5 px-5 rounded-full bg-white/10 border border-white/25 text-white focus:ring-2 focus:ring-primary-fixed-dim outline-none placeholder:text-white/60">
+<select name="inquiry" required aria-label="What is this about?" class="w-full py-3.5 px-5 rounded-full bg-white/10 border border-white/25 text-white focus:ring-2 focus:ring-primary-fixed-dim outline-none placeholder:text-white/60" style="padding-right:3rem"><option value="" disabled selected>What&#39;s this about?</option><option value="get-deals" data-hint="What do you cover? One line is enough." data-need="0">Get brand deals for my channel</option><option value="specific-brand" data-hint="Which brand? A link works." data-need="1">Work with a specific brand</option><option value="question" data-hint="What would you like to know?" data-need="1">I have a question first</option></select>
+<textarea name="message" rows="2" placeholder="Anything we should know? (optional)" class="w-full py-3.5 px-5 rounded-3xl bg-white/10 border border-white/25 text-white focus:ring-2 focus:ring-primary-fixed-dim outline-none placeholder:text-white/60"></textarea>
+<button type="submit" class="self-center bg-primary-container text-white hover:bg-primary py-3.5 px-8 rounded-full font-label-sm uppercase text-sm tracking-wider inline-flex items-center gap-2 shadow-lg transition hover:-translate-y-1 duration-200">Get Brand Deals <span class="material-symbols-outlined ">send</span></button></form></div></div>
+<div class="mt-8 flex flex-col sm:flex-row items-center justify-center gap-3 text-white/80">
+<span class="font-body-md">Prefer email?</span>
+<button type="button" id="copy-email" aria-label="Copy email address mustafa@gratovo.com" class="inline-flex items-center gap-2 bg-white/15 hover:bg-white/25 text-white rounded-full py-2 px-5 font-label-sm transition-colors">
+<span>mustafa@gratovo.com</span><span id="copy-email-icon" class="material-symbols-outlined text-base">content_copy</span></button>
+<span id="copy-email-status" class="font-label-sm" role="status"></span>
+</div></div></div></section>
+</main><footer class="bg-[#0b1623] border-white/10 text-white/70 border-t py-10"><div class="max-w-container-max mx-auto px-grid-gutter flex flex-col md:flex-row justify-between items-center gap-6">
+<p class="font-label-sm uppercase text-center md:text-left">© 2026 Gratovo. Connecting AI brands with the right creators.</p>
+<nav class="flex gap-6 font-label-sm uppercase"><a class="hover:opacity-100 opacity-80" href="../../privacy-policy.html">Privacy Policy</a><a class="hover:opacity-100 opacity-80" href="../../terms-of-service.html">Terms of Service</a></nav>
+</div></footer></div>
+<div class="layout-tag">Layout test: Apollo-style<a href="index.html">all layouts</a></div>
+<script>
+(function () {
+  var io = 'IntersectionObserver' in window ? new IntersectionObserver(function (es) {
+    es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, { threshold: 0.12 }) : null;
+  document.querySelectorAll('.reveal').forEach(function (el, i) {
+    var d = el.getAttribute('data-delay'); if (d) el.style.transitionDelay = d + 'ms';
+    if (io) io.observe(el); else el.classList.add('in');
+  });
+  document.querySelectorAll('[data-stepper]').forEach(function (root) {
+    var panels = [].slice.call(root.querySelectorAll('.step-panel'));
+    var tabs = [].slice.call(root.querySelectorAll('.step-tab'));
+    var count = root.querySelector('[data-count]'); var i = 0;
+    function show(n) {
+      i = (n + panels.length) % panels.length;
+      panels.forEach(function (p, k) { p.hidden = k !== i; });
+      tabs.forEach(function (t, k) { t.setAttribute('aria-selected', k === i ? 'true' : 'false'); t.classList.toggle('is-active', k === i); });
+      if (count) count.textContent = (i + 1) + ' of ' + panels.length;
+    }
+    tabs.forEach(function (t, k) { t.addEventListener('click', function () { show(k); }); });
+    var p = root.querySelector('[data-prev]'), n = root.querySelector('[data-next]');
+    if (p) p.addEventListener('click', function () { show(i - 1); });
+    if (n) n.addEventListener('click', function () { show(i + 1); });
+    show(0);
+  });
+  var prog = document.getElementById('scroll-progress');
+  if (prog) {
+    var num = document.getElementById('scroll-progress-num');
+    var upd = function () {
+      var h = document.documentElement.scrollHeight - innerHeight;
+      var pct = h > 0 ? Math.min(100, Math.round(scrollY / h * 100)) : 0;
+      prog.style.height = pct + '%'; if (num) num.textContent = pct;
+    };
+    addEventListener('scroll', upd, { passive: true }); upd();
+  }
+  var menuBtn = document.getElementById('menu-btn'), menu = document.getElementById('menu-overlay');
+  if (menuBtn && menu) {
+    var tgl = function () { var open = menu.classList.toggle('hidden'); menuBtn.setAttribute('aria-expanded', open ? 'false' : 'true'); };
+    menuBtn.addEventListener('click', tgl);
+    menu.querySelectorAll('a').forEach(function (a) { a.addEventListener('click', tgl); });
+  }
+  var star = document.getElementById('stars');
+  if (star) {
+    for (var s = 0; s < 70; s++) {
+      var d = document.createElement('i');
+      d.style.cssText = 'position:absolute;border-radius:50%;background:#fff;left:' + Math.random() * 100 + '%;top:' + Math.random() * 100 +
+        '%;width:' + (1 + Math.random() * 2) + 'px;height:' + (1 + Math.random() * 2) + 'px;opacity:' + (0.2 + Math.random() * 0.7) +
+        ';animation:twinkle ' + (2 + Math.random() * 4) + 's ease-in-out ' + Math.random() * 3 + 's infinite';
+      star.appendChild(d);
+    }
+  }
+  var cp = document.getElementById('copy-email');
+  if (cp) cp.addEventListener('click', function () {
+    var st = document.getElementById('copy-email-status'), ic = document.getElementById('copy-email-icon');
+    function done(ok) {
+      st.textContent = ok ? 'Copied!' : 'Press Ctrl+C to copy';
+      if (ok) ic.textContent = 'check';
+      setTimeout(function () { st.textContent = ''; ic.textContent = 'content_copy'; }, 2500);
+    }
+    if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText('mustafa@gratovo.com').then(function () { done(true); }, function () { done(false); });
+    else done(false);
+  });
+})();
+</script>
+<script src="../../js/audience-tabs.js"></script>
+<script src="../../js/process-cards.js"></script>
+</body>
+</html>

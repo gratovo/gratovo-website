@@ -1,0 +1,23 @@
+{
+  "globals": {
+    "jQuery": true
+  },
+  "liveAnimations": {
+    "scrollUp": 1
+  },
+  "videos": [],
+  "canvases": 0,
+  "svgs": 0,
+  "htmlClass": "",
+  "customCursor": false,
+  "stickyElements": 0,
+  "pageHeight": 5922,
+  "url": "https://nsentive.com/",
+  "screenshots": 9,
+  "libraryHintsFromScriptUrls": [],
+  "scriptHosts": [
+    "",
+    "nsentive.com",
+    "www.googletagmanager.com"
+  ]
+}

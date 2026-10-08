@@ -1,0 +1,22 @@
+{
+  "globals": {
+    "react": true
+  },
+  "liveAnimations": {
+    "fadeUp": 4,
+    "ticker": 1
+  },
+  "videos": [],
+  "canvases": 0,
+  "svgs": 0,
+  "htmlClass": "",
+  "customCursor": true,
+  "stickyElements": 1,
+  "pageHeight": 4550,
+  "url": "https://mindsharemedia.live/",
+  "screenshots": 7,
+  "libraryHintsFromScriptUrls": [],
+  "scriptHosts": [
+    "mindsharemedia.live"
+  ]
+}

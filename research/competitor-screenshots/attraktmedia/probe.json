@@ -1,0 +1,37 @@
+{
+  "globals": {
+    "AOS": true,
+    "jQuery": true,
+    "slick": true
+  },
+  "liveAnimations": {
+    "servicesPanelIn": 4,
+    "servicesStepIn": 4
+  },
+  "videos": [
+    {
+      "autoplay": true,
+      "loop": true,
+      "muted": true,
+      "src": "https://www.attraktmedia.com/images/background-video.mp4"
+    }
+  ],
+  "canvases": 0,
+  "svgs": 0,
+  "htmlClass": "js svg audio canvas cssremunit csscalc cssgradients supports no-touchevents video cssanimations cssfilters flexbox flexboxlegacy no-flexboxtweener flexwrap csstransforms csstransforms3d csstransitions",
+  "customCursor": false,
+  "stickyElements": 0,
+  "pageHeight": 10520,
+  "url": "https://attraktmedia.com/",
+  "screenshots": 10,
+  "libraryHintsFromScriptUrls": [],
+  "scriptHosts": [
+    "cdn.jsdelivr.net",
+    "static.cloudflareinsights.com",
+    "static.doubleclick.net",
+    "www.attraktmedia.com",
+    "www.google.com",
+    "www.youtube-nocookie.com",
+    "www.youtube.com"
+  ]
+}

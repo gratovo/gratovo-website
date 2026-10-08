@@ -1,0 +1,33 @@
+{
+  "globals": {
+    "react": true
+  },
+  "liveAnimations": {
+    "_scroll_1s4al_1": 2,
+    "adhesive-spin": 2
+  },
+  "videos": [
+    {
+      "autoplay": true,
+      "loop": true,
+      "muted": true,
+      "src": "https://www.adhesivemedia.com/hero.mp4"
+    }
+  ],
+  "canvases": 0,
+  "svgs": 128,
+  "htmlClass": "wf-dmsans-n4-active wf-active",
+  "customCursor": false,
+  "stickyElements": 1,
+  "pageHeight": 10312,
+  "url": "https://adhesivemedia.com/",
+  "screenshots": 10,
+  "libraryHintsFromScriptUrls": [
+    "Webflow"
+  ],
+  "scriptHosts": [
+    "ajax.googleapis.com",
+    "widget.senja.io",
+    "www.adhesivemedia.com"
+  ]
+}

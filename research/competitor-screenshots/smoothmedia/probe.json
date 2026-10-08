@@ -1,0 +1,38 @@
+{
+  "globals": {
+    "framer": true
+  },
+  "liveAnimations": {},
+  "videos": [
+    {
+      "autoplay": true,
+      "loop": true,
+      "muted": true,
+      "src": "https://framerusercontent.com/assets/gMDYrMnQMNK8Im23rbXLLUqiRc.mp4"
+    },
+    {
+      "autoplay": true,
+      "loop": true,
+      "muted": true,
+      "src": "https://framerusercontent.com/assets/v2rvUe0Xnido9dhESpXjFQkxR4.mp4"
+    }
+  ],
+  "canvases": 0,
+  "svgs": 82,
+  "htmlClass": "",
+  "customCursor": false,
+  "stickyElements": 1,
+  "pageHeight": 6084,
+  "url": "https://smoothmedia.co/",
+  "screenshots": 9,
+  "libraryHintsFromScriptUrls": [
+    "Framer"
+  ],
+  "scriptHosts": [
+    "app.framerstatic.com",
+    "events.framer.com",
+    "framer.com",
+    "framerusercontent.com",
+    "www.googletagmanager.com"
+  ]
+}

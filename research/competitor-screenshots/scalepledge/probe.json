@@ -1,0 +1,21 @@
+{
+  "globals": {},
+  "liveAnimations": {
+    "growth-line-draw": 1,
+    "analytics-consent-indicator-radiate": 1
+  },
+  "videos": [],
+  "canvases": 0,
+  "svgs": 4,
+  "htmlClass": "",
+  "customCursor": false,
+  "stickyElements": 2,
+  "pageHeight": 8136,
+  "url": "https://scalepledge.com/",
+  "screenshots": 10,
+  "libraryHintsFromScriptUrls": [],
+  "scriptHosts": [
+    "scalepledge.com",
+    "www.googletagmanager.com"
+  ]
+}

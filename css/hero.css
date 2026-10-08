@@ -1,0 +1,24 @@
+/* MindShare-style hero: giant wordmark, pill buttons and a scrolling platform ticker.
+   Used by index.html, brands.html and creators.html (built by research/scripts/build-pages.py). */
+html { scroll-behavior: smooth; }
+.material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+.icon-fill { font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+body { -webkit-font-smoothing: antialiased; }
+
+.ms { font-family: 'Anton', 'Plus Jakarta Sans', sans-serif; font-weight: 400; text-transform: uppercase; letter-spacing: -0.01em; line-height: 0.92; }
+.pill {
+    border-radius: 999px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; font-size: 0.8rem;
+    padding: 18px 30px; display: inline-flex; gap: 8px; align-items: center; transition: transform 0.2s, background-color 0.2s;
+}
+.pill:hover { transform: translateY(-2px); }
+.tag { border: 1px solid currentColor; border-radius: 999px; padding: 6px 14px; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; }
+
+.marquee { overflow: hidden; white-space: nowrap; }
+.marquee-track { display: inline-flex; gap: 4rem; padding-right: 4rem; animation: ticker 22s linear infinite; }
+@keyframes ticker { to { transform: translateX(-50%); } }
+
+@media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    .marquee-track { animation: none; }
+    .pill { transition: none; }
+}

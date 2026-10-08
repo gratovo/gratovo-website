@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+<head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<meta name="robots" content="noindex, nofollow">
+<title>Layout test: Attrakt-style | Gratovo</title>
+<link rel="icon" type="image/svg+xml" href="../../images/logo.svg">
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link rel="stylesheet" href="../../fonts/fonts.css">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../css/process-cards.css">
+
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "primary": "#0a5c9e",
+                        "on-primary": "#ffffff",
+                        "primary-container": "#0072b8",
+                        "on-primary-container": "#eaf6ff",
+                        "primary-fixed": "#eaf6ff",
+                        "primary-fixed-dim": "#9ad6f7",
+                        "on-primary-fixed": "#052c4d",
+                        "on-primary-fixed-variant": "#0a5c9e",
+                        "inverse-primary": "#bfe6ff",
+                        "surface-tint": "#0072b8",
+                        "accent": "#b8286e",
+                        "on-accent": "#ffffff",
+                        "accent-container": "#ffd9e3",
+                        "on-accent-container": "#5c0f33",
+                        "secondary": "#4a5a6e",
+                        "on-secondary": "#ffffff",
+                        "secondary-container": "#d5e6f4",
+                        "on-secondary-container": "#3e4c5e",
+                        "secondary-fixed": "#d5e6f4",
+                        "secondary-fixed-dim": "#b9cbdb",
+                        "on-secondary-fixed": "#0b1c2e",
+                        "on-secondary-fixed-variant": "#3e4c5e",
+                        "tertiary": "#484b4d",
+                        "on-tertiary": "#ffffff",
+                        "tertiary-container": "#606365",
+                        "on-tertiary-container": "#dde0e1",
+                        "tertiary-fixed": "#e0e3e5",
+                        "tertiary-fixed-dim": "#c4c7c9",
+                        "on-tertiary-fixed": "#191c1e",
+                        "on-tertiary-fixed-variant": "#444749",
+                        "error": "#ba1a1a",
+                        "on-error": "#ffffff",
+                        "error-container": "#ffdad6",
+                        "on-error-container": "#93000a",
+                        "background": "#f4f9fe",
+                        "on-background": "#0b1c2e",
+                        "surface": "#f4f9fe",
+                        "on-surface": "#0b1c2e",
+                        "on-surface-variant": "#3e4c5e",
+                        "surface-bright": "#f8fbff",
+                        "surface-dim": "#c4d8e8",
+                        "surface-variant": "#d5e6f4",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-container-low": "#eaf4fc",
+                        "surface-container": "#e1eef9",
+                        "surface-container-high": "#d8e8f5",
+                        "surface-container-highest": "#cfe1f0",
+                        "outline": "#66788c",
+                        "outline-variant": "#c5d5e4",
+                        "inverse-surface": "#16293d",
+                        "inverse-on-surface": "#eaf4fc"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "section-gap": "120px",
+                        "base": "8px",
+                        "grid-gutter": "24px",
+                        "container-max": "1280px"
+                    },
+                    "fontFamily": {
+                        "headline-lg-mobile": ["Plus Jakarta Sans", "sans-serif"],
+                        "body-md": ["Source Sans 3", "sans-serif"],
+                        "display-lg": ["Plus Jakarta Sans", "sans-serif"],
+                        "body-lg": ["Source Sans 3", "sans-serif"],
+                        "headline-md": ["Plus Jakarta Sans", "sans-serif"],
+                        "headline-lg": ["Plus Jakarta Sans", "sans-serif"],
+                        "label-sm": ["JetBrains Mono", "monospace"]
+                    },
+                    "fontSize": {
+                        "headline-lg-mobile": ["32px", { "lineHeight": "40px", "fontWeight": "700" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "display-lg": ["64px", { "lineHeight": "72px", "letterSpacing": "-0.02em", "fontWeight": "800" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "headline-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+                        "label-sm": ["14px", { "lineHeight": "20px", "letterSpacing": "0.02em", "fontWeight": "500" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+html { scroll-behavior: smooth; }
+body { -webkit-font-smoothing: antialiased; }
+.material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+.icon-fill { font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+.reveal { opacity: 0; transform: translateY(26px); transition: opacity .7s ease, transform .7s ease; }
+.reveal.in { opacity: 1; transform: none; }
+.marquee { overflow: hidden; white-space: nowrap; }
+.marquee-track { display: inline-flex; gap: 4rem; animation: marquee 26s linear infinite; padding-right: 4rem; }
+@keyframes marquee { to { transform: translateX(-50%); } }
+@keyframes floaty { 0%,100% { transform: translateY(0) rotate(var(--r,0deg)); } 50% { transform: translateY(-14px) rotate(var(--r,0deg)); } }
+@keyframes drawline { to { stroke-dashoffset: 0; } }
+@keyframes fadein { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+@keyframes scrollup { to { transform: translateY(-50%); } }
+.layout-tag { position: fixed; left: 12px; bottom: 12px; z-index: 9999; font: 12px/1.3 system-ui, sans-serif; background: rgba(15,23,34,.88); color: #fff; padding: 6px 10px; border-radius: 999px; }
+.layout-tag a { color: #9ad6f7; text-decoration: underline; margin-left: 6px; }
+.step-panel[hidden] { display: none; }
+@media (prefers-reduced-motion: reduce) {
+  .reveal { opacity: 1; transform: none; transition: none; }
+  *, *::before, *::after { animation: none !important; }
+}
+
+.grain { background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 .5 0'/></filter><rect width='100%' height='100%' filter='url(%23n)' opacity='.35'/></svg>"); }
+.on-dark .wordmark { color: #5fb8ee; }
+.scroll-cue::after { content: ''; display: block; width: 2px; height: 70px; margin: 8px auto 0; background: linear-gradient(#b8286e, transparent); animation: cue 1.8s ease-in-out infinite; transform-origin: top; }
+@keyframes cue { 0% { transform: scaleY(0); } 60% { transform: scaleY(1); } 100% { transform: scaleY(1); opacity: 0; } }
+.svc-row { border-top: 1px solid rgba(255,255,255,.15); }
+</style>
+<noscript><style>.reveal{opacity:1;transform:none}</style></noscript>
+</head>
+<body class="bg-[#0b1623]">
+
+<div class="on-dark bg-[#0b1623] text-white" id="top">
+<header class="fixed top-0 inset-x-0 z-50 flex justify-between items-center px-6 md:px-12 h-20 bg-gradient-to-b from-[#0b1623] to-transparent">
+<a href="#top"><span class="wordmark text-2xl md:text-3xl" role="img" aria-label="Gratovo"><img src="../../images/logo-mark.svg" alt=""><span aria-hidden="true">ratovo</span></span></a>
+<button id="menu-btn" aria-expanded="false" class="flex items-center gap-3 font-label-sm uppercase tracking-[.3em] bg-black/40 px-4 py-2 rounded">Menu <span class="flex flex-col gap-1"><i class="block w-6 h-0.5 bg-accent"></i><i class="block w-6 h-0.5 bg-accent"></i><i class="block w-6 h-0.5 bg-accent"></i></span></button>
+</header>
+<div id="menu-overlay" class="hidden fixed inset-0 z-40 bg-[#0b1623]/97 flex flex-col items-center justify-center gap-8 text-3xl font-headline-md"><a href="#top" class="hover:text-primary-fixed-dim">Home</a><a href="#services" class="hover:text-primary-fixed-dim">For brands</a><a href="#for-creators" class="hover:text-primary-fixed-dim">For creators</a><a href="#process" class="hover:text-primary-fixed-dim">How it works</a><a href="#workwithus" class="hover:text-primary-fixed-dim">Contact</a></div>
+<main>
+<section class="grain relative min-h-screen flex items-center bg-gradient-to-br from-[#0b1623] via-[#101f33] to-[#1b0f1e]">
+<div class="max-w-container-max mx-auto px-6 md:px-12 w-full pt-24">
+<h1 class="font-display-lg font-bold text-4xl md:text-7xl text-white max-w-5xl leading-tight">Connecting AI Brands With the <span class="text-accent">Creators Their Customers Trust</span>.</h1>
+<p class="mt-6 text-lg text-white/80 max-w-2xl">Brands get vetted AI creators. Creators get brand deals that fit. No cold emails. No chasing replies. We make the introduction and keep the conversation moving.</p>
+<div class="mt-10 flex flex-wrap gap-4"><a href="#workwithus" class="px-8 py-4 border-2 border-accent bg-accent text-white font-label-sm uppercase tracking-widest hover:bg-transparent transition">Find My Creators</a><a href="#creators" class="px-8 py-4 border-2 border-accent text-white font-label-sm uppercase tracking-widest hover:bg-accent/20 transition">Get Brand Deals</a></div></div>
+<div class="absolute bottom-8 right-8 text-center font-label-sm uppercase tracking-[.3em] text-white/80 scroll-cue">Scroll down</div>
+</section>
+<section class="py-24 text-center max-w-4xl mx-auto px-6 reveal">
+<p class="font-label-sm uppercase tracking-widest text-accent-container mb-4">The short version</p>
+<h2 class="font-headline-lg font-bold text-3xl md:text-5xl text-white">We find the creators for brands. We find the deals for creators.</h2>
+<p class="mt-6 text-white/70 text-lg">People who watch AI tutorials are already looking for tools to try. We put brands in front of them through creators they trust, and we bring creators the brand deals that fit.</p></section>
+<section class="border-y border-white/10 py-6 marquee"><div class="marquee-track"><span class="font-headline-md text-white/60 uppercase tracking-widest">YouTube</span><span class="text-accent">/</span><span class="font-headline-md text-white/60 uppercase tracking-widest">LinkedIn</span><span class="text-accent">/</span><span class="font-headline-md text-white/60 uppercase tracking-widest">X</span><span class="text-accent">/</span><span class="font-headline-md text-white/60 uppercase tracking-widest">Newsletters</span><span class="text-accent">/</span><span class="font-headline-md text-white/60 uppercase tracking-widest">YouTube</span><span class="text-accent">/</span><span class="font-headline-md text-white/60 uppercase tracking-widest">LinkedIn</span><span class="text-accent">/</span><span class="font-headline-md text-white/60 uppercase tracking-widest">X</span><span class="text-accent">/</span><span class="font-headline-md text-white/60 uppercase tracking-widest">Newsletters</span><span class="text-accent">/</span><span class="font-headline-md text-white/60 uppercase tracking-widest">YouTube</span><span class="text-accent">/</span><span class="font-headline-md text-white/60 uppercase tracking-widest">LinkedIn</span><span class="text-accent">/</span><span class="font-headline-md text-white/60 uppercase tracking-widest">X</span><span class="text-accent">/</span><span class="font-headline-md text-white/60 uppercase tracking-widest">Newsletters</span><span class="text-accent">/</span><span class="font-headline-md text-white/60 uppercase tracking-widest">YouTube</span><span class="text-accent">/</span><span class="font-headline-md text-white/60 uppercase tracking-widest">LinkedIn</span><span class="text-accent">/</span><span class="font-headline-md text-white/60 uppercase tracking-widest">X</span><span class="text-accent">/</span><span class="font-headline-md text-white/60 uppercase tracking-widest">Newsletters</span><span class="text-accent">/</span></div></section>
+<section class="py-24 max-w-container-max mx-auto px-6 md:px-12">
+<p class="font-label-sm uppercase tracking-widest text-accent-container text-center mb-3 reveal">For brands</p>
+<h2 class="font-headline-lg font-bold text-3xl md:text-5xl text-white text-center mb-3 reveal">Every creator passes this check.</h2>
+<p class="text-center text-white/70 mb-12 reveal">Before you see a name.</p>
+<div class="grid grid-cols-2 md:grid-cols-4 gap-5"><div class="reveal border border-white/15 rounded-xl p-8 text-center bg-white/5" data-delay="0"><p class="font-display-lg font-bold text-5xl text-white">30K+</p><p class="text-white/70 mt-2">average views per video</p></div><div class="reveal border border-white/15 rounded-xl p-8 text-center bg-white/5" data-delay="100"><p class="font-display-lg font-bold text-5xl text-white">3-8%</p><p class="text-white/70 mt-2">real engagement from active viewers</p></div><div class="reveal border border-white/15 rounded-xl p-8 text-center bg-white/5" data-delay="200"><p class="font-display-lg font-bold text-5xl text-white">35%+</p><p class="text-white/70 mt-2">of the audience in your target country</p></div><div class="reveal border border-white/15 rounded-xl p-8 text-center bg-white/5" data-delay="300"><p class="font-display-lg font-bold text-5xl text-white">1-3</p><p class="text-white/70 mt-2">creators recommended for your product, not 200</p></div></div></section>
+<section id="services" class="py-12 max-w-container-max mx-auto px-6 md:px-12">
+<h2 class="font-headline-lg font-bold text-3xl md:text-5xl text-white text-center mb-12 reveal">Everything your brand needs to work with AI creators.</h2>
+<div class="grid md:grid-cols-2 gap-x-14"><div class="svc-row reveal flex gap-6 py-6" data-delay="0"><span class="font-label-sm text-accent-container w-8 shrink-0 pt-1">01</span><div><h3 class="font-headline-md text-white">Creator search</h3><p class="text-white/70 mt-1">We find AI creators who already cover tools like yours.</p></div></div><div class="svc-row reveal flex gap-6 py-6" data-delay="120"><span class="font-label-sm text-accent-container w-8 shrink-0 pt-1">02</span><div><h3 class="font-headline-md text-white">Vetting</h3><p class="text-white/70 mt-1">Real views, real engagement, and the right audience location.</p></div></div><div class="svc-row reveal flex gap-6 py-6" data-delay="0"><span class="font-label-sm text-accent-container w-8 shrink-0 pt-1">03</span><div><h3 class="font-headline-md text-white">Introductions</h3><p class="text-white/70 mt-1">We reach out to the creators and keep the conversation moving.</p></div></div><div class="svc-row reveal flex gap-6 py-6" data-delay="120"><span class="font-label-sm text-accent-container w-8 shrink-0 pt-1">04</span><div><h3 class="font-headline-md text-white">Contracts</h3><p class="text-white/70 mt-1">Deliverables, dates, and usage rights locked in before anything goes live.</p></div></div><div class="svc-row reveal flex gap-6 py-6" data-delay="0"><span class="font-label-sm text-accent-container w-8 shrink-0 pt-1">05</span><div><h3 class="font-headline-md text-white">Script and draft review</h3><p class="text-white/70 mt-1">You see and approve the video before it posts.</p></div></div><div class="svc-row reveal flex gap-6 py-6" data-delay="120"><span class="font-label-sm text-accent-container w-8 shrink-0 pt-1">06</span><div><h3 class="font-headline-md text-white">Go-live check</h3><p class="text-white/70 mt-1">We confirm it posts on schedule and send you the early performance numbers.</p></div></div></div></section>
+<section id="shortlist" class="py-24 max-w-container-max mx-auto px-6 md:px-12">
+<h2 class="font-headline-lg font-bold text-3xl md:text-5xl text-white text-center mb-3 reveal">What we send brands.</h2>
+<p class="text-center text-white/70 mb-12 reveal">Hover a card. These are example formats, not real creators.</p>
+<div class="grid sm:grid-cols-3 gap-5 reveal"><div class="group relative aspect-square rounded-2xl overflow-hidden bg-gradient-to-br from-[#16293d] to-[#0a5c9e] border border-white/10">
+<div class="absolute inset-0 flex flex-col items-center justify-center text-center p-4 transition duration-300 group-hover:blur-sm group-hover:opacity-30">
+<span class="material-symbols-outlined icon-fill text-6xl text-white/70">account_circle</span><p class="font-headline-md text-white mt-2">Creator A</p><p class="text-white/70 text-sm">AI tutorials, YouTube</p></div>
+<div class="absolute inset-0 flex flex-col items-center justify-center text-center p-4 bg-black/55 opacity-0 group-hover:opacity-100 transition duration-300">
+<p class="font-headline-md text-white">Creator A</p><p class="text-white/80 text-sm mb-3">AI tutorials, YouTube</p>
+<div class="flex gap-5 text-white"><div><p class="text-xl font-bold">42K</p><p class="text-[11px] uppercase text-white/70">avg views</p></div>
+<div><p class="text-xl font-bold">5.1%</p><p class="text-[11px] uppercase text-white/70">engagement</p></div>
+<div><p class="text-xl font-bold">46%</p><p class="text-[11px] uppercase text-white/70">US audience</p></div></div></div>
+<span class="absolute top-3 left-3 text-[10px] uppercase tracking-wider bg-white/90 text-[#16293d] rounded-full px-2 py-0.5">Example format</span></div><div class="group relative aspect-square rounded-2xl overflow-hidden bg-gradient-to-br from-[#16293d] to-[#0a5c9e] border border-white/10">
+<div class="absolute inset-0 flex flex-col items-center justify-center text-center p-4 transition duration-300 group-hover:blur-sm group-hover:opacity-30">
+<span class="material-symbols-outlined icon-fill text-6xl text-white/70">account_circle</span><p class="font-headline-md text-white mt-2">Creator B</p><p class="text-white/70 text-sm">Automation tips, LinkedIn</p></div>
+<div class="absolute inset-0 flex flex-col items-center justify-center text-center p-4 bg-black/55 opacity-0 group-hover:opacity-100 transition duration-300">
+<p class="font-headline-md text-white">Creator B</p><p class="text-white/80 text-sm mb-3">Automation tips, LinkedIn</p>
+<div class="flex gap-5 text-white"><div><p class="text-xl font-bold">31K</p><p class="text-[11px] uppercase text-white/70">avg views</p></div>
+<div><p class="text-xl font-bold">4.2%</p><p class="text-[11px] uppercase text-white/70">engagement</p></div>
+<div><p class="text-xl font-bold">41%</p><p class="text-[11px] uppercase text-white/70">US audience</p></div></div></div>
+<span class="absolute top-3 left-3 text-[10px] uppercase tracking-wider bg-white/90 text-[#16293d] rounded-full px-2 py-0.5">Example format</span></div><div class="group relative aspect-square rounded-2xl overflow-hidden bg-gradient-to-br from-[#16293d] to-[#0a5c9e] border border-white/10">
+<div class="absolute inset-0 flex flex-col items-center justify-center text-center p-4 transition duration-300 group-hover:blur-sm group-hover:opacity-30">
+<span class="material-symbols-outlined icon-fill text-6xl text-white/70">account_circle</span><p class="font-headline-md text-white mt-2">Creator C</p><p class="text-white/70 text-sm">AI news, newsletter and X</p></div>
+<div class="absolute inset-0 flex flex-col items-center justify-center text-center p-4 bg-black/55 opacity-0 group-hover:opacity-100 transition duration-300">
+<p class="font-headline-md text-white">Creator C</p><p class="text-white/80 text-sm mb-3">AI news, newsletter and X</p>
+<div class="flex gap-5 text-white"><div><p class="text-xl font-bold">58K</p><p class="text-[11px] uppercase text-white/70">avg views</p></div>
+<div><p class="text-xl font-bold">3.6%</p><p class="text-[11px] uppercase text-white/70">engagement</p></div>
+<div><p class="text-xl font-bold">52%</p><p class="text-[11px] uppercase text-white/70">US audience</p></div></div></div>
+<span class="absolute top-3 left-3 text-[10px] uppercase tracking-wider bg-white/90 text-[#16293d] rounded-full px-2 py-0.5">Example format</span></div></div></section>
+<section id="for-creators" class="max-w-container-max mx-auto px-6 md:px-12 py-20 ">
+<div class="text-center max-w-3xl mx-auto mb-10"><p class="font-label-sm uppercase tracking-widest text-primary-fixed-dim mb-3 reveal">For creators</p>
+<h2 class="font-headline-lg font-bold text-3xl md:text-5xl text-white  reveal">Brand deals that fit your channel.</h2>
+<p class="text-white/70 mt-4 reveal">Already making content about AI and software? We put you in front of the brands that fit your audience.</p></div>
+<div class="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto mb-10"><div class="reveal bg-white/5 border border-white/15 rounded-2xl p-7" data-delay="0"><div class="w-12 h-12 rounded-xl bg-primary-container text-white flex items-center justify-center mb-4"><span class="material-symbols-outlined icon-fill text-2xl">handshake</span></div><h3 class="font-headline-md text-white mb-2">Brand Deals Come to You</h3><p class="text-white/70">No cold outreach to brands. We bring AI and SaaS sponsorship deals to creators who fit.</p></div><div class="reveal bg-white/5 border border-white/15 rounded-2xl p-7" data-delay="100"><div class="w-12 h-12 rounded-xl bg-primary-container text-white flex items-center justify-center mb-4"><span class="material-symbols-outlined icon-fill text-2xl">person</span></div><h3 class="font-headline-md text-white mb-2">One Contact, Less Back-and-Forth</h3><p class="text-white/70">No long media-kit requests or endless email threads. One person to talk to.</p></div></div>
+<div class="grid sm:grid-cols-3 gap-6 max-w-4xl mx-auto mb-10"><div class="reveal" data-delay="0"><p class="font-label-sm text-primary-fixed-dim mb-1">01</p><h4 class="font-semibold text-white">Tell us about your channel</h4><p class="text-white/70 text-sm">Your channel link and what you cover. It takes two minutes.</p></div><div class="reveal" data-delay="100"><p class="font-label-sm text-primary-fixed-dim mb-1">02</p><h4 class="font-semibold text-white">We put you forward</h4><p class="text-white/70 text-sm">We introduce you to AI and SaaS brands that fit your audience.</p></div><div class="reveal" data-delay="200"><p class="font-label-sm text-primary-fixed-dim mb-1">03</p><h4 class="font-semibold text-white">You hear from us</h4><p class="text-white/70 text-sm">When a brand deal fits, we reach out with the details.</p></div></div>
+<div class="text-center"><a href="#creators" class="inline-flex bg-primary-container text-white rounded-full px-8 py-4 font-label-sm uppercase tracking-wider">Get Brand Deals</a></div></section>
+<section id="process" class="py-24 max-w-container-max mx-auto px-6 md:px-12">
+<h2 class="font-headline-lg font-bold text-3xl md:text-5xl text-white text-center mb-12 reveal">For brands: from message to live video in four steps.</h2>
+<div class="grid md:grid-cols-4 gap-8"><div class="reveal border-t-2 border-primary-container pt-5" data-delay="0"><p class="font-label-sm text-primary-fixed-dim mb-2">01</p><h3 class="font-headline-md text-white mb-2">Request</h3><p class="text-white/70">Tell us what you sell and who it's for.</p></div><div class="reveal border-t-2 border-primary-container pt-5" data-delay="120"><p class="font-label-sm text-primary-fixed-dim mb-2">02</p><h3 class="font-headline-md text-white mb-2">Match</h3><p class="text-white/70">We recommend the 1 to 3 vetted AI creators that fit your product.</p></div><div class="reveal border-t-2 border-primary-container pt-5" data-delay="240"><p class="font-label-sm text-primary-fixed-dim mb-2">03</p><h3 class="font-headline-md text-white mb-2">Agree</h3><p class="text-white/70">We agree deliverables and dates and put everything in writing.</p></div><div class="reveal border-t-2 border-primary-container pt-5" data-delay="360"><p class="font-label-sm text-primary-fixed-dim mb-2">04</p><h3 class="font-headline-md text-white mb-2">Launch</h3><p class="text-white/70">You approve the video. We make sure it goes live.</p></div></div></section>
+<section class="py-24 px-6 bg-gradient-to-b from-transparent to-[#1b0f1e] text-center">
+<h2 class="font-headline-lg font-bold text-3xl md:text-5xl text-white mb-4 reveal">Let's work together.</h2>
+<p class="text-white/70 mb-10 reveal">Brands, tell us what you're promoting. Creators, tell us about your channel. We reply within 24 hours.</p>
+<div class="max-w-xl mx-auto">
+<div id="contact-card" class="scroll-mt-28 bg-white/5 border border-white/15 rounded-3xl p-6 md:p-8 text-left" style="--gv-bg:rgba(255,255,255,.08);--gv-bd:rgba(255,255,255,.2);--gv-fg:rgba(255,255,255,.7);--gv-on-fg:#0b1c2e;--gv-on-bg:#fff;--gv-ph:rgba(255,255,255,.65);">
+<div class="gv-tabs" role="tablist" aria-label="I am a"><button type="button" role="tab" class="gv-tabbtn gv-on" data-aud="brand" aria-selected="true" aria-controls="workwithus">I'm a brand</button><button type="button" role="tab" class="gv-tabbtn" data-aud="creator" aria-selected="false" aria-controls="creators">I'm a creator</button><span class="gv-ind" aria-hidden="true"></span></div>
+<div id="workwithus" role="tabpanel" data-gv-panel="brand" class="scroll-mt-28">
+<p class="text-white/70 mb-5">Tell us what you're promoting.</p>
+<form action="https://formsubmit.co/mustafa@gratovo.com" method="POST" class="gv-form flex flex-col gap-3" data-who="brand request"><input type="hidden" name="_captcha" value="false"><input type="hidden" name="_next" value="https://www.gratovo.com/">
+<input type="hidden" name="_subject" value="New brand request from the website">
+<input type="text" name="name" placeholder="Your name / company" required class="w-full py-3.5 px-5 rounded-full bg-white/10 border border-white/25 text-white focus:ring-2 focus:ring-primary-fixed-dim outline-none placeholder:text-white/60">
+<input type="email" name="email" placeholder="Your email" required class="w-full py-3.5 px-5 rounded-full bg-white/10 border border-white/25 text-white focus:ring-2 focus:ring-primary-fixed-dim outline-none placeholder:text-white/60">
+<select name="inquiry" required aria-label="What is this about?" class="w-full py-3.5 px-5 rounded-full bg-white/10 border border-white/25 text-white focus:ring-2 focus:ring-primary-fixed-dim outline-none placeholder:text-white/60" style="padding-right:3rem"><option value="" disabled selected>What&#39;s this about?</option><option value="find-creators" data-hint="What does your product do? One line is enough." data-need="0">Find creators for my product</option><option value="specific-creator" data-hint="Which creator? A link works." data-need="1">Work with a specific creator</option><option value="scale" data-hint="What's working so far? One line is enough." data-need="0">Scale what's already working</option><option value="question" data-hint="What would you like to know?" data-need="1">I have a question first</option></select>
+<textarea name="message" rows="2" placeholder="Anything we should know? (optional)" class="w-full py-3.5 px-5 rounded-3xl bg-white/10 border border-white/25 text-white focus:ring-2 focus:ring-primary-fixed-dim outline-none placeholder:text-white/60"></textarea>
+<button type="submit" class="self-center bg-primary-container text-white hover:bg-primary py-3.5 px-8 rounded-full font-label-sm uppercase text-sm tracking-wider inline-flex items-center gap-2 shadow-lg transition hover:-translate-y-1 duration-200">Find My Creators <span class="material-symbols-outlined ">send</span></button></form></div><div id="creators" role="tabpanel" data-gv-panel="creator" class="scroll-mt-28" hidden>
+<p class="text-white/70 mb-5">Tell us about your channel.</p>
+<form action="https://formsubmit.co/mustafa@gratovo.com" method="POST" class="gv-form flex flex-col gap-3" data-who="creator application"><input type="hidden" name="_captcha" value="false"><input type="hidden" name="_next" value="https://www.gratovo.com/">
+<input type="hidden" name="_subject" value="New creator application from the website">
+<input type="text" name="name" placeholder="Your name / channel name" required class="w-full py-3.5 px-5 rounded-full bg-white/10 border border-white/25 text-white focus:ring-2 focus:ring-primary-fixed-dim outline-none placeholder:text-white/60">
+<input type="email" name="email" placeholder="Your email" required class="w-full py-3.5 px-5 rounded-full bg-white/10 border border-white/25 text-white focus:ring-2 focus:ring-primary-fixed-dim outline-none placeholder:text-white/60">
+<input type="text" name="channel" placeholder="Your channel link" required class="w-full py-3.5 px-5 rounded-full bg-white/10 border border-white/25 text-white focus:ring-2 focus:ring-primary-fixed-dim outline-none placeholder:text-white/60">
+<select name="inquiry" required aria-label="What is this about?" class="w-full py-3.5 px-5 rounded-full bg-white/10 border border-white/25 text-white focus:ring-2 focus:ring-primary-fixed-dim outline-none placeholder:text-white/60" style="padding-right:3rem"><option value="" disabled selected>What&#39;s this about?</option><option value="get-deals" data-hint="What do you cover? One line is enough." data-need="0">Get brand deals for my channel</option><option value="specific-brand" data-hint="Which brand? A link works." data-need="1">Work with a specific brand</option><option value="question" data-hint="What would you like to know?" data-need="1">I have a question first</option></select>
+<textarea name="message" rows="2" placeholder="Anything we should know? (optional)" class="w-full py-3.5 px-5 rounded-3xl bg-white/10 border border-white/25 text-white focus:ring-2 focus:ring-primary-fixed-dim outline-none placeholder:text-white/60"></textarea>
+<button type="submit" class="self-center bg-primary-container text-white hover:bg-primary py-3.5 px-8 rounded-full font-label-sm uppercase text-sm tracking-wider inline-flex items-center gap-2 shadow-lg transition hover:-translate-y-1 duration-200">Get Brand Deals <span class="material-symbols-outlined ">send</span></button></form></div></div>
+<div class="mt-8 flex flex-col sm:flex-row items-center justify-center gap-3 text-white/80">
+<span class="font-body-md">Prefer email?</span>
+<button type="button" id="copy-email" aria-label="Copy email address mustafa@gratovo.com" class="inline-flex items-center gap-2 bg-white/15 hover:bg-white/25 text-white rounded-full py-2 px-5 font-label-sm transition-colors">
+<span>mustafa@gratovo.com</span><span id="copy-email-icon" class="material-symbols-outlined text-base">content_copy</span></button>
+<span id="copy-email-status" class="font-label-sm" role="status"></span>
+</div></div></section>
+</main>
+<footer class="bg-[#0b1623] border-white/10 text-white/70 border-t py-10"><div class="max-w-container-max mx-auto px-grid-gutter flex flex-col md:flex-row justify-between items-center gap-6">
+<p class="font-label-sm uppercase text-center md:text-left">© 2026 Gratovo. Connecting AI brands with the right creators.</p>
+<nav class="flex gap-6 font-label-sm uppercase"><a class="hover:opacity-100 opacity-80" href="../../privacy-policy.html">Privacy Policy</a><a class="hover:opacity-100 opacity-80" href="../../terms-of-service.html">Terms of Service</a></nav>
+</div></footer>
+<a href="#top" aria-label="Back to top" class="fixed bottom-6 right-6 w-12 h-12 bg-black/70 text-white flex items-center justify-center rounded"><span class="material-symbols-outlined ">arrow_upward</span></a>
+</div>
+<div class="layout-tag">Layout test: Attrakt-style<a href="index.html">all layouts</a></div>
+<script>
+(function () {
+  var io = 'IntersectionObserver' in window ? new IntersectionObserver(function (es) {
+    es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, { threshold: 0.12 }) : null;
+  document.querySelectorAll('.reveal').forEach(function (el, i) {
+    var d = el.getAttribute('data-delay'); if (d) el.style.transitionDelay = d + 'ms';
+    if (io) io.observe(el); else el.classList.add('in');
+  });
+  document.querySelectorAll('[data-stepper]').forEach(function (root) {
+    var panels = [].slice.call(root.querySelectorAll('.step-panel'));
+    var tabs = [].slice.call(root.querySelectorAll('.step-tab'));
+    var count = root.querySelector('[data-count]'); var i = 0;
+    function show(n) {
+      i = (n + panels.length) % panels.length;
+      panels.forEach(function (p, k) { p.hidden = k !== i; });
+      tabs.forEach(function (t, k) { t.setAttribute('aria-selected', k === i ? 'true' : 'false'); t.classList.toggle('is-active', k === i); });
+      if (count) count.textContent = (i + 1) + ' of ' + panels.length;
+    }
+    tabs.forEach(function (t, k) { t.addEventListener('click', function () { show(k); }); });
+    var p = root.querySelector('[data-prev]'), n = root.querySelector('[data-next]');
+    if (p) p.addEventListener('click', function () { show(i - 1); });
+    if (n) n.addEventListener('click', function () { show(i + 1); });
+    show(0);
+  });
+  var prog = document.getElementById('scroll-progress');
+  if (prog) {
+    var num = document.getElementById('scroll-progress-num');
+    var upd = function () {
+      var h = document.documentElement.scrollHeight - innerHeight;
+      var pct = h > 0 ? Math.min(100, Math.round(scrollY / h * 100)) : 0;
+      prog.style.height = pct + '%'; if (num) num.textContent = pct;
+    };
+    addEventListener('scroll', upd, { passive: true }); upd();
+  }
+  var menuBtn = document.getElementById('menu-btn'), menu = document.getElementById('menu-overlay');
+  if (menuBtn && menu) {
+    var tgl = function () { var open = menu.classList.toggle('hidden'); menuBtn.setAttribute('aria-expanded', open ? 'false' : 'true'); };
+    menuBtn.addEventListener('click', tgl);
+    menu.querySelectorAll('a').forEach(function (a) { a.addEventListener('click', tgl); });
+  }
+  var star = document.getElementById('stars');
+  if (star) {
+    for (var s = 0; s < 70; s++) {
+      var d = document.createElement('i');
+      d.style.cssText = 'position:absolute;border-radius:50%;background:#fff;left:' + Math.random() * 100 + '%;top:' + Math.random() * 100 +
+        '%;width:' + (1 + Math.random() * 2) + 'px;height:' + (1 + Math.random() * 2) + 'px;opacity:' + (0.2 + Math.random() * 0.7) +
+        ';animation:twinkle ' + (2 + Math.random() * 4) + 's ease-in-out ' + Math.random() * 3 + 's infinite';
+      star.appendChild(d);
+    }
+  }
+  var cp = document.getElementById('copy-email');
+  if (cp) cp.addEventListener('click', function () {
+    var st = document.getElementById('copy-email-status'), ic = document.getElementById('copy-email-icon');
+    function done(ok) {
+      st.textContent = ok ? 'Copied!' : 'Press Ctrl+C to copy';
+      if (ok) ic.textContent = 'check';
+      setTimeout(function () { st.textContent = ''; ic.textContent = 'content_copy'; }, 2500);
+    }
+    if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText('mustafa@gratovo.com').then(function () { done(true); }, function () { done(false); });
+    else done(false);
+  });
+})();
+</script>
+<script src="../../js/audience-tabs.js"></script>
+<script src="../../js/process-cards.js"></script>
+</body>
+</html>

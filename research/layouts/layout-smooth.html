@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+<head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<meta name="robots" content="noindex, nofollow">
+<title>Layout test: Smooth-style | Gratovo</title>
+<link rel="icon" type="image/svg+xml" href="../../images/logo.svg">
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link rel="stylesheet" href="../../fonts/fonts.css">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../css/process-cards.css">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "primary": "#0a5c9e",
+                        "on-primary": "#ffffff",
+                        "primary-container": "#0072b8",
+                        "on-primary-container": "#eaf6ff",
+                        "primary-fixed": "#eaf6ff",
+                        "primary-fixed-dim": "#9ad6f7",
+                        "on-primary-fixed": "#052c4d",
+                        "on-primary-fixed-variant": "#0a5c9e",
+                        "inverse-primary": "#bfe6ff",
+                        "surface-tint": "#0072b8",
+                        "accent": "#b8286e",
+                        "on-accent": "#ffffff",
+                        "accent-container": "#ffd9e3",
+                        "on-accent-container": "#5c0f33",
+                        "secondary": "#4a5a6e",
+                        "on-secondary": "#ffffff",
+                        "secondary-container": "#d5e6f4",
+                        "on-secondary-container": "#3e4c5e",
+                        "secondary-fixed": "#d5e6f4",
+                        "secondary-fixed-dim": "#b9cbdb",
+                        "on-secondary-fixed": "#0b1c2e",
+                        "on-secondary-fixed-variant": "#3e4c5e",
+                        "tertiary": "#484b4d",
+                        "on-tertiary": "#ffffff",
+                        "tertiary-container": "#606365",
+                        "on-tertiary-container": "#dde0e1",
+                        "tertiary-fixed": "#e0e3e5",
+                        "tertiary-fixed-dim": "#c4c7c9",
+                        "on-tertiary-fixed": "#191c1e",
+                        "on-tertiary-fixed-variant": "#444749",
+                        "error": "#ba1a1a",
+                        "on-error": "#ffffff",
+                        "error-container": "#ffdad6",
+                        "on-error-container": "#93000a",
+                        "background": "#f4f9fe",
+                        "on-background": "#0b1c2e",
+                        "surface": "#f4f9fe",
+                        "on-surface": "#0b1c2e",
+                        "on-surface-variant": "#3e4c5e",
+                        "surface-bright": "#f8fbff",
+                        "surface-dim": "#c4d8e8",
+                        "surface-variant": "#d5e6f4",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-container-low": "#eaf4fc",
+                        "surface-container": "#e1eef9",
+                        "surface-container-high": "#d8e8f5",
+                        "surface-container-highest": "#cfe1f0",
+                        "outline": "#66788c",
+                        "outline-variant": "#c5d5e4",
+                        "inverse-surface": "#16293d",
+                        "inverse-on-surface": "#eaf4fc"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "section-gap": "120px",
+                        "base": "8px",
+                        "grid-gutter": "24px",
+                        "container-max": "1280px"
+                    },
+                    "fontFamily": {
+                        "headline-lg-mobile": ["Plus Jakarta Sans", "sans-serif"],
+                        "body-md": ["Source Sans 3", "sans-serif"],
+                        "display-lg": ["Plus Jakarta Sans", "sans-serif"],
+                        "body-lg": ["Source Sans 3", "sans-serif"],
+                        "headline-md": ["Plus Jakarta Sans", "sans-serif"],
+                        "headline-lg": ["Plus Jakarta Sans", "sans-serif"],
+                        "label-sm": ["JetBrains Mono", "monospace"]
+                    },
+                    "fontSize": {
+                        "headline-lg-mobile": ["32px", { "lineHeight": "40px", "fontWeight": "700" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "display-lg": ["64px", { "lineHeight": "72px", "letterSpacing": "-0.02em", "fontWeight": "800" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "headline-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+                        "label-sm": ["14px", { "lineHeight": "20px", "letterSpacing": "0.02em", "fontWeight": "500" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+html { scroll-behavior: smooth; }
+body { -webkit-font-smoothing: antialiased; }
+.material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+.icon-fill { font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+.reveal { opacity: 0; transform: translateY(26px); transition: opacity .7s ease, transform .7s ease; }
+.reveal.in { opacity: 1; transform: none; }
+.marquee { overflow: hidden; white-space: nowrap; }
+.marquee-track { display: inline-flex; gap: 4rem; animation: marquee 26s linear infinite; padding-right: 4rem; }
+@keyframes marquee { to { transform: translateX(-50%); } }
+@keyframes floaty { 0%,100% { transform: translateY(0) rotate(var(--r,0deg)); } 50% { transform: translateY(-14px) rotate(var(--r,0deg)); } }
+@keyframes drawline { to { stroke-dashoffset: 0; } }
+@keyframes fadein { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+@keyframes scrollup { to { transform: translateY(-50%); } }
+.layout-tag { position: fixed; left: 12px; bottom: 12px; z-index: 9999; font: 12px/1.3 system-ui, sans-serif; background: rgba(15,23,34,.88); color: #fff; padding: 6px 10px; border-radius: 999px; }
+.layout-tag a { color: #9ad6f7; text-decoration: underline; margin-left: 6px; }
+.step-panel[hidden] { display: none; }
+@media (prefers-reduced-motion: reduce) {
+  .reveal { opacity: 1; transform: none; transition: none; }
+  *, *::before, *::after { animation: none !important; }
+}
+
+.serif { font-family: 'Fraunces', Georgia, serif; }
+.hero-bg { background: linear-gradient(120deg, #2b1a4d, #0a5c9e, #5b2a86, #16293d); background-size: 300% 300%; animation: drift 16s ease-in-out infinite; }
+@keyframes drift { 0%,100% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } }
+.ellipse { fill:none; stroke:#fff; stroke-width:2.5; stroke-dasharray:1; stroke-dashoffset:1; animation: drawline 1.6s 1s ease-out forwards; }
+@keyframes bob { 0%,100% { transform: translateY(0); } 50% { transform: translateY(8px); } }
+.phone { width:200px; border:6px solid #2a1745; border-radius:32px; background:#fff; box-shadow:0 20px 40px rgba(42,23,69,.25); overflow:hidden; }
+.cloud span { background:#fcfaf6; border-radius:999px; padding:10px 20px; font-weight:700; font-size:.78rem; letter-spacing:.06em; text-transform:uppercase; color:#2a1745; }
+</style>
+<noscript><style>.reveal{opacity:1;transform:none}</style></noscript>
+</head>
+<body class="bg-[#fcfaf6]">
+
+<div class="bg-[#fcfaf6] text-[#2a1745]">
+<section class="hero-bg relative min-h-screen text-white flex flex-col">
+<div class="absolute inset-0 bg-[#2a1745]/45"></div>
+<header class="relative z-10 flex items-center justify-between px-6 md:px-10 h-24"><a href="#"><span class="wordmark text-3xl" role="img" aria-label="Gratovo"><img src="../../images/logo-mark.svg" alt=""><span aria-hidden="true">ratovo</span></span></a>
+<nav class="flex items-center gap-7 text-sm font-medium"><a class="hidden sm:block" href="#who">For brands</a><a class="hidden sm:block" href="#for-creators">For creators</a><a href="#workwithus" class="border border-white rounded-full px-5 py-2">Contact</a></nav></header>
+<div class="relative z-10 flex-1 flex flex-col items-center justify-center text-center px-6 pb-10">
+<p class="text-xs font-semibold tracking-[.2em] uppercase mb-6">AI brands and creators, introduced</p>
+<h1 class="serif text-5xl md:text-8xl max-w-5xl leading-[1.02]">Connecting AI brands with the <span class="relative inline-block">creators<svg class="absolute -inset-x-3 -inset-y-3 w-[calc(100%+1.5rem)] h-[calc(100%+1.5rem)]" viewBox="0 0 300 100" preserveAspectRatio="none" aria-hidden="true"><ellipse class="ellipse" pathLength="1" cx="150" cy="50" rx="146" ry="44"/></svg></span> their customers trust.</h1>
+<p class="mt-8 max-w-xl text-lg text-white/85">Brands get vetted AI creators. Creators get brand deals that fit. No cold emails. No chasing replies. We make the introduction and keep the conversation moving.</p>
+<div class="mt-8 flex flex-wrap justify-center gap-3"><a href="#workwithus" class="bg-white text-[#2a1745] rounded-full px-9 py-4 font-semibold">Find My Creators</a><a href="#creators" class="border border-white text-white rounded-full px-9 py-4 font-semibold">Get Brand Deals</a></div>
+<a href="#who" aria-label="Scroll down" class="mt-10 text-2xl" style="animation: bob 1.8s ease-in-out infinite">↓</a></div></section>
+<section id="who" class="bg-[#e6def2] px-6 py-24 text-center"><h2 class="serif text-4xl md:text-6xl mb-4 reveal">What we send brands.</h2><p class="mb-14 text-[#2a1745]/75 reveal">Each creator, with the numbers that matter. Example formats, not real creators.</p>
+<div class="flex flex-wrap justify-center gap-8 mb-20"><div class="phone reveal" data-delay="0" style="margin-top:0px"><div class="bg-gradient-to-br from-[#2a1745] to-[#0a5c9e] h-64 flex flex-col items-center justify-center text-white text-center p-4"><span class="material-symbols-outlined icon-fill text-6xl text-white/80">account_circle</span><p class="serif text-xl mt-2">Creator A</p><p class="text-xs text-white/70">AI tutorials, YouTube</p></div>
+<div class="p-4 text-[#2a1745]"><p class="text-[10px] uppercase tracking-widest text-[#2a1745]/60 mb-2">Example format</p><div class="flex justify-between text-center"><div><p class="font-bold">42K</p><p class="text-[10px] uppercase">avg views</p></div><div><p class="font-bold">5.1%</p><p class="text-[10px] uppercase">engage</p></div><div><p class="font-bold">46%</p><p class="text-[10px] uppercase">US</p></div></div></div></div><div class="phone reveal" data-delay="120" style="margin-top:36px"><div class="bg-gradient-to-br from-[#2a1745] to-[#0a5c9e] h-64 flex flex-col items-center justify-center text-white text-center p-4"><span class="material-symbols-outlined icon-fill text-6xl text-white/80">account_circle</span><p class="serif text-xl mt-2">Creator B</p><p class="text-xs text-white/70">Automation tips, LinkedIn</p></div>
+<div class="p-4 text-[#2a1745]"><p class="text-[10px] uppercase tracking-widest text-[#2a1745]/60 mb-2">Example format</p><div class="flex justify-between text-center"><div><p class="font-bold">31K</p><p class="text-[10px] uppercase">avg views</p></div><div><p class="font-bold">4.2%</p><p class="text-[10px] uppercase">engage</p></div><div><p class="font-bold">41%</p><p class="text-[10px] uppercase">US</p></div></div></div></div><div class="phone reveal" data-delay="240" style="margin-top:0px"><div class="bg-gradient-to-br from-[#2a1745] to-[#0a5c9e] h-64 flex flex-col items-center justify-center text-white text-center p-4"><span class="material-symbols-outlined icon-fill text-6xl text-white/80">account_circle</span><p class="serif text-xl mt-2">Creator C</p><p class="text-xs text-white/70">AI news, newsletter and X</p></div>
+<div class="p-4 text-[#2a1745]"><p class="text-[10px] uppercase tracking-widest text-[#2a1745]/60 mb-2">Example format</p><div class="flex justify-between text-center"><div><p class="font-bold">58K</p><p class="text-[10px] uppercase">avg views</p></div><div><p class="font-bold">3.6%</p><p class="text-[10px] uppercase">engage</p></div><div><p class="font-bold">52%</p><p class="text-[10px] uppercase">US</p></div></div></div></div></div>
+<p class="text-sm tracking-widest uppercase mb-6 reveal">We work with products like:</p><div class="cloud flex flex-wrap justify-center gap-3 max-w-3xl mx-auto reveal"><span>AI assistants</span><span>Automation</span><span>Developer tools</span><span>Productivity</span><span>SaaS</span><span>No-code</span><span>AI agents</span><span>Analytics</span><span>Writing tools</span><span>Design tools</span><span>Meeting tools</span><span>Research tools</span></div></section>
+<section id="approach" class="px-6 py-24 max-w-5xl mx-auto text-center"><h2 class="serif text-4xl md:text-6xl mb-14 reveal">How it works for <em class="text-[#7a4fc0]">brands</em>.</h2><div class="grid md:grid-cols-3 gap-8"><div class="reveal text-center px-4" data-delay="0"><p class="serif text-6xl text-[#7a4fc0]">1</p><h3 class="serif text-2xl text-[#2a1745] mt-2 mb-2">Tell us what you sell</h3><p class="text-[#2a1745]/75">A short message about your product and who it's for. We reply within 24 hours.</p></div><div class="reveal text-center px-4" data-delay="120"><p class="serif text-6xl text-[#7a4fc0]">2</p><h3 class="serif text-2xl text-[#2a1745] mt-2 mb-2">We recommend the best fit</h3><p class="text-[#2a1745]/75">You get 1 to 3 vetted creators with their views, engagement, and audience details.</p></div><div class="reveal text-center px-4" data-delay="240"><p class="serif text-6xl text-[#7a4fc0]">3</p><h3 class="serif text-2xl text-[#2a1745] mt-2 mb-2">We take it from there</h3><p class="text-[#2a1745]/75">Contracts, scripts, and posting dates. You approve the video, and it goes live. Most deals go live within about a month.</p></div></div>
+<div class="grid sm:grid-cols-3 gap-4 mt-16"><div class="reveal bg-white rounded-2xl p-6 text-left"><p class="font-bold mb-1">Zero Outreach</p><p class="text-sm text-[#2a1745]/70">No searching, no cold emails, no waiting on replies. We contact the creators, and you only hear about the ones worth your time.</p></div><div class="reveal bg-white rounded-2xl p-6 text-left"><p class="font-bold mb-1">Vetted, Not Guessed</p><p class="text-sm text-[#2a1745]/70">Before you see a name, we check real average views, engagement, and audience location. No fake audiences. No bad-fit channels.</p></div><div class="reveal bg-white rounded-2xl p-6 text-left"><p class="font-bold mb-1">Nothing Goes Live Unseen</p><p class="text-sm text-[#2a1745]/70">We check the draft against your product first. Then you approve it before it posts.</p></div></div></section>
+<div class="bg-[#e6def2] text-[#2a1745]"><section id="for-creators" class="max-w-container-max mx-auto px-6 md:px-12 py-20 ">
+<div class="text-center max-w-3xl mx-auto mb-10"><p class="font-label-sm uppercase tracking-widest text-primary-container mb-3 reveal">For creators</p>
+<h2 class="font-headline-lg font-bold text-3xl md:text-5xl text-on-background  reveal">Brand deals that fit your channel.</h2>
+<p class="text-secondary mt-4 reveal">Already making content about AI and software? We put you in front of the brands that fit your audience.</p></div>
+<div class="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto mb-10"><div class="reveal bg-white border border-outline-variant rounded-2xl shadow-sm p-7" data-delay="0"><div class="w-12 h-12 rounded-xl bg-primary-container text-white flex items-center justify-center mb-4"><span class="material-symbols-outlined icon-fill text-2xl">handshake</span></div><h3 class="font-headline-md text-on-background mb-2">Brand Deals Come to You</h3><p class="text-secondary">No cold outreach to brands. We bring AI and SaaS sponsorship deals to creators who fit.</p></div><div class="reveal bg-white border border-outline-variant rounded-2xl shadow-sm p-7" data-delay="100"><div class="w-12 h-12 rounded-xl bg-primary-container text-white flex items-center justify-center mb-4"><span class="material-symbols-outlined icon-fill text-2xl">person</span></div><h3 class="font-headline-md text-on-background mb-2">One Contact, Less Back-and-Forth</h3><p class="text-secondary">No long media-kit requests or endless email threads. One person to talk to.</p></div></div>
+<div class="grid sm:grid-cols-3 gap-6 max-w-4xl mx-auto mb-10"><div class="reveal" data-delay="0"><p class="font-label-sm text-primary-container mb-1">01</p><h4 class="font-semibold text-on-background">Tell us about your channel</h4><p class="text-secondary text-sm">Your channel link and what you cover. It takes two minutes.</p></div><div class="reveal" data-delay="100"><p class="font-label-sm text-primary-container mb-1">02</p><h4 class="font-semibold text-on-background">We put you forward</h4><p class="text-secondary text-sm">We introduce you to AI and SaaS brands that fit your audience.</p></div><div class="reveal" data-delay="200"><p class="font-label-sm text-primary-container mb-1">03</p><h4 class="font-semibold text-on-background">You hear from us</h4><p class="text-secondary text-sm">When a brand deal fits, we reach out with the details.</p></div></div>
+<div class="text-center"><a href="#creators" class="inline-flex bg-primary-container text-white rounded-full px-8 py-4 font-label-sm uppercase tracking-wider">Get Brand Deals</a></div></section></div>
+<section class="bg-[#2a1745] text-white px-6 py-24 text-center"><h2 class="serif text-4xl md:text-6xl mb-4 reveal">Let's get you matched.</h2><p class="text-white/75 mb-10 reveal">Brands, tell us what you're promoting. Creators, tell us about your channel. We reply within 24 hours.</p><div class="max-w-xl mx-auto">
+<div id="contact-card" class="scroll-mt-28 bg-white/5 border border-white/15 rounded-3xl p-6 md:p-8 text-left" style="--gv-bg:rgba(255,255,255,.08);--gv-bd:rgba(255,255,255,.2);--gv-fg:rgba(255,255,255,.7);--gv-on-fg:#0b1c2e;--gv-on-bg:#fff;--gv-ph:rgba(255,255,255,.65);">
+<div class="gv-tabs" role="tablist" aria-label="I am a"><button type="button" role="tab" class="gv-tabbtn gv-on" data-aud="brand" aria-selected="true" aria-controls="workwithus">I'm a brand</button><button type="button" role="tab" class="gv-tabbtn" data-aud="creator" aria-selected="false" aria-controls="creators">I'm a creator</button><span class="gv-ind" aria-hidden="true"></span></div>
+<div id="workwithus" role="tabpanel" data-gv-panel="brand" class="scroll-mt-28">
+<p class="text-white/70 mb-5">Tell us what you're promoting.</p>
+<form action="https://formsubmit.co/mustafa@gratovo.com" method="POST" class="gv-form flex flex-col gap-3" data-who="brand request"><input type="hidden" name="_captcha" value="false"><input type="hidden" name="_next" value="https://www.gratovo.com/">
+<input type="hidden" name="_subject" value="New brand request from the website">
+<input type="text" name="name" placeholder="Your name / company" required class="w-full py-3.5 px-5 rounded-full bg-white/10 border border-white/25 text-white focus:ring-2 focus:ring-primary-fixed-dim outline-none placeholder:text-white/60">
+<input type="email" name="email" placeholder="Your email" required class="w-full py-3.5 px-5 rounded-full bg-white/10 border border-white/25 text-white focus:ring-2 focus:ring-primary-fixed-dim outline-none placeholder:text-white/60">
+<select name="inquiry" required aria-label="What is this about?" class="w-full py-3.5 px-5 rounded-full bg-white/10 border border-white/25 text-white focus:ring-2 focus:ring-primary-fixed-dim outline-none placeholder:text-white/60" style="padding-right:3rem"><option value="" disabled selected>What&#39;s this about?</option><option value="find-creators" data-hint="What does your product do? One line is enough." data-need="0">Find creators for my product</option><option value="specific-creator" data-hint="Which creator? A link works." data-need="1">Work with a specific creator</option><option value="scale" data-hint="What's working so far? One line is enough." data-need="0">Scale what's already working</option><option value="question" data-hint="What would you like to know?" data-need="1">I have a question first</option></select>
+<textarea name="message" rows="2" placeholder="Anything we should know? (optional)" class="w-full py-3.5 px-5 rounded-3xl bg-white/10 border border-white/25 text-white focus:ring-2 focus:ring-primary-fixed-dim outline-none placeholder:text-white/60"></textarea>
+<button type="submit" class="self-center bg-primary-container text-white hover:bg-primary py-3.5 px-8 rounded-full font-label-sm uppercase text-sm tracking-wider inline-flex items-center gap-2 shadow-lg transition hover:-translate-y-1 duration-200">Find My Creators <span class="material-symbols-outlined ">send</span></button></form></div><div id="creators" role="tabpanel" data-gv-panel="creator" class="scroll-mt-28" hidden>
+<p class="text-white/70 mb-5">Tell us about your channel.</p>
+<form action="https://formsubmit.co/mustafa@gratovo.com" method="POST" class="gv-form flex flex-col gap-3" data-who="creator application"><input type="hidden" name="_captcha" value="false"><input type="hidden" name="_next" value="https://www.gratovo.com/">
+<input type="hidden" name="_subject" value="New creator application from the website">
+<input type="text" name="name" placeholder="Your name / channel name" required class="w-full py-3.5 px-5 rounded-full bg-white/10 border border-white/25 text-white focus:ring-2 focus:ring-primary-fixed-dim outline-none placeholder:text-white/60">
+<input type="email" name="email" placeholder="Your email" required class="w-full py-3.5 px-5 rounded-full bg-white/10 border border-white/25 text-white focus:ring-2 focus:ring-primary-fixed-dim outline-none placeholder:text-white/60">
+<input type="text" name="channel" placeholder="Your channel link" required class="w-full py-3.5 px-5 rounded-full bg-white/10 border border-white/25 text-white focus:ring-2 focus:ring-primary-fixed-dim outline-none placeholder:text-white/60">
+<select name="inquiry" required aria-label="What is this about?" class="w-full py-3.5 px-5 rounded-full bg-white/10 border border-white/25 text-white focus:ring-2 focus:ring-primary-fixed-dim outline-none placeholder:text-white/60" style="padding-right:3rem"><option value="" disabled selected>What&#39;s this about?</option><option value="get-deals" data-hint="What do you cover? One line is enough." data-need="0">Get brand deals for my channel</option><option value="specific-brand" data-hint="Which brand? A link works." data-need="1">Work with a specific brand</option><option value="question" data-hint="What would you like to know?" data-need="1">I have a question first</option></select>
+<textarea name="message" rows="2" placeholder="Anything we should know? (optional)" class="w-full py-3.5 px-5 rounded-3xl bg-white/10 border border-white/25 text-white focus:ring-2 focus:ring-primary-fixed-dim outline-none placeholder:text-white/60"></textarea>
+<button type="submit" class="self-center bg-primary-container text-white hover:bg-primary py-3.5 px-8 rounded-full font-label-sm uppercase text-sm tracking-wider inline-flex items-center gap-2 shadow-lg transition hover:-translate-y-1 duration-200">Get Brand Deals <span class="material-symbols-outlined ">send</span></button></form></div></div>
+<div class="mt-8 flex flex-col sm:flex-row items-center justify-center gap-3 text-white/80">
+<span class="font-body-md">Prefer email?</span>
+<button type="button" id="copy-email" aria-label="Copy email address mustafa@gratovo.com" class="inline-flex items-center gap-2 bg-white/15 hover:bg-white/25 text-white rounded-full py-2 px-5 font-label-sm transition-colors">
+<span>mustafa@gratovo.com</span><span id="copy-email-icon" class="material-symbols-outlined text-base">content_copy</span></button>
+<span id="copy-email-status" class="font-label-sm" role="status"></span>
+</div></div></section>
+<footer class="bg-[#0b1623] border-white/10 text-white/70 border-t py-10"><div class="max-w-container-max mx-auto px-grid-gutter flex flex-col md:flex-row justify-between items-center gap-6">
+<p class="font-label-sm uppercase text-center md:text-left">© 2026 Gratovo. Connecting AI brands with the right creators.</p>
+<nav class="flex gap-6 font-label-sm uppercase"><a class="hover:opacity-100 opacity-80" href="../../privacy-policy.html">Privacy Policy</a><a class="hover:opacity-100 opacity-80" href="../../terms-of-service.html">Terms of Service</a></nav>
+</div></footer></div>
+<div class="layout-tag">Layout test: Smooth-style<a href="index.html">all layouts</a></div>
+<script>
+(function () {
+  var io = 'IntersectionObserver' in window ? new IntersectionObserver(function (es) {
+    es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, { threshold: 0.12 }) : null;
+  document.querySelectorAll('.reveal').forEach(function (el, i) {
+    var d = el.getAttribute('data-delay'); if (d) el.style.transitionDelay = d + 'ms';
+    if (io) io.observe(el); else el.classList.add('in');
+  });
+  document.querySelectorAll('[data-stepper]').forEach(function (root) {
+    var panels = [].slice.call(root.querySelectorAll('.step-panel'));
+    var tabs = [].slice.call(root.querySelectorAll('.step-tab'));
+    var count = root.querySelector('[data-count]'); var i = 0;
+    function show(n) {
+      i = (n + panels.length) % panels.length;
+      panels.forEach(function (p, k) { p.hidden = k !== i; });
+      tabs.forEach(function (t, k) { t.setAttribute('aria-selected', k === i ? 'true' : 'false'); t.classList.toggle('is-active', k === i); });
+      if (count) count.textContent = (i + 1) + ' of ' + panels.length;
+    }
+    tabs.forEach(function (t, k) { t.addEventListener('click', function () { show(k); }); });
+    var p = root.querySelector('[data-prev]'), n = root.querySelector('[data-next]');
+    if (p) p.addEventListener('click', function () { show(i - 1); });
+    if (n) n.addEventListener('click', function () { show(i + 1); });
+    show(0);
+  });
+  var prog = document.getElementById('scroll-progress');
+  if (prog) {
+    var num = document.getElementById('scroll-progress-num');
+    var upd = function () {
+      var h = document.documentElement.scrollHeight - innerHeight;
+      var pct = h > 0 ? Math.min(100, Math.round(scrollY / h * 100)) : 0;
+      prog.style.height = pct + '%'; if (num) num.textContent = pct;
+    };
+    addEventListener('scroll', upd, { passive: true }); upd();
+  }
+  var menuBtn = document.getElementById('menu-btn'), menu = document.getElementById('menu-overlay');
+  if (menuBtn && menu) {
+    var tgl = function () { var open = menu.classList.toggle('hidden'); menuBtn.setAttribute('aria-expanded', open ? 'false' : 'true'); };
+    menuBtn.addEventListener('click', tgl);
+    menu.querySelectorAll('a').forEach(function (a) { a.addEventListener('click', tgl); });
+  }
+  var star = document.getElementById('stars');
+  if (star) {
+    for (var s = 0; s < 70; s++) {
+      var d = document.createElement('i');
+      d.style.cssText = 'position:absolute;border-radius:50%;background:#fff;left:' + Math.random() * 100 + '%;top:' + Math.random() * 100 +
+        '%;width:' + (1 + Math.random() * 2) + 'px;height:' + (1 + Math.random() * 2) + 'px;opacity:' + (0.2 + Math.random() * 0.7) +
+        ';animation:twinkle ' + (2 + Math.random() * 4) + 's ease-in-out ' + Math.random() * 3 + 's infinite';
+      star.appendChild(d);
+    }
+  }
+  var cp = document.getElementById('copy-email');
+  if (cp) cp.addEventListener('click', function () {
+    var st = document.getElementById('copy-email-status'), ic = document.getElementById('copy-email-icon');
+    function done(ok) {
+      st.textContent = ok ? 'Copied!' : 'Press Ctrl+C to copy';
+      if (ok) ic.textContent = 'check';
+      setTimeout(function () { st.textContent = ''; ic.textContent = 'content_copy'; }, 2500);
+    }
+    if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText('mustafa@gratovo.com').then(function () { done(true); }, function () { done(false); });
+    else done(false);
+  });
+})();
+</script>
+<script src="../../js/audience-tabs.js"></script>
+<script src="../../js/process-cards.js"></script>
+</body>
+</html>
