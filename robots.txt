@@ -1,5 +1,5 @@
 User-agent: *
 Allow: /
+Disallow: /research/
 
-# Point search engines to your sitemap
-Sitemap: https://www.gratovo.com/sitemap.xml
+Sitemap: https://gratovo.com/sitemap.xml

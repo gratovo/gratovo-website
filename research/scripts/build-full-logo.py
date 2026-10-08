@@ -2,7 +2,7 @@
 """Rebuild images/logo-mark.svg and images/full-logo.png from images/logo.svg.
 
 The full logo is the G mark from images/logo.svg followed by "ratovo" in
-Plus Jakarta Sans (fonts/fonts.css), laid out with the same .wordmark CSS the
+Outfit 800 capitals (fonts/fonts.css), laid out with the same .wordmark-caps CSS (css/theme.css) the
 website uses, so the PNG always matches the site.
 
 Usage:   python research/scripts/build-full-logo.py [--height 400] [--pad 0]
@@ -46,6 +46,19 @@ def render(browser, html_path, out_png, width, height, scale):
         sys.exit("Browser did not produce a screenshot.")
 
 
+def slim_svg(svg):
+    """Smaller SVG with the same look: no XML header or editor attributes, path numbers rounded to 0.1 (differences are sub-pixel)."""
+    def num(m):
+        t = ("%.1f" % round(float(m.group(0)), 1)).rstrip("0").rstrip(".")
+        return "0" if t in ("-0", "") else t
+    svg = re.sub(r"<\?xml[^>]*\?>\s*", "", svg)
+    svg = re.sub(r"<!DOCTYPE[^>]*>\s*", "", svg)
+    svg = re.sub(r'\s+xmlns:(serif|xlink)="[^"]*"', "", svg)
+    svg = re.sub(r'\s+(serif:id|xml:space)="[^"]*"', "", svg)
+    svg = re.sub(r'(\sd=")([^"]*)(")', lambda m: m.group(1) + re.sub(r"-?\d+\.?\d*(?:e-?\d+)?", num, m.group(2)) + m.group(3), svg)
+    return re.sub(r">\s+<", "><", svg).strip() + "\n"
+
+
 def crop_viewbox(browser, tmp):
     """Write images/logo-mark.svg: logo.svg with its viewBox trimmed to the artwork."""
     svg = LOGO_SVG.read_text(encoding="utf8")
@@ -70,23 +83,23 @@ def crop_viewbox(browser, tmp):
     new_vb = f'viewBox="{x0:.1f} {y0:.1f} {w:.1f} {h:.1f}"'
     out = svg.replace(m.group(0), new_vb)
     out = re.sub(r'<svg([^>]*?) width="[^"]*" height="[^"]*"', rf'<svg\1 width="{w:.0f}" height="{h:.0f}"', out, count=1)
-    MARK_SVG.write_text(out, encoding="utf8")
+    MARK_SVG.write_text(slim_svg(out), encoding="utf8")
     print(f"logo-mark.svg  {new_vb}")
 
 
 def build_png(browser, tmp, height, pad):
     css = (ROOT / "fonts" / "fonts.css").as_uri()
+    theme = (ROOT / "css" / "theme.css").as_uri()
     # font-size so the full logo ends up about `height` px tall; trimmed afterwards
     fs = height / 1.0
     html = tmp / "wordmark.html"
     html.write_text(f'''<!doctype html><meta charset="utf-8">
-<link rel="stylesheet" href="{css}">
-<style>html,body{{margin:0;background:transparent}}body{{padding:{int(fs*0.5)}px}}
-.wordmark{{font-size:{fs}px}}</style>
-<span class="wordmark"><img src="{MARK_SVG.as_uri()}" alt="">ratovo</span>
-<script>document.fonts.load("800 100px 'Plus Jakarta Sans'","ratovo");</script>''', encoding="utf8")
+<link rel="stylesheet" href="{css}"><link rel="stylesheet" href="{theme}">
+<style>html,body{{margin:0;background:transparent}}body{{padding:{int(fs*0.5)}px}}</style>
+<span class="wordmark wordmark-caps wordmark-grad wordmark-color" style="--wm-size:{fs}px"><img src="{MARK_SVG.as_uri()}" alt=""><span class="wm-text">ratovo</span></span>
+<script>document.fonts.load("800 100px 'Outfit Logo'","RATOVO");</script>''', encoding="utf8")
     png = tmp / "wordmark.png"
-    render(browser, html, png, int(fs * 5), int(fs * 2.2), 1)
+    render(browser, html, png, int(fs * 7), int(fs * 2.4), 1)
     im = Image.open(png).convert("RGBA")
     box = im.getchannel("A").getbbox()
     if not box:

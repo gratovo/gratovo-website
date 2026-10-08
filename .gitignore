@@ -1,3 +1,4 @@
 _site/
 research/.tools/
 node_modules/
+research/.cache/_render.html

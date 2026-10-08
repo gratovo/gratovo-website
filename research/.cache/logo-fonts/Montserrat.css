@@ -1,0 +1,24 @@
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/l/font?kit=JTUSjIg1_i6t8kCHKm45xWtzw0-rspkn8H3CxB5KPwc&skey=7bc19f711c0de8f&v=v31) format('woff2');
+  unicode-range: U+41, U+48-49, U+4f, U+52, U+54, U+56, U+61, U+6f, U+72, U+74, U+76, U+78;
+}
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 800;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/l/font?kit=JTUSjIg1_i6t8kCHKm45xWtzw0-rspkn8H3CxB5KPwc&skey=7bc19f711c0de8f&v=v31) format('woff2');
+  unicode-range: U+41, U+48-49, U+4f, U+52, U+54, U+56, U+61, U+6f, U+72, U+74, U+76, U+78;
+}
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 900;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/l/font?kit=JTUSjIg1_i6t8kCHKm45xWtzw0-rspkn8H3CxB5KPwc&skey=7bc19f711c0de8f&v=v31) format('woff2');
+  unicode-range: U+41, U+48-49, U+4f, U+52, U+54, U+56, U+61, U+6f, U+72, U+74, U+76, U+78;
+}

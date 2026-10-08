@@ -1,4 +1,6 @@
-# Simple workflow for deploying static content to GitHub Pages
+# Deploys the static site to GitHub Pages.
+# Needs Settings > Pages > Build and deployment > Source = "GitHub Actions".
+# (With "Deploy from a branch" GitHub publishes the whole repo, including research/, and ignores this file.)
 name: Deploy static content to Pages
 
 on:
@@ -22,11 +24,8 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  # Single deploy job since we're just deploying
-  deploy:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
+  # Build job: copy the public files into _site and upload them as the Pages artifact
+  build:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -36,11 +35,28 @@ jobs:
       - name: Prepare site (leave out dev-only files)
         run: |
           mkdir _site
-          rsync -a --exclude '/_site' --exclude '/.git' --exclude '/.github'             --exclude '/research' --exclude '/.gitattributes' --exclude '/.gitignore' ./ _site/
+          rsync -a \
+            --exclude '/_site' --exclude '/.git' --exclude '/.github' \
+            --exclude '/research' --exclude '/.gitattributes' --exclude '/.gitignore' \
+            --exclude '/index-b.html' \
+            --exclude '/css' --exclude '/fonts/fonts.css' \
+            --include '/js/*.min.js' --exclude '/js/*.js' \
+            ./ _site/
+          echo "Files in the artifact:"
+          find _site -type f | sort | head -100
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
+        uses: actions/upload-pages-artifact@v5
         with:
           path: '_site'
+
+  # Deploy job: runs on a fresh runner after the artifact is fully uploaded
+  deploy:
+    needs: build
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v5

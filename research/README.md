@@ -75,3 +75,88 @@ Ideal client, exact offer and price, differentiator versus platforms and bigger 
 - Workflow after changing copy/classes/colours: `python research/scripts/build-pages.py` then `python research/scripts/build-css.py` (needs Node; first run installs tailwindcss 3.4.17 + forms + container-queries into `research/.tools/`, git-ignored). Theme colours still live in `research/pages/partials/tailwind-config.html`. If you forget to rebuild the CSS after adding a new Tailwind class, that class will have no styling.
 - Sticky nav: `site_header()` in the generator; it is a direct child of `<body>` (so it also stays over the footer). The Contact button is the phone emoji (aria-label "Contact us").
 - Not migrated: `privacy-policy.html`, `terms-of-service.html`, `index-b.html` still use the Tailwind CDN.
+
+## Design system / theme (one file: `css/theme.css`)
+
+The look is controlled from `css/theme.css`. **No rebuild is needed for changes in that file**: refresh the page.
+
+- **Palette**: three inputs at the top, `--brand` (main blue), `--ink` (dark navy) and `--tint-strength` (how blue the page background is).
+  Every other shade (header/hover blue, page background, FAQ band, borders, muted text, light accents, shadows) is derived from those with
+  `color-mix()`, so the palette stays harmonious whatever you pick. The animated "How it works" diagrams read the same variables
+  (`js/process-cards.js`, `themeRGB`). Ready-made Indigo / Teal / Violet pairs are in a comment under `:root`. All derived text/background pairs were
+  checked against WCAG AA for the current palette and the Indigo and Teal presets.
+- **Fonts**: two families only. `--font-display` Plus Jakarta Sans (headings, labels, buttons, hero wordmark; it is also the logo's font) and
+  `--font-body` Source Sans 3. Anton, JetBrains Mono and the Georgia italic were removed (files deleted). To change a family, add its woff2 +
+  `@font-face` in `fonts/fonts.css`, preload it in `build-pages.py`, then change the variable.
+- **Type scale**: `--fs-display`, `--fs-ticker`, `--fs-h2`, `--fs-h3`, `--fs-stat`, `--fs-lead`, `--fs-body`, `--fs-small`, `--fs-label` (fluid with `clamp()`).
+  In HTML use `font-display text-h2`, `font-body text-lead`, `text-label uppercase` etc.
+- **Shape and space**: `--r-card` (cards), `--r-field` (inputs, logo plate), buttons/tabs/badges are pills/circles; `--section-y` is the vertical padding of
+  every section (`pt-section`, `pb-section`, `py-section`); `--gutter`, `--container` set the content width (the header uses the same container).
+- **Components** (in `theme.css`): `.btn` + `.btn-primary | .btn-light | .btn-ghost`, `.field` (inputs, select, textarea), `.tag`.
+  CTAs are real links styled as buttons (no `<a><button>` nesting).
+- **Tailwind**: `research/pages/partials/tailwind-config.html` only maps utility names to those variables (`bg-brand`, `bg-brand-deep`, `bg-canvas`, `bg-band`, `bg-card`,
+  `bg-tint`, `text-ink`, `text-muted`, `text-sky`, `border-line`, `rounded-card`, `rounded-field`, `shadow-card`, `shadow-lift`). Recompile
+  (`build-pages.py` then `build-css.py`) only when you add a new utility class or token name. Load order: `fonts.css`, `tailwind.css`, `theme.css`, `hero.css`, `process-cards.css`.
+- Not migrated yet (still the old CDN setup and colours): `privacy-policy.html`, `terms-of-service.html`, `index-b.html`.
+
+## Header, hero and deploy notes (round 2)
+
+- **Header** is a light, sticky bar (`bg-white/90` + blur) so the full-colour logo sits on it with no plate; logo is 28px/36px (mobile/desktop). Nav links use `.nav-link` (+ `.nav-on` for the current page) in `css/theme.css`.
+- **Hero** headline is the value statement (`HERO[...]["tag"]` in `build-pages.py`), not the brand name, so the logo only appears once (the header). Size token: `--fs-display`.
+- **Keyword loop** beside the contact form: edit `KEYWORDS` in `build-pages.py` (`(text, emphasised)`); loop speed follows the list length (`SECONDS_PER_KEYWORD`).
+- **Deploy workflow** (`.github/workflows/static.yml`): split into `build` (rsync public files to `_site`, upload with `upload-pages-artifact@v5`) and `deploy` (fresh runner, `deploy-pages@v5`).
+  Failure on 2026-10-08: `deploy-pages@v5` lists artifacts through the Actions artifact service and reported none, though the `github-pages` artifact existed (REST API showed it).
+  **Settings > Pages > Source must be "GitHub Actions".** If it is "Deploy from a branch", GitHub's own "pages build and deployment" publishes the whole repo
+  (including `research/`, confirmed live at /research/README.md on 2026-10-08) and the exclusions in this workflow do nothing.
+
+## SEO system (added 2026-10-08)
+
+Research and audit: `research/seo-research.md`. Pages: 3 core (home, brands, creators) + 3 landing pages + 4 guides + a guides hub, all generated.
+
+- **Copy for the new pages** lives in `research/scripts/seo_content.py` (landing pages, guides, FAQs, dates). Templates and structured data are in `build-pages.py`.
+  To add a guide: add a dict to `SEO.PAGES` (kind `article`), add a `CARD_COPY` entry in `build-pages.py`, then run the workflow below. The sitemap, `llms.txt`, footer links and share image follow automatically.
+- **Workflow after any change:**
+  1. `python research/scripts/build-pages.py`   (pages, sitemap.xml, robots.txt, manifest, llms.txt, 404.html)
+  2. `python research/scripts/build-css.py`     (scans every generated page)
+  3. `python research/scripts/build-og.py`      (share images images/og/*.png and icons; needed when titles change)
+  4. `python research/scripts/seo-check.py`     (lint: titles, descriptions, one H1, canonicals, JSON-LD, alt text, links, sitemap)
+- **Canonical host is `https://gratovo.com`** (apex). `www` 301-redirects to it, so never use `www` in canonicals, sitemap or schema (`SITE` in build-pages.py).
+- **Structured data** per page: Organization (+ WebSite on home), BreadcrumbList, Service (brand/creator pages), Article (guides), FAQPage.
+- `sitemap.xml` lists indexable pages only; `lastmod` changes only when a page's HTML changes (hash cache in `research/.cache/lastmod.json`, commit it).
+- `index-b.html` is noindex and excluded from the deploy; privacy/terms stay noindex and are not in the sitemap.
+- **IndexNow** (Bing/Yandex/Naver): `python research/scripts/indexnow.py --init`, commit and deploy the key file, then `--submit` after each deploy. Google ignores IndexNow; use Search Console.
+- Manual steps that need an account (cannot be scripted here): Google Search Console (add `gratovo.com` as a Domain property, submit `https://gratovo.com/sitemap.xml`, request indexing for the new URLs), Bing Webmaster Tools (import from Search Console), and set GitHub Pages Source to "GitHub Actions".
+
+## Hero and top bar (round 3)
+
+- Hero (home, brands, creators) is full-screen: the full logo is the centrepiece (`.wordmark-light`, white filter on the logo mark; size token `--fs-logo` in `css/theme.css`), then the H1 as a smaller line, the description and buttons.
+  Copy is in `HERO` in `build-pages.py` (`tag` = headline/H1, `sub` = description, `chip` = "For brands"/"For creators"). Brands and creators pages also get a Home pill next to the chip.
+- The top bar on those pages is `fixed` and starts hidden (`is-hidden` + `inert`); `js/site-header.js` slides it in after about 20% of the hero has scrolled (it hides again near the top). Pages without a hero (landing pages, guides, 404) keep the always-visible sticky bar.
+- The bar logo everywhere is the G mark only (`images/logo-mark.svg`); the full wordmark lives in the hero and the footer.
+
+## Hero effects and logo (round 4)
+- **Logo**: Outfit 800 capitals + the G mark, one component (`.wordmark-caps` in `css/theme.css`, size via `--wm-size`). Used in the hero (gradient version `.wordmark-grad`), the footer, `images/full-logo.png` and the share-image plate. Details and measurements: `logo-font-test.md`.
+- **Pattern**: the cubes tile the contact section had before the rework (`images/pattern-cubes.png`, from transparenttextures.com, kept local) is `.pattern-cubes` (20% opacity) in the hero and the contact section.
+- **Hero gradient**: `.hero-bg` in `css/hero.css`, built only from `--brand`, `--brand-deep`, `--sky`; two soft glows drift slowly (off for reduced motion).
+- **Spotlight**: `js/hero-spotlight.js` clones `.hero-layer` into `.hero-alt` (white gradient, coloured text, the G in its own colours) and reveals it through a circle that follows the mouse. Mouse/pen only (`hover: hover` and `pointer: fine`); the clone is `aria-hidden`/`inert` and its h1 becomes a div, so SEO and keyboard use are unaffected. Light-version colours are the `.hero-alt ...` rules at the end of `css/hero.css`; radius is 24% of the hero's short side, 120 to 210px (`radius()` in the script).
+- **Ticker**: the hero strip repeats the same `KEYWORDS` as the contact-section loop (`ticker_html()`); size token `--fs-ticker`.
+
+## Round 5 notes
+- **How it works** is now a light branded section (`.pc-section` in `css/process-cards.css`): soft brand gradient plus the hero's cubes pattern tinted with `--brand-deep` through a mask (`.pattern-tint`, opacity .42). The pattern and the logo mark are embedded in `css/theme.css` as `--cubes-mask` / `--wm-mask` by `scripts/build-mask.py` (masks from separate files fail on `file://`); re-run it if either image changes.
+- **Top bar** (`js/site-header.js`, `data-autohide` on every page): tucks away while you scroll down past the top (or past the hero) and returns on any upward scroll, on hover, on keyboard focus and when the mouse touches the top edge. The slide is 0.5s with a fade (`.site-header` in `css/theme.css`). Nav logo `h-8 sm:h-10`, nav links `text-small` (15px) from `sm` up; footer logo `--wm-size:2.5rem`.
+
+## Build and speed (release prep)
+**Build everything:** `python research/scripts/build-all.py` runs, in order, `build-pages.py` (HTML + sitemap etc.), `build-css.py` (Tailwind), `build-assets.py` (bundles + inlining) and `seo-check.py`. Share images are separate (`build-og.py`, needs a browser). Edit sources only (`css/*.css`, `fonts/fonts.css`, `js/*.js`, `research/pages/partials/*`, `research/scripts/*content*.py`); the pages, `css/site.min.css`, `js/site.min.js` and `js/lite.min.js` are generated.
+
+What makes it fast (measured with a throttled Edge: 1.6 Mbps, 150 ms latency, 4x slower CPU, gzip like GitHub Pages):
+- **One stylesheet, inlined into every page** (`build-assets.py`): no render-blocking request. GitHub Pages only caches for 10 minutes, so a separate CSS file saved almost nothing. Pages without a hero / "How it works" get a lighter copy without the two embedded mask images (`--wm-mask`, `--cubes-mask`, made by `build-mask.py`).
+- **One deferred script per page**: `site.min.js` (home, brands, creators) or `lite.min.js` (everything else: tabs + top bar only). esbuild minifies (installed into `research/.tools/` on first run).
+- **No third-party requests**: the six card photos live in `images/cards/*.webp` (800x533, 13-38 KB each; originals cached in `research/.cache/unsplash/`). `build-pages.py` rewrites the Unsplash links on its own (`optimise()`), so the page source can keep the original URLs.
+- **Fonts**: text fonts use `font-display: swap` and are preloaded (text shows at once, no invisible-text wait); the icon font and the logo font stay `block` so icon names / half-styled logo never flash.
+- **Less GPU work**: no `backdrop-filter` blur (header, contact card, video play button), no 85vmax blurred layers in the hero (soft gradients instead), `contain: paint` on the hero, `will-change: transform` only on the things that move. The mouse circle writes its clip-path and ring transform straight onto two elements (no inherited CSS variables, which restyled the whole hero every frame); the phone shape's keyword strip does not animate.
+- **No layout inside script start-up**: the sliding tab pills measure themselves after the first paint (`gv-painted`), not while the script runs.
+- **Smaller files**: HTML has no comments or indentation, JSON-LD is compact, `logo-mark.svg` / `logo.svg` are slimmed (`slim_svg()` in `build-full-logo.py`; renders identically to the pixel except 100 anti-aliasing pixels).
+- **Legal pages** (`privacy-policy.html`, `terms-of-service.html`) are now generated from `scripts/legal_content.py` with the same header, footer and CSS (they used to load the 300 KB Tailwind browser compiler). Still `noindex`, not in the sitemap.
+- **Deploy** (`.github/workflows/static.yml`) leaves out `research/`, `css/`, the JS sources and `fonts/fonts.css`; everything the pages need is inline or in `images/`, `fonts/`, `js/*.min.js`.
+
+Things that cannot be changed on GitHub Pages: cache lifetime (10 min), Brotli, HTTP headers. A CDN in front (for example Cloudflare, free) would add long caching and Brotli.

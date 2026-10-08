@@ -1,0 +1,21 @@
+{
+  "name": "Gratovo",
+  "short_name": "Gratovo",
+  "description": "AI influencer marketing for AI and SaaS brands and creators.",
+  "start_url": "/",
+  "display": "browser",
+  "background_color": "#ffffff",
+  "theme_color": "#0072b8",
+  "icons": [
+    {
+      "src": "/images/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/images/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

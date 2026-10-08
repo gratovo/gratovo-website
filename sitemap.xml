@@ -1,38 +1,58 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="https://www.sitemaps.org/schemas/sitemap/0.9">
-  <!-- Homepage -->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://www.gratovo.com/</loc>
+    <loc>https://gratovo.com/</loc>
     <lastmod>2026-10-08</lastmod>
-    <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
-  <!-- For brands -->
   <url>
-    <loc>https://www.gratovo.com/brands.html</loc>
+    <loc>https://gratovo.com/brands.html</loc>
     <lastmod>2026-10-08</lastmod>
-    <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
-  <!-- For creators -->
   <url>
-    <loc>https://www.gratovo.com/creators.html</loc>
+    <loc>https://gratovo.com/creators.html</loc>
     <lastmod>2026-10-08</lastmod>
-    <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
-  <!-- Privacy Policy -->
   <url>
-    <loc>https://www.gratovo.com/privacy-policy.html</loc>
-    <lastmod>2026-07-03</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.3</priority>
+    <loc>https://gratovo.com/saas-influencer-marketing.html</loc>
+    <lastmod>2026-10-08</lastmod>
+    <priority>0.8</priority>
   </url>
-  <!-- Terms of Service -->
   <url>
-    <loc>https://www.gratovo.com/terms-of-service.html</loc>
-    <lastmod>2026-07-03</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.3</priority>
+    <loc>https://gratovo.com/ai-youtube-sponsorships.html</loc>
+    <lastmod>2026-10-08</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://gratovo.com/ai-youtuber-brand-deals.html</loc>
+    <lastmod>2026-10-08</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://gratovo.com/ai-influencer-marketing-guide.html</loc>
+    <lastmod>2026-10-08</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://gratovo.com/how-to-find-ai-youtubers-to-sponsor.html</loc>
+    <lastmod>2026-10-08</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://gratovo.com/how-to-vet-ai-creators-before-sponsoring.html</loc>
+    <lastmod>2026-10-08</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://gratovo.com/how-ai-creators-get-brand-sponsorships.html</loc>
+    <lastmod>2026-10-08</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://gratovo.com/guides.html</loc>
+    <lastmod>2026-10-08</lastmod>
+    <priority>0.7</priority>
   </url>
 </urlset>

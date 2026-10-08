@@ -1,0 +1,211 @@
+/* =====================================================================
+   GRATOVO THEME: the one place to restyle the site.
+
+   1. Change the three colours in "PALETTE" and every shade, tint, border,
+      shadow and animated diagram follows. No rebuild is needed for this file.
+   2. Fonts, type sizes, corner radius and section spacing are below it.
+   3. Shared components (.btn, .field, .tag) are at the bottom.
+
+   Layout classes (flex, grid, padding...) come from css/tailwind.css, which is
+   compiled from research/pages/partials/tailwind-config.html. That file only
+   points at the variables below, so a palette or type change never needs a
+   recompile either. A recompile is only needed when you add new utility classes.
+   ===================================================================== */
+
+:root {
+    /* ---------- PALETTE: edit these ---------- */
+    --brand: #0072b8;          /* main brand blue: buttons, hero, accents */
+    --ink: #0b1c2e;            /* near-black navy: headings and the dark "How it works" section */
+    --tint-strength: 13%;      /* how much brand colour tints the page background (0% = plain white) */
+
+    /* ---------- derived shades (change only to fine-tune) ---------- */
+    --brand-deep: color-mix(in srgb, var(--brand) 82%, var(--ink));      /* header, hover, text links on light */
+    --neutral: color-mix(in srgb, var(--ink) 55%, var(--brand));         /* base for borders */
+    --canvas: color-mix(in srgb, var(--brand) var(--tint-strength), white);                       /* page background */
+    --band: color-mix(in srgb, var(--brand) calc(var(--tint-strength) + 7%), white);              /* alternate section band (FAQ) */
+    --card: #ffffff;                                                       /* cards, inputs */
+    --tint: color-mix(in srgb, var(--brand) 8%, white);                  /* very light brand wash (hovers, card headers) */
+    --sky: color-mix(in srgb, var(--brand) 45%, white);                  /* light accent for use on dark or brand backgrounds */
+    --line: color-mix(in srgb, var(--neutral) 28%, white);               /* borders and dividers */
+    --muted: color-mix(in srgb, var(--ink) 78%, white);                  /* secondary text */
+    --logo-a: #0886cc;         /* the logo's own blues (taken from the G mark): letters in the coloured logo run a -> b */
+    --logo-b: #29b0f5;
+
+    /* ---------- FONTS: two families ---------- */
+    --font-display: 'Plus Jakarta Sans', system-ui, -apple-system, 'Segoe UI', sans-serif;   /* headings, labels, buttons (the logo's font) */
+    --font-body: 'Source Sans 3', system-ui, -apple-system, 'Segoe UI', sans-serif;          /* paragraphs */
+
+    /* ---------- TYPE SCALE (fluid: phone to desktop) ---------- */
+    --fs-display: clamp(2.5rem, 1.2rem + 5.6vw, 6rem);       /* hero headline */
+    --fs-logo: clamp(3.25rem, 0.5rem + 15vw, 15rem);          /* the big hero logo */
+    --fs-h1: clamp(2.25rem, 1.3rem + 3.4vw, 3.75rem);         /* page titles (inner pages) */
+    --fs-ticker: clamp(0.95rem, 0.8rem + 0.55vw, 1.3rem);       /* hero keyword strip */
+    --fs-h2: clamp(1.75rem, 1.2rem + 2vw, 2.75rem);          /* section titles */
+    --fs-h3: 1.375rem;                                        /* card titles */
+    --fs-h3-sm: 1.1875rem;                                    /* compact card titles */
+    --fs-stat: clamp(2.25rem, 1.6rem + 2.4vw, 3.5rem);       /* big numbers */
+    --fs-lead: clamp(1.0625rem, 1rem + 0.3vw, 1.25rem);      /* intro paragraphs */
+    --fs-body: 1.0625rem;                                     /* normal text */
+    --fs-small: 0.9375rem;                                    /* buttons, captions */
+    --fs-label: 0.8125rem;                                    /* uppercase labels, nav */
+
+    /* ---------- SHAPE ---------- */
+    --r-card: 20px;            /* cards, panels, stat tiles */
+    --r-field: 12px;           /* inputs, small tiles, logo plate */
+    /* buttons, tabs and badges are fully round (pill / circle) */
+
+    /* ---------- SPACE ---------- */
+    --section-y: clamp(4rem, 2.5rem + 4vw, 6.5rem);          /* vertical padding of every section */
+    --gutter: 24px;                                           /* side padding */
+    --container: 1280px;                                      /* max content width */
+
+    /* ---------- DEPTH ---------- */
+    --shadow-card: 0 1px 2px color-mix(in srgb, var(--ink) 8%, transparent), 0 8px 22px -10px color-mix(in srgb, var(--ink) 22%, transparent);
+    --shadow-lift: 0 2px 4px color-mix(in srgb, var(--ink) 8%, transparent), 0 18px 38px -12px color-mix(in srgb, var(--ink) 34%, transparent);
+}
+
+/* Quick palette presets: copy the two lines you like over --brand and --ink above.
+   Indigo:  --brand: #4f46e5;  --ink: #14123a;
+   Teal:    --brand: #0f766e;  --ink: #0b2623;
+   Violet:  --brand: #7c3aed;  --ink: #1a1033;                                      */
+
+/* ---------- base ---------- */
+html { scroll-behavior: smooth; }
+body {
+    font-family: var(--font-body);
+    font-size: var(--fs-body);
+    line-height: 1.6;
+    color: var(--ink);
+    background: var(--canvas);
+    -webkit-font-smoothing: antialiased;
+}
+h1, h2, h3 { text-wrap: balance; }
+p { text-wrap: pretty; }
+[hidden] { display: none !important; }
+:focus-visible { outline: 2px solid var(--brand); outline-offset: 3px; }
+::selection { background: var(--sky); color: var(--ink); }
+
+.material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+.icon-fill { font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+
+/* ---------- buttons: one shape, three colourways ---------- */
+.btn {
+    display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem; cursor: pointer;
+    padding: 1.05rem 1.9rem; border-radius: 9999px; border: 2px solid transparent;
+    font-family: var(--font-display); font-weight: 700; font-size: var(--fs-small); line-height: 1;
+    letter-spacing: 0.06em; text-transform: uppercase; text-decoration: none;
+    box-shadow: var(--shadow-card);
+    transition: transform 0.2s, background-color 0.2s, box-shadow 0.2s, color 0.2s;
+}
+.btn:hover { transform: translateY(-2px); box-shadow: var(--shadow-lift); }
+.btn .material-symbols-outlined { font-size: 1.25rem; }
+.btn-primary { background: var(--brand); color: #fff; }
+.btn-primary:hover { background: var(--brand-deep); }
+.btn-light { background: var(--card); color: var(--brand-deep); }
+.btn-light:hover { background: var(--tint); }
+.btn-ghost { background: transparent; color: #fff; border-color: #fff; box-shadow: none; }
+.btn-ghost:hover { background: rgba(255, 255, 255, 0.15); box-shadow: none; }
+
+/* ---------- form fields ---------- */
+.field {
+    display: block; width: 100%; padding: 0.95rem 1.25rem; border: 1px solid transparent; border-radius: var(--r-field);
+    background-color: var(--card); color: var(--ink); font-family: var(--font-body); font-size: var(--fs-body); line-height: 1.4;
+    box-shadow: var(--shadow-card); outline: none; transition: box-shadow 0.2s, border-color 0.2s;
+}
+.field::placeholder { color: var(--muted); opacity: 1; }
+.field:focus { border-color: var(--sky); box-shadow: 0 0 0 3px color-mix(in srgb, var(--sky) 60%, transparent), var(--shadow-card); }
+
+/* ---------- small outlined tag (hero label) ---------- */
+/* ---------- top bar: slides away while the hero is on screen (home, brands, creators) ---------- */
+.site-header { transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.35s ease, box-shadow 0.5s; will-change: transform; }
+.site-header.is-hidden { transform: translateY(-105%); opacity: 0; box-shadow: none; pointer-events: none; }
+@media (prefers-reduced-motion: reduce) { .site-header { transition: none; } }
+
+/* white version of the full logo for dark/brand backgrounds */
+.wordmark-light { color: #fff; }
+.wordmark-light img { filter: brightness(0) invert(1); }
+/* Logo: the G mark + "RATOVO" in Outfit 800, sized from the font's real metrics so the mark lines up.
+   --cap = cap height in em (0.719 for Outfit). Mark = cap height + 6% overshoot, its bottom sits just under the baseline.
+   Size it with --wm-size (default: the big hero size). Measurements: research/logo-font-test.md */
+.wordmark-caps { --cap: 0.719; display: inline-flex; align-items: baseline; font-family: 'Outfit Logo', var(--font-display); font-weight: 800;
+    text-transform: uppercase; letter-spacing: 0.045em; line-height: 1; font-size: var(--wm-size, calc(var(--fs-logo) * 0.76)); }
+.wordmark-caps img, .wordmark-caps .wm-mark { height: calc(var(--cap) * 1.06em); width: auto; margin-right: calc(var(--cap) * 0.12em); margin-bottom: calc(var(--cap) * -0.03em); vertical-align: baseline; }
+
+/* Gradient logo (hero): one soft white -> pale sky gradient shared by the mark and the letters.
+   --wg-w is the whole logo's width in em; the letters start --wg-x in, so the gradient runs on without a seam. */
+.wordmark-grad { --wg: linear-gradient(90deg, #fff 0%, #fff 22%, color-mix(in srgb, var(--sky) 38%, white) 100%); --wg-w: 5.5em; --wg-x: 1.054em; }
+.wordmark-grad .wm-mark { display: inline-block; aspect-ratio: 2047 / 1611; background: var(--wg); background-size: var(--wg-w) 100%;
+    -webkit-mask: var(--wm-mask) center / contain no-repeat; mask: var(--wm-mask) center / contain no-repeat; }
+.wordmark-grad .wm-text { background: var(--wg); background-size: var(--wg-w) 100%; background-position: calc(var(--wg-x) * -1) 0;
+    -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; color: transparent; }
+
+/* Coloured logo (footer, light hero version, share images): letters in the G's own blues instead of one flat brand colour */
+.wordmark-color { --wg: linear-gradient(90deg, var(--logo-a), var(--logo-b)); --wg-x: 0em; --wg-w: 4.5em; }
+
+/* ---------- top navigation links ---------- */
+.nav-link { position: relative; padding: 0.4rem 0; color: var(--ink); transition: color 0.2s; }
+.nav-link:hover { color: var(--brand); }
+.nav-link::after { content: ''; position: absolute; left: 0; right: 0; bottom: 0; height: 2px; border-radius: 2px; background: var(--brand); transform: scaleX(0); transition: transform 0.25s; }
+.nav-link:hover::after, .nav-link.nav-on::after { transform: scaleX(1); }
+.nav-link.nav-on { color: var(--brand-deep); }
+
+.tag-link { gap: 0.4rem; padding-left: 0.75rem; text-decoration: none; transition: background-color 0.2s; }
+.tag-link .material-symbols-outlined { font-size: 1.05rem; line-height: 1; }
+.tag-link:hover { background: rgba(255, 255, 255, 0.18); }
+
+.tag {
+    display: inline-flex; align-items: center; line-height: 1.2; padding: 0.4rem 0.9rem; border: 1px solid currentColor; border-radius: 9999px;
+    font-family: var(--font-display); font-weight: 700; font-size: var(--fs-label); letter-spacing: 0.12em; text-transform: uppercase;
+}
+
+/* ---------- long-form content (guides and landing pages) ---------- */
+.prose-gv { font-size: var(--fs-body); line-height: 1.7; color: color-mix(in srgb, var(--ink) 92%, white); }
+.prose-gv h2 { font-family: var(--font-display); font-weight: 700; font-size: clamp(1.5rem, 1.15rem + 1.1vw, 1.9rem); line-height: 1.2; letter-spacing: -0.02em; color: var(--ink); margin: 3rem 0 1rem; scroll-margin-top: 6rem; }
+.prose-gv h2:first-child { margin-top: 0; }
+.prose-gv h3 { font-family: var(--font-display); font-weight: 700; font-size: var(--fs-h3); color: var(--ink); margin: 2rem 0 0.75rem; }
+.prose-gv p { margin: 0 0 1.15rem; }
+.prose-gv ul, .prose-gv ol { margin: 0 0 1.4rem; padding-left: 1.4rem; }
+.prose-gv ul { list-style: disc; }
+.prose-gv ol { list-style: decimal; }
+.prose-gv li { margin: 0 0 0.6rem; padding-left: 0.3rem; }
+.prose-gv li::marker { color: var(--brand); font-weight: 700; }
+.prose-gv a, .toc a { color: var(--brand-deep); text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 3px; }
+.prose-gv a:hover, .toc a:hover { color: var(--brand); }
+.prose-gv strong { font-weight: 700; color: var(--ink); }
+.note { margin: 1.5rem 0; padding: 1rem 1.25rem; background: var(--tint); border-left: 4px solid var(--brand); border-radius: var(--r-field); }
+
+.crumbs ol { display: flex; flex-wrap: wrap; align-items: center; gap: 0.25rem 0.5rem; font-family: var(--font-display); font-size: 0.8125rem; font-weight: 600; color: var(--muted); }
+.crumbs li + li::before { content: '/'; margin-right: 0.5rem; opacity: 0.5; }
+.crumbs a { color: inherit; text-decoration: none; }
+.crumbs a:hover { color: var(--brand-deep); text-decoration: underline; }
+.crumbs li[aria-current] { color: var(--ink); }
+.crumbs-dark ol { color: rgba(255, 255, 255, 0.75); }
+.crumbs-dark a:hover { color: #fff; }
+.crumbs-dark li[aria-current] { color: #fff; }
+
+.takeaways { background: var(--card); border: 1px solid var(--line); border-left: 4px solid var(--brand); border-radius: var(--r-card); padding: 1.5rem 1.75rem; box-shadow: var(--shadow-card); margin-bottom: 1.5rem; }
+.takeaways ul { list-style: disc; padding-left: 1.2rem; margin: 0; }
+.takeaways li { margin: 0 0 0.5rem; padding-left: 0.2rem; line-height: 1.55; }
+.takeaways li::marker { color: var(--brand); }
+.toc { background: color-mix(in srgb, var(--ink) 5%, transparent); border: 1px solid var(--line); border-radius: var(--r-card); padding: 1.25rem 1.75rem; margin-bottom: 3rem; }
+.toc ol { list-style: decimal; padding-left: 1.2rem; margin: 0; columns: 1; }
+.toc li { margin: 0 0 0.4rem; padding-left: 0.2rem; font-size: var(--fs-small); }
+@media (min-width: 640px) { .toc ol { columns: 2; column-gap: 2rem; } .toc li { break-inside: avoid; } }
+.cta-box { background: var(--card); border: 1px solid var(--line); border-radius: var(--r-card); padding: 2rem; box-shadow: var(--shadow-card); text-align: center; }
+
+@media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    .btn { transition: none; }
+}
+
+/* MARK-MASK:start (generated by research/scripts/build-mask.py) */
+:root { --wm-mask: url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjA0NyIgaGVpZ2h0PSIxNjExIiB2aWV3Qm94PSIwLjAgMjE3LjkgMjA0Ny4wIDE2MTEuMiIgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHN0eWxlPSJmaWxsLXJ1bGU6ZXZlbm9kZDtjbGlwLXJ1bGU6ZXZlbm9kZDtzdHJva2UtbGluZWpvaW46cm91bmQ7c3Ryb2tlLW1pdGVybGltaXQ6MjsiPjxnIHRyYW5zZm9ybT0ibWF0cml4KDEsMCwwLDEsLTUwMy40OTU1NzcsLTU5OC41NjEwOTYpIj48ZyBpZD0iT24tRGFyayIgdHJhbnNmb3JtPSJtYXRyaXgoNC4zMjMxODYsMCwwLDYuMTc3ODg2LC0zMDg4Ljg4NjcyNCwtMTE4NTcuNDAwNTY4KSI+PHJlY3QgeD0iODMwLjk1NyIgeT0iMjAxNi4yMTciIHdpZHRoPSI0NzMuNDkzIiBoZWlnaHQ9IjMzMS4zNDMiIHN0eWxlPSJmaWxsOnJnYigxNywyNCwzOSk7ZmlsbC1vcGFjaXR5OjA7Ii8+PGNsaXBQYXRoIGlkPSJfY2xpcDEiPjxyZWN0IHg9IjgzMC45NTciIHk9IjIwMTYuMjE3IiB3aWR0aD0iNDczLjQ5MyIgaGVpZ2h0PSIzMzEuMzQzIi8+PC9jbGlwUGF0aD48ZyBjbGlwLXBhdGg9InVybCgjX2NsaXAxKSI+PGcgdHJhbnNmb3JtPSJtYXRyaXgoMS4wMzY2MDYsMCwwLDAuNzI1NCwtMzMyLjY0NTg1OSwxMjY1LjQ3ODc2NikiPjxnIHRyYW5zZm9ybT0ibWF0cml4KDEuMDg3NDgxLDAsMCwxLjA4NzQ4MSw1MzMuMDcxMjU5LC03NzUuMjI2MDk0KSI+PHBhdGggZD0iTTc2Ni44LDE5NTEuNUM3NjYuOCwxOTUxLjUgNzgwLjEsMTk1OC43IDc5Ny4zLDE5NjQuNUM4MTUuNywxOTcwLjcgODM5LjcsMTk3NS4zIDgzOS43LDE5NzUuM0M3ODUsMjA0Ny4yIDY3Ni45LDIwNjAuNiA2MDUuNywyMDA2LjlDNTY2LjksMTk3Ny42IDU0Ny4zLDE5MzQuMiA1NDMsMTg5NC40QzUzMywxODAxLjYgNjAxLjcsMTcwOS45IDcwNi40LDE3MDkuNUM3NjYuNywxNzA5LjIgNzk0LDE3NDcuNSA4MTEuNywxNzU5LjJDODY3LjQsMTc5Ni4xIDkwMy43LDE3NTUuMSA5MDQuMiwxNzU0LjlDOTAyLjUsMTc2MS44IDg5OCwxNzc0LjEgODkxLjYsMTc4NS4yQzg5MSwxNzg2LjMgODg5LjYsMTc4OC43IDg4Ny41LDE3OTJDODg3LjQsMTc5Mi4yIDg4MiwxNzk5IDg3NCwxODA2LjJDODY1LjYsMTgxMy42IDg1Ny45LDE4MTguMiA4NTMuMSwxODIwLjhDODUyLjMsMTgyMS4yIDg0NS42LDE4MjQuMiA4MzYuOCwxODI2LjVDODMyLDE4MjcuNyA4MjguMiwxODI4LjQgODI2LjYsMTgyOC42QzgyNi4yLDE4MjguNyA4MTcuNiwxODI5LjYgODA2LjIsMTgyOC41Qzc5OS4xLDE4MjcuOCA3OTYuNiwxODI3IDc5NS44LDE4MjYuOEM3NjMuOCwxODE3LjUgNzQ4LjgsMTc4OS40IDcyNS41LDE3ODFDNzIxLjksMTc3OS43IDcxMy42LDE3NzYuOSA2OTYuNywxNzc4LjVDNjM0LjcsMTc4NC43IDYwMC43LDE4NDUuNyA2MTMuMiwxODk4LjhDNjE5LDE5MjMuNSA2MzIuOCwxOTM4LjUgNjMzLjgsMTkzOS44QzY2Ny4zLDE5NzguNCA3MjcuNSwxOTgyLjIgNzY2LjgsMTk1MS41WiIgc3R5bGU9ImZpbGw6dXJsKCNfUmFkaWFsMik7Ii8+PGNsaXBQYXRoIGlkPSJfY2xpcDMiPjxwYXRoIGQ9Ik03NjYuOCwxOTUxLjVDNzY2LjgsMTk1MS41IDc4MC4xLDE5NTguNyA3OTcuMywxOTY0LjVDODE1LjcsMTk3MC43IDgzOS43LDE5NzUuMyA4MzkuNywxOTc1LjNDNzg1LDIwNDcuMiA2NzYuOSwyMDYwLjYgNjA1LjcsMjAwNi45QzU2Ni45LDE5NzcuNiA1NDcuMywxOTM0LjIgNTQzLDE4OTQuNEM1MzMsMTgwMS42IDYwMS43LDE3MDkuOSA3MDYuNCwxNzA5LjVDNzY2LjcsMTcwOS4yIDc5NCwxNzQ3LjUgODExLjcsMTc1OS4yQzg2Ny40LDE3OTYuMSA5MDMuNywxNzU1LjEgOTA0LjIsMTc1NC45QzkwMi41LDE3NjEuOCA4OTgsMTc3NC4xIDg5MS42LDE3ODUuMkM4OTEsMTc4Ni4zIDg4OS42LDE3ODguNyA4ODcuNSwxNzkyQzg4Ny40LDE3OTIuMiA4ODIsMTc5OSA4NzQsMTgwNi4yQzg2NS42LDE4MTMuNiA4NTcuOSwxODE4LjIgODUzLjEsMTgyMC44Qzg1Mi4zLDE4MjEuMiA4NDUuNiwxODI0LjIgODM2LjgsMTgyNi41QzgzMiwxODI3LjcgODI4LjIsMTgyOC40IDgyNi42LDE4MjguNkM4MjYuMiwxODI4LjcgODE3LjYsMTgyOS42IDgwNi4yLDE4MjguNUM3OTkuMSwxODI3LjggNzk2LjYsMTgyNyA3OTUuOCwxODI2LjhDNzYzLjgsMTgxNy41IDc0OC44LDE3ODkuNCA3MjUuNSwxNzgxQzcyMS45LDE3NzkuNyA3MTMuNiwxNzc2LjkgNjk2LjcsMTc3OC41QzYzNC43LDE3ODQuNyA2MDAuNywxODQ1LjcgNjEzLjIsMTg5OC44QzYxOSwxOTIzLjUgNjMyLjgsMTkzOC41IDYzMy44LDE5MzkuOEM2NjcuMywxOTc4LjQgNzI3LjUsMTk4Mi4yIDc2Ni44LDE5NTEuNVoiLz48L2NsaXBQYXRoPjxnIGNsaXAtcGF0aD0idXJsKCNfY2xpcDMpIj48ZyB0cmFuc2Zvcm09Im1hdHJpeCgwLjkxOTU1NiwwLDAsMC45MTk1NTYsLTQ5MC4xODg5ODksNzEyLjg2Mzk3MSkiPjxwYXRoIGQ9Ik0xMzQ4LjUsMTE5MEMxMzYwLjMsMTIxMS45IDEyNzUuNSwxMjI4LjYgMTI1OC41LDEyNjMuM0MxMjM1LjksMTMwOS43IDEyMzguMSwxNDc1LjggMTIxMi41LDE0NjhDMTE4Ni45LDE0NjAuMyAxMDg2LjUsMTMyNS41IDExMDUsMTIxNi42QzExMDguNywxMTk1LjMgMTE0OS40LDExNjkuNCAxMTQ5LjQsMTE2OS40QzExNDkuNCwxMTY5LjQgMTIwMy45LDExMjUuMyAxMjU1LjYsMTEyNi4xQzEyOTguMywxMTI2LjggMTMyNC43LDExNDUuNyAxMzQ4LjUsMTE5MFoiIHN0eWxlPSJmaWxsOnVybCgjX0xpbmVhcjQpOyIvPjwvZz48ZyB0cmFuc2Zvcm09Im1hdHJpeCgwLjkxOTU1NiwwLDAsMC45MTk1NTYsLTQ5MC4xODg5ODksNzEyLjg2Mzk3MSkiPjxwYXRoIGQ9Ik0xMjU1LjYsMTEyNi4xQzEyOTguMywxMTI2LjggMTMxNC43LDExNDYuMSAxMzQ5LjYsMTE4Mi40QzEzNjguMSwxMjAxLjYgMTM4OC4yLDEyMTkuNyAxNDE4LjQsMTIxOS4xQzE0NTQuNSwxMjE4LjIgMTQ2OS40LDEyMTEuMiAxNDc0LjcsMTIwNi4yQzE0ODEuMywxMTk5LjggMTU0NC41LDExNjIuNiAxNTE2LjQsMTEyOUMxNTA1LDExMTUuNCAxNDgzLDExNTkgMTQ1NS43LDExNTEuOUMxNDIyLjMsMTE0My4xIDEzNzQuOSwxMDYyLjMgMTI3NS45LDEwODBDMTE1Ni4zLDExMDEuNSAxMTQ5LjQsMTE2OS40IDExNDkuNCwxMTY5LjRDMTE0OS40LDExNjkuNCAxMjAzLjksMTEyNS4zIDEyNTUuNiwxMTI2LjFaIiBzdHlsZT0iZmlsbDp1cmwoI19MaW5lYXI1KTsiLz48L2c+PC9nPjwvZz48ZyB0cmFuc2Zvcm09Im1hdHJpeCgxLjgzMzQ3OCwwLjE0NzExNywtMC4xMzU5OSwxLjY5NDgwMywtMTE1NC40MTQwOTYsNDA5NC42ODYwNTUpIj48cGF0aCBkPSJNMTMwNi4xLC0xNzc0LjhMMTMwNS43LC0xNzk3LjFMMTM2MC42LC0xNzU4LjJMMTMwNSwtMTcwOS4zTDEzMDUuNCwtMTczOS40QzEzMDUuNCwtMTczOS40IDEyNzMuOSwtMTcyNyAxMjM0LjksLTE3NTMuMkMxMjAyLjcsLTE3NzQuOSAxMTg0LjIsLTE3NTUuOCAxMTg0LjIsLTE3NTUuOEMxMTg0LjIsLTE3NTUuOCAxMTkzLjksLTE4MDUuNiAxMjUwLjgsLTE3ODZDMTI5MS44LC0xNzcxLjggMTMwNi4xLC0xNzc0LjggMTMwNi4xLC0xNzc0LjhaIiBzdHlsZT0iZmlsbDp1cmwoI19MaW5lYXI2KTsiLz48L2c+PC9nPjwvZz48L2c+PC9nPjxkZWZzPjxyYWRpYWxHcmFkaWVudCBpZD0iX1JhZGlhbDIiIGN4PSIwIiBjeT0iMCIgcj0iMSIgZ3JhZGllbnRVbml0cz0idXNlclNwYWNlT25Vc2UiIGdyYWRpZW50VHJhbnNmb3JtPSJtYXRyaXgoLTIzOC4yMDY0ODIsNTcuNDU2MDksLTU3LjQ1NjA5LC0yMzguMjA2NDgyLDgzNy43MDg5MTMsMTg5OC4wNjAwOTQpIj48c3RvcCBvZmZzZXQ9IjAiIHN0eWxlPSJzdG9wLWNvbG9yOnJnYigwLDEzOSwyMTEpO3N0b3Atb3BhY2l0eToxIi8+PHN0b3Agb2Zmc2V0PSIxIiBzdHlsZT0ic3RvcC1jb2xvcjpyZ2IoMzYsMTcyLDI0Mik7c3RvcC1vcGFjaXR5OjEiLz48L3JhZGlhbEdyYWRpZW50PjxsaW5lYXJHcmFkaWVudCBpZD0iX0xpbmVhcjQiIHgxPSIwIiB5MT0iMCIgeDI9IjEiIHkyPSIwIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgZ3JhZGllbnRUcmFuc2Zvcm09Im1hdHJpeCg3Ni4wMjE3NjgsLTE1MC45ODY3MDksMTUwLjk4NjcwOSw3Ni4wMjE3NjgsMTE3Mi43MTA2MjUsMTI3Ny4xMDk3MjYpIj48c3RvcCBvZmZzZXQ9IjAiIHN0eWxlPSJzdG9wLWNvbG9yOnJnYigwLDE0MCwyMTIpO3N0b3Atb3BhY2l0eTowIi8+PHN0b3Agb2Zmc2V0PSIxIiBzdHlsZT0ic3RvcC1jb2xvcjpyZ2IoMTUsODEsMTUxKTtzdG9wLW9wYWNpdHk6MSIvPjwvbGluZWFyR3JhZGllbnQ+PGxpbmVhckdyYWRpZW50IGlkPSJfTGluZWFyNSIgeDE9IjAiIHkxPSIwIiB4Mj0iMSIgeTI9IjAiIGdyYWRpZW50VW5pdHM9InVzZXJTcGFjZU9uVXNlIiBncmFkaWVudFRyYW5zZm9ybT0ibWF0cml4KC0zODYuNDMwNDgyLDAsMCwtMzg2LjQzMDQ4MiwxNTUyLjAxMDE5NywxMTQ2LjczODE1NCkiPjxzdG9wIG9mZnNldD0iMCIgc3R5bGU9InN0b3AtY29sb3I6cmdiKDI1Miw5MSwxMjIpO3N0b3Atb3BhY2l0eToxIi8+PHN0b3Agb2Zmc2V0PSIwLjIiIHN0eWxlPSJzdG9wLWNvbG9yOnJnYigyNDEsODksMTM3KTtzdG9wLW9wYWNpdHk6MSIvPjxzdG9wIG9mZnNldD0iMC4zOSIgc3R5bGU9InN0b3AtY29sb3I6cmdiKDIwNyw4MywxODQpO3N0b3Atb3BhY2l0eToxIi8+PHN0b3Agb2Zmc2V0PSIxIiBzdHlsZT0ic3RvcC1jb2xvcjpyZ2IoMzcsMTc2LDI0Myk7c3RvcC1vcGFjaXR5OjEiLz48L2xpbmVhckdyYWRpZW50PjxsaW5lYXJHcmFkaWVudCBpZD0iX0xpbmVhcjYiIHgxPSIwIiB5MT0iMCIgeDI9IjEiIHkyPSIwIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgZ3JhZGllbnRUcmFuc2Zvcm09Im1hdHJpeCgxNzYuMzg0OTQ4LDAsMCw4Ny44MTI5NzEsMTE4NC4xOTkxMDQsLTE3NTMuMjI5NjU3KSI+PHN0b3Agb2Zmc2V0PSIwIiBzdHlsZT0ic3RvcC1jb2xvcjpyZ2IoMCwxMjEsMTg2KTtzdG9wLW9wYWNpdHk6MSIvPjxzdG9wIG9mZnNldD0iMSIgc3R5bGU9InN0b3AtY29sb3I6cmdiKDM1LDE2OCwyNDIpO3N0b3Atb3BhY2l0eToxIi8+PC9saW5lYXJHcmFkaWVudD48L2RlZnM+PC9zdmc+DQo="); --cubes-mask: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEMAAABkCAMAAADqvX3PAAAAKlBMVEUAAADX19fX19fBwcHT09PX19fW1tbT09PW1tbV1dXOzs7Ozs7BwcHV1dX5uIg2AAAADnRSTlMAPQAKH0czAAApFAAAAHys1goAAAHwSURBVHja7ZfdcuMwCEb1GUIDcd//dZuk2n5rZzCKOzuzFzo3+XNOBAIHtQosxwi0XUw/jjh2qN1pVzV43FJwJIDLuq5tvaNmzxeEZI5wWP/p9v0gypgGYhGH8fL28yyM7ycOJkFlJW3tZDHhRdBjIO22JR6a1BGMgTAWopvr6BC1jSB1MDWyXYfvkpDlg4iiV83lITiuoXZL+U4/ltcNq2MhogaYBWMYjYU8HHfSRdTrCIOLYImemrfz8dMO6DlVGYyFMWz3tmuGY6GgO1ikXVM51JDXurBO0nyEcyPTnvOXvmyb0hzqfV64jUUYw47Re9CZe6EbeC+M39+TcfK/gTFZuxZgOSag7aMASwGkrQW1Y2lLwXRMx3RMx3T8Pw67FpSOcA5RCccOcTMNL05aRw7Fn2kizA7+1VNH6ENAOBgOxiIK888dHPVqh+Q/yeknzQfHkhx+nqyjT0QFzDUd2Skp53lp7PdFnEkYIhzQv/KRzJUV0QdDSON5+S14CEW0vqSTiAPWWDknCLsY0BZxnNP0L/Z9YQEO8yznXZ2yNwfgTu7rNFgj9aamvS9eZljMTNOeoybSGNwQkvZ+3XrCU07t4HmWSBjDLBzEwdSzhMYcRPRZNYmgdjA1FyahcKQIqpKZs8N0TMd0TMd0/BvHF8n9f8tHo7HcAAAAAElFTkSuQmCC"); }
+/* MARK-MASK:end */
+
+/* Home page: while the brand-only vetting section is hidden (creator picked), the benefits section takes over the space under it */
+#benefits:has(+ [data-aud-only][hidden]) { padding-bottom: var(--section-y); }
+
+/* phone button in the top bar: hover is a very light cyan, not a dark blue */
+.nav-call { transition: background-color 0.2s, border-color 0.2s, transform 0.2s; }
+.nav-call:hover, .nav-call:focus-visible { background: color-mix(in srgb, var(--logo-b) 18%, white); border-color: color-mix(in srgb, var(--logo-b) 45%, white); }
+.nav-call:active { transform: scale(0.96); }

@@ -41,7 +41,9 @@ def main():
     m = re.search(r"tailwind\.config\s*=\s*(\{.*\})\s*</script>", src, re.S)
     if not m:
         sys.exit("could not find tailwind.config in the partial")
-    content = [str(ROOT / n).replace("\\", "/") for n in ("index.html", "brands.html", "creators.html")]
+    # every generated page (and the 404); legacy pages that still use the Tailwind CDN are skipped
+    legacy = {"index-b.html"}
+    content = [str(f).replace("\\", "/") for f in sorted(ROOT.glob("*.html")) if f.name not in legacy]
     content.append(str(ROOT / "js" / "*.js").replace("\\", "/"))
     cfg = (f"const base = {m.group(1)};\n"
            f"module.exports = Object.assign(base, {{ content: {content!r},\n"

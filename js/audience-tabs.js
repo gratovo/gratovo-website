@@ -12,6 +12,12 @@
     var aud = (document.body && document.body.getAttribute('data-audience')) === 'creator' ? 'creator' : 'brand';
     var subs = [];
 
+    function anchorAtCentre() {
+        var el = document.elementFromPoint(window.innerWidth / 2, window.innerHeight / 2), main = document.querySelector('main');
+        while (el && el.parentElement && el.parentElement !== main) el = el.parentElement;
+        return el && el.parentElement === main ? el : null;
+    }
+
     window.GV = {
         get: function () { return aud; },
         on: function (fn) { subs.push(fn); },
@@ -19,7 +25,11 @@
             if (a !== 'brand' && a !== 'creator') return;
             if (a === aud) return;
             aud = a;
+            /* whatever is in the middle of the screen stays there: switching sides changes the height of sections above it, and Safari
+               (unlike Chrome and Firefox) does not compensate for that by itself. If the browser already did, the correction is zero. */
+            var anchor = anchorAtCentre(), was = anchor ? anchor.getBoundingClientRect().top : 0;
             subs.forEach(function (fn) { fn(a, opts || {}); });
+            if (anchor) { var d = anchor.getBoundingClientRect().top - was; if (Math.abs(d) > 1) window.scrollBy({ top: d, behavior: 'instant' }); }
         }
     };
 
@@ -31,6 +41,7 @@
         var panels = [].slice.call(card.querySelectorAll('[data-gv-panel]'));
 
         function moveInd() {
+            if (!window.GV_PAINTED) return;   /* measuring forces a layout: wait until the first paint has happened */
             var b = tabs.filter(function (t) { return t.getAttribute('data-aud') === aud; })[0];
             if (!b || !ind) return;
             ind.style.left = b.offsetLeft + 'px';
@@ -60,7 +71,7 @@
         window.addEventListener('resize', moveInd);
         if (document.fonts && document.fonts.ready) document.fonts.ready.then(moveInd);
         show(aud, false);
-        setTimeout(moveInd, 60);
+        document.addEventListener('gv-painted', moveInd);
 
         /* inquiry dropdown: shorter message, same inbox, easier sorting */
         [].forEach.call(card.querySelectorAll('form'), function (form) {
@@ -87,7 +98,9 @@
         /* links to the forms choose the matching side first */
         function go(a) {
             window.GV.set(a);
-            var y = card.getBoundingClientRect().top + window.pageYOffset - 100;
+            /* land on the whole "Let's work together" section (heading + form), not just the card; the top bar hides on the way down */
+            var sec = card.closest('section') || card;
+            var y = sec.getBoundingClientRect().top + window.pageYOffset;
             window.scrollTo({ top: y, behavior: reduce ? 'auto' : 'smooth' });
         }
         [].forEach.call(document.querySelectorAll('a[href="#workwithus"], a[href="#creators"]'), function (a) {
@@ -112,6 +125,7 @@
         var fixed = panels[0] ? panels[0].getAttribute('data-faq-panel') : aud;
 
         function moveInd() {
+            if (!window.GV_PAINTED) return;   /* measuring forces a layout: wait until the first paint has happened */
             var b = tabs.filter(function (t) { return t.getAttribute('data-aud') === aud; })[0];
             if (!b || !ind) return;
             ind.style.left = b.offsetLeft + 'px';
@@ -159,7 +173,7 @@
         window.addEventListener('resize', moveInd);
         if (document.fonts && document.fonts.ready) document.fonts.ready.then(moveInd);
         show(locked ? fixed : aud, false);
-        setTimeout(moveInd, 60);
+        document.addEventListener('gv-painted', moveInd);
     }
 
     /* Benefits (home page): brand cards / creator cards behind "I'm a brand" / "I'm a creator" tabs */
@@ -171,6 +185,7 @@
         var panels = [].slice.call(sec.querySelectorAll('[data-bn-panel]'));
 
         function moveInd() {
+            if (!window.GV_PAINTED) return;   /* measuring forces a layout: wait until the first paint has happened */
             var b = tabs.filter(function (t) { return t.getAttribute('data-aud') === aud; })[0];
             if (!b || !ind) return;
             ind.style.left = b.offsetLeft + 'px';
@@ -200,10 +215,29 @@
         window.addEventListener('resize', moveInd);
         if (document.fonts && document.fonts.ready) document.fonts.ready.then(moveInd);
         show(aud, false);
-        setTimeout(moveInd, 60);
+        document.addEventListener('gv-painted', moveInd);
     }
 
-    function boot() { init(); initFaq(); initBenefits(); }
+    /* sections for one side only ([data-aud-only="brand"], e.g. the creator vetting standards): hidden while the other side is chosen.
+       The scroll position is kept steady by GV.set above. */
+    function initOnly() {
+        var els = [].slice.call(document.querySelectorAll('[data-aud-only]'));
+        if (!els.length) return;
+        function apply(a, animate) {
+            els.forEach(function (el) {
+                var show = el.getAttribute('data-aud-only') === a;
+                if (show === !el.hidden) return;
+                el.hidden = !show;
+                if (show && animate && !reduce && el.animate) el.animate([{ opacity: 0, transform: 'translateY(14px)' }, { opacity: 1, transform: 'none' }], { duration: 350, easing: 'cubic-bezier(0.22,1,0.36,1)' });
+            });
+        }
+        window.GV.on(function (a) { apply(a, true); });
+        apply(aud, false);
+    }
+
+    function boot() { init(); initFaq(); initBenefits(); initOnly(); }
     if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot);
     else boot();
+    /* after the first paint: let the tab pills measure themselves (doing it earlier forces a full layout inside the script) */
+    requestAnimationFrame(function () { requestAnimationFrame(function () { window.GV_PAINTED = true; document.dispatchEvent(new Event('gv-painted')); }); });
 })();

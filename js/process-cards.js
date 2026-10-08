@@ -14,12 +14,39 @@
     'use strict';
 
     var FPS = 30, SW = 520, SH = 480;
-    var ACC = '#0072b8';
-    var LINE = 'rgba(11,28,46,0.12)';
-    var DOT = 'rgba(11,28,46,0.22)';
-    var RING = 'rgba(11,28,46,0.13)';
-    var INK = '#3e4c5e';
-    var CHIP = '#eef6fc';
+    var TXT_SCALE = 1.02;   /* diagram labels are set in the display font, which reads smaller than the old monospace */
+
+    /* Colours come from the CSS theme (css/theme.css), so changing the palette there restyles the diagrams too.
+       Each token is resolved to plain rgb (via a probe element + canvas) because the animation blends colours. */
+    function themeRGB(name, fallback) {
+        try {
+            var probe = document.createElement('i');
+            probe.style.cssText = 'position:absolute;visibility:hidden;color:var(' + name + ')';
+            document.body.appendChild(probe);
+            var computed = getComputedStyle(probe).color;
+            document.body.removeChild(probe);
+            var cv = document.createElement('canvas');
+            cv.width = cv.height = 1;
+            var cx = cv.getContext('2d', { willReadFrequently: true });
+            cx.fillStyle = '#000';
+            cx.fillStyle = computed;
+            cx.fillRect(0, 0, 1, 1);
+            var d = cx.getImageData(0, 0, 1, 1).data;
+            return [d[0], d[1], d[2]];
+        } catch (e) { return fallback; }
+    }
+    function rgb(c) { return 'rgb(' + c[0] + ',' + c[1] + ',' + c[2] + ')'; }
+    function rgba(c, a) { return 'rgba(' + c[0] + ',' + c[1] + ',' + c[2] + ',' + a + ')'; }
+    var C_BRAND = themeRGB('--brand', [0, 114, 184]);
+    var C_INK = themeRGB('--ink', [11, 28, 46]);
+    var C_TINT = themeRGB('--tint', [235, 244, 250]);
+    var C_MUTED = themeRGB('--muted', [65, 78, 92]);
+    var ACC = rgb(C_BRAND);
+    var LINE = rgba(C_INK, 0.12);
+    var DOT = rgba(C_INK, 0.22);
+    var RING = rgba(C_INK, 0.13);
+    var INK = rgb(C_MUTED);
+    var CHIP = rgb(C_TINT);
     var NS = 'http://www.w3.org/2000/svg';
 
     /* ---------- math + easing ---------- */
@@ -97,11 +124,11 @@
     }
 
     /* text that resolves left to right out of deterministic random characters */
-    var CH = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+    var CH = 'ABDEHKNPRSTUVXZ0123456789';
     function hashChar(f, i) {
         var o = 43758.5453 * Math.sin(12.9898 * (17 * f + 23 * i));
         o = o - Math.floor(o);
-        return CH.charAt(Math.floor(36 * o));
+        return CH.charAt(Math.floor(CH.length * o));
     }
     function scramble(f, t, a, b) {
         t = clamp(t, 0, 1);
@@ -122,7 +149,7 @@
         var al = lerp(g(pa, 3, 1), g(pb, 3, 1), t);
         return 'rgba(' + r + ',' + gg + ',' + bb + ',' + al.toFixed(3) + ')';
     }
-    var RING_RGB = 'rgba(11,28,46,0.13)', ACC_RGB = 'rgba(0,114,184,1)';
+    var RING_RGB = RING, ACC_RGB = rgba(C_BRAND, 1);
 
     /* ---------- DOM helpers ---------- */
     function svgEl(name, attrs) {
@@ -187,7 +214,7 @@
         }
         var tx = document.createElement('span');
         tx.className = 'pc-txt';
-        tx.style.fontSize = (o.fs || 17) + 'px';
+        tx.style.fontSize = ((o.fs || 17) * TXT_SCALE).toFixed(1) + 'px';
         tx.style.letterSpacing = (o.ls != null ? o.ls : 0.6) + 'px';
         tx.textContent = o.text || '';
         el.appendChild(tx);
@@ -229,8 +256,8 @@
     }
 
     /* creator avatar: soft gradient disc with a neutral head-and-shoulders mark (no real people) */
-    var HUES = [['#7cc4ee', '#3b8fcb'], ['#b9a8f0', '#7a63d6'], ['#f3b3c8', '#d9648e'], ['#9fe0c6', '#3fae8a'],
-        ['#f7d58e', '#e0a43a'], ['#9ec9f5', '#4f86d6'], ['#f5b9a1', '#df7a55'], ['#a8d8e8', '#4f9fb8']];
+    var HUES = [['#8cc8ec', '#3b8fcb'], ['#a9b8ee', '#5f72d4'], ['#9fd6dc', '#3a9aa8'], ['#b7c6dc', '#6b84a6'],
+        ['#9cc4f0', '#4a82d0'], ['#a3d9e6', '#3f9bb5'], ['#b3b9ec', '#7079cf'], ['#a6cfe0', '#4a8aa8']];
     /* photos (optional): paths to real, permitted creator photos. The neutral avatar always sits underneath,
        so a missing or broken file just shows the avatar. */
     function personHTML(i, size, photos) {
@@ -243,7 +270,7 @@
     }
     var BRAND_ICONS = ['smart_toy', 'bolt', 'cloud', 'terminal', 'database', 'hub', 'memory', 'code'];
     function brandHTML(i, size) {
-        return '<div style="width:100%;height:100%;background:#eef6fc;display:flex;align-items:center;justify-content:center">' +
+        return '<div style="width:100%;height:100%;background:' + CHIP + ';display:flex;align-items:center;justify-content:center">' +
             ico(BRAND_ICONS[i % BRAND_ICONS.length], size, ACC) + '</div>';
     }
 
@@ -330,7 +357,7 @@
     C.brief = function (S, o) {
         var loop = 150;
         var L1 = Line(S, 260, 74, 260, 152);
-        var tg = [{ x: 58, y: 362, w: 80, h: 40 }, { x: 196, y: 322, w: 128, h: 40 }, { x: 382, y: 362, w: 80, h: 40 }];
+        var tg = [{ x: 44, y: 362, w: 100, h: 40 }, { x: 196, y: 322, w: 128, h: 40 }, { x: 376, y: 362, w: 100, h: 40 }];
         var tl = tg.map(function (t) { return Line(S, 260, 210, t.x + t.w / 2, t.y); });
         var sw = Sweep(S, 'bs', [[0.28, 0], [0.52, 0.95], [0.6, 0]], 110, 2.3);
         sw.line(260, 74, 260, 152);
@@ -374,7 +401,7 @@
         var lines = pts.map(function () { return Line(S, 260, 240, 260, 240, { dash: '5 6', stroke: LINE }); });
         var sw = Sweep(S, 'ms', [[0.1, 0], [0.5, 0.75], [0.9, 0]], 72, 2);
         var mr = sw.rect(192, 221, 136, 46, 10, 5);
-        var chip = Chip(S, { x: 174, y: 220, w: 172, h: 48, r: 10, fs: 19, ls: 0.7, text: 'MATCHING...', bg: CHIP, gap: 0 });
+        var chip = Chip(S, { x: 162, y: 220, w: 196, h: 48, r: 10, fs: 19, ls: 0.7, text: 'MATCHING...', bg: CHIP, gap: 0 });
         chip.tx.style.paddingInline = '12px';
         var discs = pts.map(function (p, i) {
             return Disc(S, { x: p.x, y: p.y, d: size, html: o.brands ? brandHTML(i, 34) : personHTML(i, 34, o.photos) });
@@ -394,7 +421,7 @@
                 else text = scramble(e, ii, o.vettedText, 'MATCHING...');
                 var aa = ip(e, 78, 96, outCubic);
                 var cc = e < 240 ? aa : 1 - oo;
-                var width = e < 240 ? lerp(172, 136, aa) : lerp(136, 172, oo);
+                var width = e < 240 ? lerp(196, 156, aa) : lerp(156, 196, oo);
                 var left = 260 - width / 2;
                 var m = e < 240 ? 1 : 1 - oo;
                 chip.set({ opacity: ip(e, 0, 6, outQuad) * (e < 240 ? 1 : 1), left: left, width: width, border: mixColor(RING_RGB, ACC_RGB, cc), text: text, scale: 1 });
@@ -454,7 +481,7 @@
         var ds = disc.map(function (p, i) {
             return Disc(S, { x: p.x, y: p.y, d: 96, bw: 2, bg: '#fff', html: '<div class="pc-discin">' + ico(o.discs[i], 32, ACC) + '</div>' });
         });
-        var done = Chip(S, { x: 135, y: 392, w: 250, h: 60, r: 16, text: o.doneText, fs: 18, ls: 0.9, bg: CHIP, border: 'rgba(0,114,184,0.27)', gap: 14 });
+        var done = Chip(S, { x: 135, y: 392, w: 250, h: 60, r: 16, text: o.doneText, fs: 18, ls: 0.9, bg: CHIP, border: rgba(C_BRAND, 0.27), gap: 14 });
         var chk = document.createElement('span');
         chk.className = 'pc-chk';
         chk.innerHTML = CHECK_SVG;
@@ -496,7 +523,7 @@
         var top = Chip(S, { x: 152, y: 24, w: 216, h: 48, r: 10, icon: o.topIcon, text: o.topText, fs: 16, ls: 0.9, is: 21 });
         var vid = node(S, {
             left: '74px', top: '116px', width: '372px', height: '208px', borderRadius: '12px', overflow: 'hidden',
-            background: 'linear-gradient(135deg,#0b1c2e 0%,#0a4a7a 60%,#0072b8 100%)', opacity: '0', transformOrigin: '50% 50%',
+            background: 'linear-gradient(135deg,' + rgb(C_INK) + ' 0%,' + rgb(C_BRAND.map(function (v, i) { return Math.round(v * 0.6 + C_INK[i] * 0.4); })) + ' 60%,' + ACC + ' 100%)', opacity: '0', transformOrigin: '50% 50%',
             boxShadow: '0 8px 24px rgba(11,28,46,0.18)'
         },
             '<div class="pc-vbar" style="top:16px;left:18px;width:120px"></div><div class="pc-vbar" style="top:32px;left:18px;width:70px;opacity:.5"></div>' +
@@ -504,7 +531,7 @@
             '<div class="pc-vprog"><i></i></div>');
         var prog = vid.querySelector('.pc-vprog i');
         var play = vid.querySelector('.pc-play');
-        var appr = Chip(S, { x: 141, y: 176, w: 238, h: 56, r: 18, icon: 'check_circle', text: o.approveText, fs: 16, ls: 0.9, bg: '#eaf4fc', iconColor: RING, is: 22 });
+        var appr = Chip(S, { x: 141, y: 176, w: 238, h: 56, r: 18, icon: 'check_circle', text: o.approveText, fs: 16, ls: 0.9, bg: CHIP, iconColor: RING, is: 22 });
         var fin = Chip(S, { x: 117, y: 390, w: 286, h: 48, r: 10, icon: o.finalIcon, text: o.finalText, fs: 16, ls: 0.9, iconColor: RING, is: 21 });
         return {
             loop: loop, hold: 160,
@@ -715,6 +742,7 @@
 
         function track() { return sec.querySelector('[data-pc-panel="' + aud + '"] .pc-track'); }
         function moveInd() {
+            if (!window.GV_PAINTED) return;   /* measuring forces a layout: wait until the first paint has happened */
             var b = tabs.filter(function (t) { return t.getAttribute('data-aud') === aud; })[0];
             if (!b || !ind) return;
             ind.style.left = b.offsetLeft + 'px';
@@ -727,6 +755,27 @@
             if (prev) prev.disabled = start;
             if (next) next.disabled = end;
             t.classList.toggle('pc-atend', end);
+            t.classList.toggle('pc-scrolled', !start);
+            meter(t);
+        }
+        /* progress bar + "Steps 1-3 of 5": shows there is more to the side */
+        function meter(t) {
+            var bar = sec.querySelector('.pc-progress i'), txt = sec.querySelector('.pc-count');
+            var steps = t.querySelectorAll('.pc-step');
+            if (!bar || !txt || !steps.length || !t.scrollWidth) return;
+            /* count the cards that sit fully in the clear: not under the left/right edge fades (widths match the masks in the CSS) */
+            var cs = getComputedStyle(t), padL = parseFloat(cs.paddingLeft) || 0, padR = parseFloat(cs.paddingRight) || 0;
+            var fadeL = t.classList.contains('pc-scrolled') ? padL : 0;
+            var fadeR = t.classList.contains('pc-atend') ? 0 : (window.innerWidth <= 768 ? Math.max(20, padR) : padR);
+            var L = t.scrollLeft + fadeL, R = t.scrollLeft + t.clientWidth - fadeR, a = 0, b = 0;
+            [].forEach.call(steps, function (s, i) {
+                var x0 = s.offsetLeft - t.offsetLeft, w = s.offsetWidth;
+                if (Math.min(x0 + w, R) - Math.max(x0, L) >= w * 0.9) { if (!a) a = i + 1; b = i + 1; }
+            });
+            if (!a) a = b = 1;
+            bar.style.width = Math.min(100, t.clientWidth / t.scrollWidth * 100).toFixed(1) + '%';
+            bar.style.left = (t.scrollLeft / t.scrollWidth * 100).toFixed(1) + '%';
+            txt.textContent = (a === b ? 'Step ' + a : 'Steps ' + a + '–' + b) + ' of ' + steps.length;
         }
         function reveal(panel) {
             panel.classList.remove('pc-pending');
@@ -765,6 +814,7 @@
                 reveal(pn);
                 [].forEach.call(pn.querySelectorAll('.pc-visual'), function (h) { h._player.restart(); });
             }
+            fit();
             arrows();
         }
 
@@ -776,8 +826,26 @@
         });
         if (prev) prev.addEventListener('click', function () { track().scrollBy({ left: -420, behavior: reduce ? 'auto' : 'smooth' }); });
         if (next) next.addEventListener('click', function () { track().scrollBy({ left: 420, behavior: reduce ? 'auto' : 'smooth' }); });
+        [prev, next].forEach(function (b) { if (b) b.addEventListener('click', function () { sec.classList.add('pc-used'); }); });
+        panels.forEach(function (pn) { pn.querySelector('.pc-track').addEventListener('pointerdown', function () { sec.classList.add('pc-used'); }, { passive: true }); });
         panels.forEach(function (pn) { pn.querySelector('.pc-track').addEventListener('scroll', arrows, { passive: true }); });
-        window.addEventListener('resize', function () { moveInd(); arrows(); });
+        /* Exactly N whole cards (3 on a desktop), with only a small sliver of the previous / next card at each edge. The card row is as wide as
+           those N cards plus two slivers and sits centred; anything further out is cut off. (Under 769px it stays one card with the next one
+           peeking, as in the CSS.) */
+        function fit() {
+            if (!window.GV_PAINTED) return;
+            var t = track(), st = t && t.querySelector('.pc-step');
+            if (!st) return;
+            if (window.innerWidth <= 768) { sec.classList.remove('pc-fit'); sec.style.removeProperty('--pc-pad'); sec.style.removeProperty('--pc-track-w'); arrows(); return; }
+            var w = st.offsetWidth, gap = parseFloat(getComputedStyle(t).columnGap) || 0, W = sec.clientWidth, peek = 84;
+            var n = Math.max(1, Math.floor((Math.min(W, 1600) - 48 - 2 * peek + gap) / (w + gap)));
+            sec.classList.add('pc-fit');
+            sec.style.setProperty('--pc-pad', peek + 'px');
+            sec.style.setProperty('--pc-track-w', Math.min(W, n * w + (n - 1) * gap + 2 * peek) + 'px');
+            arrows();
+        }
+        window.addEventListener('resize', function () { moveInd(); fit(); arrows(); });
+        document.addEventListener('gv-painted', fit);
 
         /* reveal once when the cards come into view (about 75% down the viewport) */
         if ('IntersectionObserver' in window) {
@@ -801,7 +869,7 @@
             setTimeout(function () { sec.classList.add('pc-fonts'); }, 2500);
         } else sec.classList.add('pc-fonts');
         setAud(locked ? lockAud : (window.GV ? window.GV.get() : 'brand'), true);
-        setTimeout(moveInd, 60);
+        document.addEventListener('gv-painted', moveInd);
     }
 
     window.GVProcess = {

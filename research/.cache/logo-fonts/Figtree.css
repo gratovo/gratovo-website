@@ -1,0 +1,24 @@
+@font-face {
+  font-family: 'Figtree';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/l/font?kit=_Xms-HUzqDCFdgfMq4avBc8lj2fG56HWbAwqnj0&skey=3eaac920d8b62e62&v=v9) format('woff2');
+  unicode-range: U+41, U+48-49, U+4f, U+52, U+54, U+56, U+61, U+6f, U+72, U+74, U+76, U+78;
+}
+@font-face {
+  font-family: 'Figtree';
+  font-style: normal;
+  font-weight: 800;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/l/font?kit=_Xms-HUzqDCFdgfMq4avBc8lj2fG56HWbAwqnj0&skey=3eaac920d8b62e62&v=v9) format('woff2');
+  unicode-range: U+41, U+48-49, U+4f, U+52, U+54, U+56, U+61, U+6f, U+72, U+74, U+76, U+78;
+}
+@font-face {
+  font-family: 'Figtree';
+  font-style: normal;
+  font-weight: 900;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/l/font?kit=_Xms-HUzqDCFdgfMq4avBc8lj2fG56HWbAwqnj0&skey=3eaac920d8b62e62&v=v9) format('woff2');
+  unicode-range: U+41, U+48-49, U+4f, U+52, U+54, U+56, U+61, U+6f, U+72, U+74, U+76, U+78;
+}

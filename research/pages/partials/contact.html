@@ -1,68 +1,67 @@
 <!-- CTA Section -->
         <section
-            class="bg-gradient-to-r from-primary-container to-primary py-24 px-grid-gutter text-center relative overflow-hidden">
-            <div class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-20">
-            </div>
+            class="bg-gradient-to-b from-brand to-brand-deep py-section px-grid-gutter text-center relative overflow-hidden">
+            <div class="pattern-cubes" aria-hidden="true"></div>
             <div class="relative z-10 max-w-5xl mx-auto">
-                <h2 class="font-headline-lg text-headline-md md:text-headline-lg text-on-primary mb-6">
+                <h2 class="font-display text-h2 text-white mb-5">
                     Let's Work Together.
                 </h2>
-                <p class="font-body-lg text-body-lg text-primary-fixed mb-10 max-w-2xl mx-auto">
+                <p class="font-body text-lead text-tint mb-12 max-w-2xl mx-auto">
                     Brands, tell us what you're promoting. Creators, tell us about your channel. We reply within 24 hours.</p>
                 <div class="max-w-5xl mx-auto grid md:grid-cols-[1fr_1.7fr] gap-10 items-center">
                 <div class="gv-loop hidden md:block" aria-hidden="true">
                     <div class="gv-loop-track"><span>no cold emails</span><span>no chasing replies</span><span>no guessing who's legit</span><span>no endless threads</span><span>just the right match</span><span>no cold emails</span><span>no chasing replies</span><span>no guessing who's legit</span><span>no endless threads</span><span>just the right match</span><span>no cold emails</span><span>no chasing replies</span><span>no guessing who's legit</span><span>no endless threads</span><span>just the right match</span></div>
                 </div>
-                <div id="contact-card" class="scroll-mt-28 w-full max-w-xl mx-auto bg-white/15 border border-white/30 rounded-3xl p-5 md:p-8 text-left">
+                <div id="contact-card" class="scroll-mt-28 w-full max-w-xl mx-auto bg-white/10 border border-white/25 rounded-card p-5 md:p-8 text-left">
                     <div class="gv-tabs" role="tablist" aria-label="I am a">
                         <button type="button" role="tab" class="gv-tabbtn gv-on" data-aud="brand" aria-selected="true" aria-controls="workwithus">I'm a brand</button>
                         <button type="button" role="tab" class="gv-tabbtn" data-aud="creator" aria-selected="false" aria-controls="creators">I'm a creator</button>
                         <span class="gv-ind" aria-hidden="true"></span>
                     </div>
                     <div id="workwithus" role="tabpanel" data-gv-panel="brand" class="scroll-mt-28">
-                        <p class="text-primary-fixed mb-5">Tell us what you're promoting.</p>
-                        <form action="https://formsubmit.co/mustafa@gratovo.com" method="POST" class="gv-form flex flex-col gap-3" data-who="brand request"><input type="hidden" name="_captcha" value="false"><input type="hidden" name="_next" value="https://www.gratovo.com/">
+                        <p class="font-body text-body text-tint mb-5">Tell us what you're promoting.</p>
+                        <form action="https://formsubmit.co/mustafa@gratovo.com" method="POST" class="gv-form flex flex-col gap-3" data-who="brand request"><input type="hidden" name="_captcha" value="false"><input type="hidden" name="_next" value="https://gratovo.com/">
                             <input type="hidden" name="_subject" value="New brand request from the website">
-                            <input type="text" name="name" placeholder="Your name / company" required class="w-full py-4 px-6 rounded-full font-body-md text-on-surface bg-surface-container-lowest border-0 focus:ring-2 focus:ring-inverse-primary shadow-lg outline-none placeholder:text-secondary transition-all">
-                            <input type="email" name="email" placeholder="Your email" required class="w-full py-4 px-6 rounded-full font-body-md text-on-surface bg-surface-container-lowest border-0 focus:ring-2 focus:ring-inverse-primary shadow-lg outline-none placeholder:text-secondary transition-all">
-                            <select name="inquiry" required aria-label="What is this about?" class="w-full py-4 pl-6 pr-12 rounded-full font-body-md text-on-surface bg-surface-container-lowest border-0 focus:ring-2 focus:ring-inverse-primary shadow-lg outline-none transition-all">
+                            <input type="text" name="name" placeholder="Your name / company" required class="field">
+                            <input type="email" name="email" placeholder="Your email" required class="field">
+                            <select name="inquiry" required aria-label="What is this about?" class="field">
                                 <option value="" disabled selected>What's this about?</option>
                                 <option value="find-creators" data-hint="What does your product do? One line is enough." data-need="0">Find creators for my product</option>
                                 <option value="specific-creator" data-hint="Which creator? A link works." data-need="1">Work with a specific creator</option>
                                 <option value="scale" data-hint="What's working so far? One line is enough." data-need="0">Scale what's already working</option>
                                 <option value="question" data-hint="What would you like to know?" data-need="1">I have a question first</option>
                             </select>
-                            <textarea name="message" rows="2" placeholder="Anything we should know? (optional)" class="w-full py-4 px-6 rounded-3xl font-body-md text-on-surface bg-surface-container-lowest border-0 focus:ring-2 focus:ring-inverse-primary shadow-lg outline-none placeholder:text-secondary transition-all"></textarea>
-                            <button type="submit" class="self-center bg-surface-container-lowest text-primary-container py-4 px-8 rounded-full font-label-sm uppercase text-base tracking-wider hover:bg-surface-bright transition-colors inline-flex items-center gap-2 shadow-lg hover:shadow-xl transform hover:-translate-y-1 duration-200">Find My Creators <span class="material-symbols-outlined" data-icon="send">send</span></button>
+                            <textarea name="message" rows="2" placeholder="Anything we should know? (optional)" class="field"></textarea>
+                            <button type="submit" class="btn btn-light self-center mt-2">Find My Creators <span class="material-symbols-outlined" data-icon="send">send</span></button>
                         </form>
                     </div>
                     <div id="creators" role="tabpanel" data-gv-panel="creator" class="scroll-mt-28" hidden>
-                        <p class="text-primary-fixed mb-5">Tell us about your channel.</p>
-                        <form action="https://formsubmit.co/mustafa@gratovo.com" method="POST" class="gv-form flex flex-col gap-3" data-who="creator application"><input type="hidden" name="_captcha" value="false"><input type="hidden" name="_next" value="https://www.gratovo.com/">
+                        <p class="font-body text-body text-tint mb-5">Tell us about your channel.</p>
+                        <form action="https://formsubmit.co/mustafa@gratovo.com" method="POST" class="gv-form flex flex-col gap-3" data-who="creator application"><input type="hidden" name="_captcha" value="false"><input type="hidden" name="_next" value="https://gratovo.com/">
                             <input type="hidden" name="_subject" value="New creator application from the website">
-                            <input type="text" name="name" placeholder="Your name / channel name" required class="w-full py-4 px-6 rounded-full font-body-md text-on-surface bg-surface-container-lowest border-0 focus:ring-2 focus:ring-inverse-primary shadow-lg outline-none placeholder:text-secondary transition-all">
-                            <input type="email" name="email" placeholder="Your email" required class="w-full py-4 px-6 rounded-full font-body-md text-on-surface bg-surface-container-lowest border-0 focus:ring-2 focus:ring-inverse-primary shadow-lg outline-none placeholder:text-secondary transition-all">
-                            <input type="text" name="channel" placeholder="Your channel link" required class="w-full py-4 px-6 rounded-full font-body-md text-on-surface bg-surface-container-lowest border-0 focus:ring-2 focus:ring-inverse-primary shadow-lg outline-none placeholder:text-secondary transition-all">
-                            <select name="inquiry" required aria-label="What is this about?" class="w-full py-4 pl-6 pr-12 rounded-full font-body-md text-on-surface bg-surface-container-lowest border-0 focus:ring-2 focus:ring-inverse-primary shadow-lg outline-none transition-all">
+                            <input type="text" name="name" placeholder="Your name / channel name" required class="field">
+                            <input type="email" name="email" placeholder="Your email" required class="field">
+                            <input type="text" name="channel" placeholder="Your channel link" required class="field">
+                            <select name="inquiry" required aria-label="What is this about?" class="field">
                                 <option value="" disabled selected>What's this about?</option>
                                 <option value="get-deals" data-hint="What do you cover? One line is enough." data-need="0">Get brand deals for my channel</option>
                                 <option value="specific-brand" data-hint="Which brand? A link works." data-need="1">Work with a specific brand</option>
                                 <option value="question" data-hint="What would you like to know?" data-need="1">I have a question first</option>
                             </select>
-                            <textarea name="message" rows="2" placeholder="Anything we should know? (optional)" class="w-full py-4 px-6 rounded-3xl font-body-md text-on-surface bg-surface-container-lowest border-0 focus:ring-2 focus:ring-inverse-primary shadow-lg outline-none placeholder:text-secondary transition-all"></textarea>
-                            <button type="submit" class="self-center bg-surface-container-lowest text-primary-container py-4 px-8 rounded-full font-label-sm uppercase text-base tracking-wider hover:bg-surface-bright transition-colors inline-flex items-center gap-2 shadow-lg hover:shadow-xl transform hover:-translate-y-1 duration-200">Get Brand Deals <span class="material-symbols-outlined" data-icon="send">send</span></button>
+                            <textarea name="message" rows="2" placeholder="Anything we should know? (optional)" class="field"></textarea>
+                            <button type="submit" class="btn btn-light self-center mt-2">Get Brand Deals <span class="material-symbols-outlined" data-icon="send">send</span></button>
                         </form>
                     </div>
                 </div>
                 </div>
-                <div class="mt-8 flex flex-col sm:flex-row items-center justify-center gap-3 text-primary-fixed">
-                    <span class="font-body-md">Prefer email?</span>
+                <div class="mt-8 flex flex-col sm:flex-row items-center justify-center gap-3 text-tint">
+                    <span class="font-body">Prefer email?</span>
                     <button type="button" id="copy-email" aria-label="Copy email address mustafa@gratovo.com"
-                        class="inline-flex items-center gap-2 bg-white/20 hover:bg-white/30 text-on-primary rounded-full py-2 px-5 font-label-sm transition-colors">
+                        class="inline-flex items-center gap-2 bg-white/15 hover:bg-white/25 text-white rounded-full py-2.5 px-5 font-display text-small font-semibold transition-colors">
                         <span>mustafa@gratovo.com</span>
-                        <span id="copy-email-icon" class="material-symbols-outlined text-base">content_copy</span>
+                        <span id="copy-email-icon" class="material-symbols-outlined text-lg">content_copy</span>
                     </button>
-                    <span id="copy-email-status" class="font-label-sm" role="status"></span>
+                    <span id="copy-email-status" class="font-display text-small font-semibold" role="status"></span>
                 </div>
             </div>
         </section>
